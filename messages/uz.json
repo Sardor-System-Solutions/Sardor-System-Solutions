@@ -1,0 +1,360 @@
+{
+  "Meta": {
+    "home": {
+      "title": "Dasturiy taʼminot studiyasi",
+      "description": "Sardor & Danila Systems — dasturiy taʼminot studiyasi: veb-platformalar, mobil ilovalar, CRM tizimlari, dashboardlar va biznes avtomatlashtirish."
+    },
+    "services": {
+      "title": "Xizmatlar",
+      "description": "Veb va mobil ishlab chiqish, CRM tizimlari, UI/UX dizayn va biznes avtomatlashtirish — tajribali jamoa tomonidan."
+    },
+    "portfolio": {
+      "title": "Ishlar",
+      "description": "Sardor & Danila Systems tanlangan keyslari: koʻchmas mulk marketplace, operatsion CRM va kross-platforma mobil ilova."
+    },
+    "about": {
+      "title": "Biz haqimizda",
+      "description": "Kuchli muhandislik, aniq arxitektura va uzoq muddatli hamkorlikka asoslangan oʻsib borayotgan studiya."
+    },
+    "contact": {
+      "title": "Aloqa",
+      "description": "Loyihangiz haqida gapirib bering. Odatda bir ish kuni ichida javob beramiz."
+    }
+  },
+  "Nav": {
+    "services": "Xizmatlar",
+    "portfolio": "Ishlar",
+    "about": "Biz haqimizda",
+    "contact": "Aloqa",
+    "cta": "Loyihani boshlash",
+    "menu": "Menyu",
+    "openMenu": "Menyuni ochish",
+    "home": "Bosh sahifa"
+  },
+  "Hero": {
+    "badge": "Dasturiy taʼminot studiyasi",
+    "title": "Biz biznes tayanadigan",
+    "titleAccent": "dasturiy mahsulotlarni yaratamiz.",
+    "subtitle": "SDS — dasturiy taʼminot studiyasi. Biz veb-platformalar, mobil ilovalar, CRM tizimlari va avtomatlashtirishni yaratamiz — birinchi kundan aniq arxitektura va kuchli muhandislik bilan.",
+    "primaryCta": "Loyihani boshlash",
+    "secondaryCta": "Ishlarimiz",
+    "stats": [
+      { "value": "30+", "label": "Bajarilgan loyiha" },
+      { "value": "4+", "label": "Yil tajriba" },
+      { "value": "1 kun", "label": "Oʻrtacha javob" }
+    ]
+  },
+  "Technologies": {
+    "label": "Biz ishlaydigan texnologiyalar"
+  },
+  "Services": {
+    "eyebrow": "Xizmatlar",
+    "title": "Ishga tushirish va oʻsish uchun zarur hammasi.",
+    "subtitle": "Muhandislik, dizayn va operatsiyalar bir jamoada — gʻoyadan ishlab chiqarishgacha keraksiz uzatishlarsiz.",
+    "deliverablesLabel": "Nimani olasiz",
+    "stackLabel": "Stack",
+    "learnMore": "Batafsil",
+    "pageEyebrow": "Xizmatlar",
+    "pageTitle": "Tajribali jamoadan dasturiy xizmatlar.",
+    "pageSubtitle": "Birinchi saytdan kompaniya miqyosidagi platformagacha — biz dasturiy taʼminotni loyihalash, yaratish va qoʻllab-quvvatlashning toʻliq tsiklini qamrab olamiz.",
+    "items": {
+      "web": {
+        "title": "Veb ishlab chiqish",
+        "tagline": "Tezkor va qulay veb-platformalar.",
+        "description": "Saytlar, mahsulot dashboardlari va murakkab veb-ilovalar React va Next.js asosida — boshidanoq unumdorlik, qulaylik va SEO bilan.",
+        "features": [
+          "Saytlar va lendinglar",
+          "Mahsulot dashboardlari va veb-ilovalar",
+          "Headless CMS va kontent modellari",
+          "Core Web Vitals va texnik SEO"
+        ]
+      },
+      "mobile": {
+        "title": "Mobil ishlab chiqish",
+        "tagline": "Bitta kod, nativ sifat.",
+        "description": "React Native va Expo asosida iOS va Android uchun kross-platforma ilovalar — nativ unumdorlik, oflayn rejim va storega chiqarish.",
+        "features": [
+          "Bitta koddan iOS va Android",
+          "Nativ darajadagi unumdorlik",
+          "Oflayn maʼlumot sinxronlash",
+          "App Store va Playga chiqarish"
+        ]
+      },
+      "crm": {
+        "title": "CRM tizimlari",
+        "tagline": "Sizning jarayoningizga mos vositalar.",
+        "description": "Haqiqiy ish jarayoningizga moslangan maxsus CRM va back-office — rollar, ruxsatlar, dashboardlar va kerakli integratsiyalar bilan.",
+        "features": [
+          "Jarayoningizga mos CRM",
+          "Rol asosidagi kirish va ruxsatlar",
+          "Real vaqtli dashboard va hisobotlar",
+          "Maʼlumot koʻchirish va integratsiyalar"
+        ]
+      },
+      "design": {
+        "title": "UI/UX dizayn",
+        "tagline": "Tushunarli interfeyslar.",
+        "description": "Mahsulot strategiyasi, UX oqimlari va haqiqiy foydalanishga asoslangan dizayn tizimlari — oson oʻzlashtiriladigan interfeyslar.",
+        "features": [
+          "Mahsulot va UX strategiyasi",
+          "Dizayn tizimlari va komponentlar",
+          "Interaktiv prototiplar",
+          "Standart boʻyicha qulaylik (WCAG)"
+        ]
+      },
+      "automation": {
+        "title": "Biznes avtomatlashtirish",
+        "tagline": "Qoʻlda bajariladigan qadamlarni olib tashlaymiz.",
+        "description": "Vositalaringizni bogʻlaymiz, jarayonlarni avtomatlashtiramiz va maʼlumotlar izchil boʻlishi uchun ichki tizimlar quramiz.",
+        "features": [
+          "Jarayonlarni avtomatlashtirish",
+          "Tashqi servislar bilan integratsiya",
+          "Ichki vositalar va back-office",
+          "API dizayni va maʼlumot oqimlari"
+        ]
+      }
+    }
+  },
+  "Featured": {
+    "eyebrow": "Tanlangan ishlar",
+    "title": "Faxrlanadigan loyihalarimiz.",
+    "subtitle": "Aniq qamrov va kuchli ijro hal qiluvchi boʻlgan bir nechta loyiha.",
+    "viewAll": "Barcha ishlar"
+  },
+  "Why": {
+    "eyebrow": "Nega SDS",
+    "title": "Ishlar ortidagi studiya.",
+    "subtitle": "Biz junior jamoalar va shablonlar hisobiga kengayadigan agentliklardan farq qilamiz.",
+    "items": {
+      "senior": {
+        "title": "Faqat tajribali muhandislar",
+        "description": "Har bir qator tajribali muhandislar tomonidan yoziladi va tekshiriladi — hech kim sizning hisobingizdan oʻrganmaydi."
+      },
+      "endToEnd": {
+        "title": "Dizayn va muhandislik bir jamoada",
+        "description": "Strategiya, UX va ishlab chiqish bir tom ostida — gʻoyadan ishlab chiqarishgacha uzatishlarsiz."
+      },
+      "reliable": {
+        "title": "Uzoqqa moʻljallangan",
+        "description": "Aniq arxitektura, testlar va hujjatlar — yillab rivojlantiriladigan, qayta yozilmaydigan tizimlar."
+      },
+      "partner": {
+        "title": "Uzoq muddatli hamkor",
+        "description": "Ishga tushirilgandan keyin ham qolamiz — monitoring, takomillashtirish va biznes oʻsishi bilan masshtablash."
+      }
+    }
+  },
+  "Process": {
+    "eyebrow": "Jarayon",
+    "title": "Gʻoyadan ishlab chiqarishgacha aniq yoʻl.",
+    "subtitle": "Har bir bosqichda koʻrinadigan oddiy ish uslubi.",
+    "steps": {
+      "discovery": {
+        "title": "Tahlil va qamrov",
+        "description": "Maqsad, cheklov va xatarlarni aniqlaymiz, soʻng qamrov, bosqich va muvaffaqiyat mezonlarini kelishamiz."
+      },
+      "design": {
+        "title": "Dizayn va arxitektura",
+        "description": "UX oqimlari, UI yoʻnalishi va texnik reja — ishlab chiqishdan oldin tekshiriladi."
+      },
+      "build": {
+        "title": "Ishlab chiqish",
+        "description": "Kod-revyu, testlar va haftalik demolar bilan bosqichma-bosqich yetkazib berish — taraqqiyot doim koʻrinadi."
+      },
+      "launch": {
+        "title": "Ishga tushirish va qoʻllab-quvvatlash",
+        "description": "Reliz, monitoring va topshirish — keyingi yaxshilanishlar rejasi bilan."
+      }
+    }
+  },
+  "Testimonials": {
+    "eyebrow": "Fikrlar",
+    "title": "Hamkorlar nima deydi.",
+    "subtitle": "Biz hamkorlik qilayotgan jamoalar hikoyalarini toʻplayapmiz.",
+    "placeholder": "Mijozlar fikrlari tez orada."
+  },
+  "Cta": {
+    "title": "Loyiha rejangiz bormi?",
+    "subtitle": "Nima yaratayotganingiz haqida gaplashamiz. Qamrovni aniqlash va ishga tushirishda yordam beramiz.",
+    "primary": "Loyihani boshlash",
+    "secondary": "Xizmatlarimiz"
+  },
+  "Portfolio": {
+    "eyebrow": "Ishlar",
+    "title": "Skrinshot emas, keyslar.",
+    "subtitle": "Biz loyihalagan va qurgan haqiqiy mahsulotlar — yechgan muammolari va erishilgan natijalari bilan.",
+    "caseStudy": "Keysni koʻrish",
+    "backToWork": "Barcha ishlar",
+    "nextProject": "Keyingi loyiha",
+    "labels": {
+      "overview": "Umumiy",
+      "problem": "Muammo",
+      "solution": "Yechim",
+      "technologies": "Texnologiyalar",
+      "screenshots": "Skrinshotlar",
+      "results": "Natijalar",
+      "year": "Yil",
+      "category": "Toifa",
+      "services": "Xizmatlar"
+    },
+    "projects": {
+      "oson-uy": {
+        "title": "Oson Uy",
+        "category": "Koʻchmas mulk marketplace",
+        "summary": "Toshkent uchun ijara va sotuv platformasi: xarita boʻyicha qidiruv, moslashuvchan filtrlar va xavfsiz agent kabineti.",
+        "overview": "Oson Uy — Toshkent boʻylab xaridor, ijarachi va agentlarni bogʻlaydigan koʻchmas mulk marketplace. SDS platformani boshdan-oxir loyihalab qurdi — eʼlonlar tajribasidan agent kabinetigacha.",
+        "problem": "Mahalliy bozor chat guruhlari va eʼlonlar saytlaridagi tarqoq eʼlonlarga tayanardi. Xaridorlarga muhim mezon boʻyicha filtrlash qiyin, agentlarga esa soʻrovlarni boshqarish qiyin edi.",
+        "solution": "Biz Next.js asosida tezkor platforma qurdik: xarita boʻyicha qidiruv, batafsil filtrlar, tasdiqlangan eʼlonlar va xavfsiz agent kabineti. Server rendering SEOni saqlaydi, toza maʼlumot modeli katalogni izchil tutadi.",
+        "services": ["Mahsulot va UX", "Veb ishlab chiqish", "Xarita va qidiruv"],
+        "results": [
+          { "value": "2.1s → 0.8s", "label": "Sahifa yuklanish medianasi" },
+          { "value": "+46%", "label": "Maqsadli soʻrovlar" },
+          { "value": "100%", "label": "Tasdiqlangan eʼlonlar" }
+        ]
+      },
+      "crm-dashboard": {
+        "title": "Operatsion CRM",
+        "category": "SaaS · Ichki vositalar",
+        "summary": "Logistika jamoasi uchun jonli analitika, ogohlantirish va avtomatik hisobotli operatsion CRM.",
+        "overview": "Jadvallardan oshib ketgan logistika kompaniyasi uchun maxsus CRM va operatsion dashboard. SDS qoʻlda kuzatuvni yagona real vaqt tizimi bilan almashtirdi.",
+        "problem": "Operatsiyalar jadval va messenjerlarga tarqoq edi. Holatlar eskirardi, hisobotlar kunlab tayyorlanardi va yagona haqiqat manbai yoʻq edi.",
+        "solution": "Biz Next.js va NestJS asosida rolli CRM qurdik: WebSockets orqali real vaqtli yetkazib berish kuzatuvi, avtomatik hisobotlar va sozlanadigan ogohlantirishlar. Redis keshlash dashboardlarni katta hajmda ham tezkor saqlaydi.",
+        "services": ["Mahsulot va UX", "Veb ishlab chiqish", "Backend va maʼlumot"],
+        "results": [
+          { "value": "-72%", "label": "Hisobotga sarflangan vaqt" },
+          { "value": "Real-time", "label": "Yetkazib berish koʻrinishi" },
+          { "value": "5x", "label": "Tezroq onboarding" }
+        ]
+      },
+      "mobile-app": {
+        "title": "KidsCity mobil ilovasi",
+        "category": "Mobil · Bron qilish",
+        "summary": "Oilaviy hordiq markazida tashriflar, chiptalar va tadbirlarni bron qilish uchun kross-platforma ilova.",
+        "overview": "Oilaviy hordiq brendi uchun React Native ilovasi: ota-onalar faoliyatlarni koʻrishi, tashrif bron qilishi va chiptalarni telefonidan boshqarishi mumkin.",
+        "problem": "Bronlar telefon va joyida amalga oshardi, bu navbat va kelmaslik holatlarini keltirardi. Brendning qaytadigan oilalarga toʻgʻridan-toʻgʻri kanali yoʻq edi.",
+        "solution": "Biz koʻrib chiqish, jadval, xavfsiz toʻlovlar va push-bildirishnomalarga ega ozoda kross-platforma ilovani chiqardik — autentifikatsiya, maʼlumot va xabarlar uchun Firebase asosida.",
+        "services": ["Mahsulot va UX", "Mobil ishlab chiqish", "Toʻlovlar"],
+        "results": [
+          { "value": "4.8★", "label": "Storedagi reyting" },
+          { "value": "+34%", "label": "Takroriy bronlar" },
+          { "value": "-60%", "label": "Kelmaslik darajasi" }
+        ]
+      }
+    }
+  },
+  "About": {
+    "hero": {
+      "eyebrow": "SDS haqida",
+      "title": "Taqdimot emas, muhandislikka asoslangan studiya.",
+      "subtitle": "Sardor & Danila Systems — oʻsib borayotgan dasturiy taʼminot studiyasi. Biz biznes bilan hamkorlikda ishlab chiqarishda barqaror mahsulotlarni loyihalaymiz, quramiz va masshtablashtiramiz."
+    },
+    "mission": {
+      "eyebrow": "Missiya",
+      "title": "Nega yaratamiz.",
+      "body": [
+        "Biz shijoatli bizneslarga senior darajadagi muhandislikdan foydalanish imkonini berish uchun mavjudmiz — ishonchli mahsulot chiqaradigan va ishga tushirilgandan keyin ham takomillashtiradigan.",
+        "Ajoyib dasturiy taʼminot natijaga javob beradigan kichik, fokuslangan jamoalardan tugʻiladi: aniq arxitektura, halol muddatlar va biznesni haqiqatan ilgari suradigan narsaga eʼtibor."
+      ]
+    },
+    "stats": [
+      { "value": "30+", "label": "Bajarilgan loyiha" },
+      { "value": "4+", "label": "Yil amaliyot" },
+      { "value": "3", "label": "Qoʻllab-quvvatlanadigan til" },
+      { "value": "95%", "label": "Mijozlarni saqlash" }
+    ],
+    "values": {
+      "eyebrow": "Qadriyatlar",
+      "title": "Oʻzimizdan talab qiladiganlarimiz.",
+      "subtitle": "Har bir loyiha ortidagi tamoyillar.",
+      "items": {
+        "ownership": {
+          "title": "Natijaga javob beramiz",
+          "description": "Mahsulotingizga oʻzimizniki kabi qaraymiz — faqat yetkazib berishga emas, natijaga javobgarmiz."
+        },
+        "craft": {
+          "title": "Muhandislik mahorati",
+          "description": "Toza, unumdor, test qilingan kod. Foydalanuvchi sezadigan tafsilotlar ustida ishlaymiz."
+        },
+        "transparency": {
+          "title": "Toʻliq shaffoflik",
+          "description": "Aniq qamrov, halol muddatlar va haftalik demolar. Oxirida kutilmagan holatsiz."
+        },
+        "longevity": {
+          "title": "Uzoqqa moʻljallangan",
+          "description": "Mahsulot yillab rivojlanishi uchun arxitektura va hujjatlar."
+        }
+      }
+    },
+    "process": {
+      "eyebrow": "Qanday ishlaymiz",
+      "title": "Aniqlik uchun moʻljallangan jarayon.",
+      "subtitle": "Har bir loyihada bir xil ishonchli yoʻl."
+    },
+    "team": {
+      "eyebrow": "Jamoa",
+      "title": "Har bosqichda tajribali odamlar.",
+      "subtitle": "Erta toʻgʻri qaror qabul qilish uchun senior tajribali, fokuslangan muhandis va dizaynerlar jamoasi.",
+      "members": {
+        "sardor": {
+          "name": "Sardor",
+          "role": "Hammuassis · Muhandislik",
+          "bio": "Veb va backend tizimlari boʻyicha arxitektura va yetkazib berishni boshqaradi."
+        },
+        "danila": {
+          "name": "Danila",
+          "role": "Hammuassis · Mahsulot va dizayn",
+          "bio": "Mahsulot strategiyasi, UX va dizayn tizimiga javob beradi."
+        },
+        "engineering": {
+          "name": "Muhandislik",
+          "role": "Full-stack muhandislar",
+          "bio": "Ishlab chiqarish dasturlarini chiqaradigan senior veb va mobil muhandislar."
+        },
+        "design": {
+          "name": "Dizayn",
+          "role": "Mahsulot dizaynerlari",
+          "bio": "Haqiqiy foydalanishga asoslangan UX, UI va dizayn tizimlari."
+        }
+      }
+    }
+  },
+  "Contact": {
+    "eyebrow": "Aloqa",
+    "title": "Loyihangiz haqida gapirib bering.",
+    "subtitle": "Odatda bir ish kuni ichida javob beramiz. Kontekst, muddat va havolalarni ulashing — maʼqul keyingi qadamni taklif qilamiz.",
+    "form": {
+      "name": "Ism",
+      "namePlaceholder": "Ismingiz",
+      "email": "Email",
+      "emailPlaceholder": "you@company.com",
+      "company": "Kompaniya",
+      "companyPlaceholder": "Kompaniya (ixtiyoriy)",
+      "message": "Loyiha tafsilotlari",
+      "messagePlaceholder": "Nima yaratyapsiz? Maqsad, muddat va havolalarni kiriting.",
+      "submit": "Yuborish",
+      "sending": "Yuborilmoqda…",
+      "success": "Rahmat — xabaringiz yuborishga tayyor. Email mijozingizda davom ettiramiz yoki Telegramda bogʻlanamiz.",
+      "errors": {
+        "name": "Iltimos, ismingizni kiriting.",
+        "email": "Toʻgʻri email kiriting.",
+        "message": "Loyiha haqida bir nechta tafsilot qoʻshing."
+      }
+    },
+    "channels": {
+      "title": "Toʻgʻridan-toʻgʻri yozish qulayroqmi?",
+      "subtitle": "Sizga qulay kanalda bogʻlaning.",
+      "telegram": "Telegram",
+      "instagram": "Instagram",
+      "phone": "Telefon",
+      "email": "Email",
+      "responseTime": "Odatda 1 ish kuni ichida javob beramiz."
+    }
+  },
+  "Footer": {
+    "tagline": "Biz jadvallar va tayyor yechimlardan oshib ketgan jamoalar uchun ishonchli raqamli mahsulotlar yaratamiz.",
+    "navigate": "Navigatsiya",
+    "connect": "Aloqa",
+    "rights": "Barcha huquqlar himoyalangan.",
+    "location": "Toshkent, Oʻzbekiston"
+  }
+}

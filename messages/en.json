@@ -1,0 +1,360 @@
+{
+  "Meta": {
+    "home": {
+      "title": "Software development studio",
+      "description": "Sardor & Danila Systems is a software development studio building web platforms, mobile apps, CRM systems, dashboards, and business automation."
+    },
+    "services": {
+      "title": "Services",
+      "description": "Web and mobile development, CRM systems, UI/UX design, and business automation — engineered by a senior team."
+    },
+    "portfolio": {
+      "title": "Work",
+      "description": "Selected case studies from Sardor & Danila Systems: real estate marketplace, operations CRM, and a cross-platform mobile app."
+    },
+    "about": {
+      "title": "About",
+      "description": "A growing software development studio built on senior engineering, clear architecture, and long-term partnership."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Tell us about your project. We usually reply within one business day."
+    }
+  },
+  "Nav": {
+    "services": "Services",
+    "portfolio": "Work",
+    "about": "About",
+    "contact": "Contact",
+    "cta": "Start a project",
+    "menu": "Menu",
+    "openMenu": "Open menu",
+    "home": "Home"
+  },
+  "Hero": {
+    "badge": "Software development studio",
+    "title": "We design and build software",
+    "titleAccent": "that businesses run on.",
+    "subtitle": "SDS is a software development studio. We ship web platforms, mobile apps, CRM systems, and automation — with clear architecture and senior engineering from day one.",
+    "primaryCta": "Start a project",
+    "secondaryCta": "View our work",
+    "stats": [
+      { "value": "30+", "label": "Projects delivered" },
+      { "value": "4+", "label": "Years building" },
+      { "value": "1 day", "label": "Avg. response" }
+    ]
+  },
+  "Technologies": {
+    "label": "The stack we build with"
+  },
+  "Services": {
+    "eyebrow": "Services",
+    "title": "Everything you need to ship and scale.",
+    "subtitle": "Engineering, design, and operations in one team — so you move from idea to production without hand-offs slowing you down.",
+    "deliverablesLabel": "What you get",
+    "stackLabel": "Stack",
+    "learnMore": "Learn more",
+    "pageEyebrow": "Services",
+    "pageTitle": "Software services, delivered by a senior team.",
+    "pageSubtitle": "From a first marketing site to a company-wide platform — we cover the full lifecycle of designing, building, and maintaining software.",
+    "items": {
+      "web": {
+        "title": "Web Development",
+        "tagline": "Fast, accessible web platforms.",
+        "description": "Marketing sites, product dashboards, and complex web apps built on React and Next.js — with performance, accessibility, and SEO built in from the start.",
+        "features": [
+          "Marketing sites & landing pages",
+          "Product dashboards & web apps",
+          "Headless CMS & content models",
+          "Core Web Vitals & technical SEO"
+        ]
+      },
+      "mobile": {
+        "title": "Mobile Development",
+        "tagline": "One codebase, native quality.",
+        "description": "Cross-platform iOS and Android apps with React Native and Expo — native-quality performance, offline support, and smooth store deployment.",
+        "features": [
+          "iOS & Android from one codebase",
+          "Native-quality performance",
+          "Offline-first data sync",
+          "App Store & Play deployment"
+        ]
+      },
+      "crm": {
+        "title": "CRM Systems",
+        "tagline": "Tools that match how you work.",
+        "description": "Custom CRMs and back-office systems tailored to your real workflow — with roles, permissions, dashboards, and the integrations your team depends on.",
+        "features": [
+          "Custom CRM for your workflow",
+          "Role-based access & permissions",
+          "Real-time dashboards & reporting",
+          "Data migration & integrations"
+        ]
+      },
+      "design": {
+        "title": "UI/UX Design",
+        "tagline": "Interfaces people understand.",
+        "description": "Product strategy, UX flows, and design systems grounded in real usage — interfaces that are easy to adopt and a pleasure to use.",
+        "features": [
+          "Product & UX strategy",
+          "Design systems & components",
+          "Interactive prototypes",
+          "Accessibility (WCAG) by default"
+        ]
+      },
+      "automation": {
+        "title": "Business Automation",
+        "tagline": "Remove the manual steps.",
+        "description": "Connect your tools, automate workflows, and build the internal systems that keep data consistent and your team focused on real work.",
+        "features": [
+          "Workflow & process automation",
+          "Third-party integrations",
+          "Internal tools & back-office",
+          "API design & data pipelines"
+        ]
+      }
+    }
+  },
+  "Featured": {
+    "eyebrow": "Selected work",
+    "title": "Projects we're proud of.",
+    "subtitle": "A few engagements where clear scope and senior execution made the difference.",
+    "viewAll": "View all work"
+  },
+  "Why": {
+    "eyebrow": "Why SDS",
+    "title": "The studio behind the work.",
+    "subtitle": "We're built differently from agencies that scale on junior teams and templates.",
+    "items": {
+      "senior": {
+        "title": "Senior engineers only",
+        "description": "Every line is written and reviewed by experienced engineers — no juniors learning on your budget."
+      },
+      "endToEnd": {
+        "title": "Design & engineering in one team",
+        "description": "Strategy, UX, and development under one roof, so you move from idea to production without hand-offs."
+      },
+      "reliable": {
+        "title": "Built to last",
+        "description": "Clear architecture, tests, and documentation — systems you can extend for years, not rewrite in one."
+      },
+      "partner": {
+        "title": "A long-term partner",
+        "description": "We stay after launch — monitoring, iterating, and scaling the product as your business grows."
+      }
+    }
+  },
+  "Process": {
+    "eyebrow": "Process",
+    "title": "A clear path from idea to production.",
+    "subtitle": "A straightforward way of working — with visibility at every step.",
+    "steps": {
+      "discovery": {
+        "title": "Discovery & scope",
+        "description": "We map goals, constraints, and risks, then agree on scope, milestones, and success metrics."
+      },
+      "design": {
+        "title": "Design & architecture",
+        "description": "UX flows, UI direction, and a technical plan — validated before we commit to building."
+      },
+      "build": {
+        "title": "Engineering",
+        "description": "Iterative delivery with code reviews, tests, and weekly demos so you always see progress."
+      },
+      "launch": {
+        "title": "Launch & support",
+        "description": "Release, monitoring, and handover — plus a roadmap for what to improve next."
+      }
+    }
+  },
+  "Testimonials": {
+    "eyebrow": "Testimonials",
+    "title": "What partners say.",
+    "subtitle": "We're collecting stories from the teams we work with.",
+    "placeholder": "Client testimonials coming soon."
+  },
+  "Cta": {
+    "title": "Have a project in mind?",
+    "subtitle": "Let's talk about what you're building. We'll help you scope it and ship it.",
+    "primary": "Start a project",
+    "secondary": "See our services"
+  },
+  "Portfolio": {
+    "eyebrow": "Work",
+    "title": "Case studies, not screenshots.",
+    "subtitle": "Real products we designed and built — with the problems they solved and the results they delivered.",
+    "caseStudy": "View case study",
+    "backToWork": "All work",
+    "nextProject": "Next project",
+    "labels": {
+      "overview": "Overview",
+      "problem": "The problem",
+      "solution": "Our solution",
+      "technologies": "Technologies",
+      "screenshots": "Screenshots",
+      "results": "Results",
+      "year": "Year",
+      "category": "Category",
+      "services": "Services"
+    },
+    "projects": {
+      "oson-uy": {
+        "title": "Oson Uy",
+        "category": "Real Estate Marketplace",
+        "summary": "A property rental and sales platform for Tashkent with map search, rich filters, and a secure agent back-office.",
+        "overview": "Oson Uy is a real-estate marketplace connecting buyers, renters, and agents across Tashkent. SDS designed and built the platform end to end — from the listing experience to the agent dashboard.",
+        "problem": "The local market relied on scattered listings across chat groups and classifieds. Buyers struggled to filter by what mattered, and agents had no reliable way to manage inquiries or keep listings up to date.",
+        "solution": "We built a fast Next.js platform with map-based search, granular filters, verified listings, and a secure agent dashboard. Server-rendered pages keep listings SEO-friendly, while a clean data model keeps inventory consistent.",
+        "services": ["Product & UX", "Web development", "Maps & search"],
+        "results": [
+          { "value": "2.1s → 0.8s", "label": "Median page load" },
+          { "value": "+46%", "label": "Qualified inquiries" },
+          { "value": "100%", "label": "Listings verified" }
+        ]
+      },
+      "crm-dashboard": {
+        "title": "Operations CRM",
+        "category": "SaaS · Internal Tools",
+        "summary": "An operations CRM with live analytics, alerts, and automated reporting for a logistics team.",
+        "overview": "A custom CRM and operations dashboard for a logistics company that had outgrown spreadsheets. SDS replaced manual tracking with a single real-time system.",
+        "problem": "Operations were spread across spreadsheets and messaging apps. Status was always out of date, reporting took days, and nobody had a single source of truth.",
+        "solution": "We built a role-based CRM on Next.js and NestJS with live shipment tracking over WebSockets, automated reporting, and configurable alerts. Redis-backed caching keeps dashboards instant even with heavy data.",
+        "services": ["Product & UX", "Web development", "Backend & data"],
+        "results": [
+          { "value": "-72%", "label": "Time spent on reporting" },
+          { "value": "Real-time", "label": "Shipment visibility" },
+          { "value": "5x", "label": "Faster onboarding" }
+        ]
+      },
+      "mobile-app": {
+        "title": "KidsCity Mobile App",
+        "category": "Mobile · Booking",
+        "summary": "A cross-platform mobile app for booking visits, tickets, and events at a family entertainment venue.",
+        "overview": "A React Native app for a family entertainment brand, letting parents browse activities, book visits, and manage tickets from their phone.",
+        "problem": "Bookings happened by phone and at the door, creating queues and no-shows. The brand had no direct channel to reach returning families.",
+        "solution": "We shipped a polished cross-platform app with browsing, scheduling, secure payments, and push notifications — backed by Firebase for auth, data, and messaging.",
+        "services": ["Product & UX", "Mobile development", "Payments"],
+        "results": [
+          { "value": "4.8★", "label": "App store rating" },
+          { "value": "+34%", "label": "Repeat bookings" },
+          { "value": "-60%", "label": "No-show rate" }
+        ]
+      }
+    }
+  },
+  "About": {
+    "hero": {
+      "eyebrow": "About SDS",
+      "title": "A software studio built on engineering, not slide decks.",
+      "subtitle": "Sardor & Danila Systems is a growing software development studio. We partner with businesses to design, build, and scale digital products that hold up in production."
+    },
+    "mission": {
+      "eyebrow": "Mission",
+      "title": "Why we build.",
+      "body": [
+        "We exist to give ambitious businesses access to senior-level software engineering — the kind that ships reliable products and keeps improving them long after launch.",
+        "Great software comes from small, focused teams who own outcomes: clear architecture, honest timelines, and a relentless focus on what actually moves the business forward."
+      ]
+    },
+    "stats": [
+      { "value": "30+", "label": "Projects delivered" },
+      { "value": "4+", "label": "Years in practice" },
+      { "value": "3", "label": "Languages supported" },
+      { "value": "95%", "label": "Client retention" }
+    ],
+    "values": {
+      "eyebrow": "Values",
+      "title": "What we hold ourselves to.",
+      "subtitle": "The principles behind every project we take on.",
+      "items": {
+        "ownership": {
+          "title": "We own outcomes",
+          "description": "We treat your product like ours — accountable for results, not just deliverables."
+        },
+        "craft": {
+          "title": "Engineering craft",
+          "description": "Clean, performant, well-tested code. We sweat the details users actually feel."
+        },
+        "transparency": {
+          "title": "Radical transparency",
+          "description": "Clear scope, honest timelines, and weekly demos. No surprises at the end."
+        },
+        "longevity": {
+          "title": "Built for the long run",
+          "description": "Architecture and documentation that let your product evolve for years."
+        }
+      }
+    },
+    "process": {
+      "eyebrow": "How we work",
+      "title": "A process designed for clarity.",
+      "subtitle": "The same dependable path on every engagement."
+    },
+    "team": {
+      "eyebrow": "Team",
+      "title": "Senior people, end to end.",
+      "subtitle": "A focused team of engineers and designers — with the senior experience to make the right calls early.",
+      "members": {
+        "sardor": {
+          "name": "Sardor",
+          "role": "Co-founder · Engineering",
+          "bio": "Leads architecture and delivery across web and backend systems."
+        },
+        "danila": {
+          "name": "Danila",
+          "role": "Co-founder · Product & Design",
+          "bio": "Owns product strategy, UX, and the design system."
+        },
+        "engineering": {
+          "name": "Engineering",
+          "role": "Full-stack engineers",
+          "bio": "Senior web and mobile engineers shipping production software."
+        },
+        "design": {
+          "name": "Design",
+          "role": "Product designers",
+          "bio": "UX, UI, and design systems grounded in real usage."
+        }
+      }
+    }
+  },
+  "Contact": {
+    "eyebrow": "Contact",
+    "title": "Tell us about your project.",
+    "subtitle": "We usually reply within one business day. Share context, timeline, and links — we'll suggest a sensible next step.",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "you@company.com",
+      "company": "Company",
+      "companyPlaceholder": "Company (optional)",
+      "message": "Project details",
+      "messagePlaceholder": "What are you building? Include goals, timeline, and any links.",
+      "submit": "Send message",
+      "sending": "Sending…",
+      "success": "Thanks — your message is ready to send. We'll continue in your email client or reach out on Telegram.",
+      "errors": {
+        "name": "Please enter your name.",
+        "email": "Please enter a valid email.",
+        "message": "Please add a few details about your project."
+      }
+    },
+    "channels": {
+      "title": "Prefer to talk directly?",
+      "subtitle": "Reach us on your channel of choice.",
+      "telegram": "Telegram",
+      "instagram": "Instagram",
+      "phone": "Phone",
+      "email": "Email",
+      "responseTime": "Typically replies within 1 business day."
+    }
+  },
+  "Footer": {
+    "tagline": "We build reliable digital products for teams that outgrow spreadsheets and off-the-shelf tools.",
+    "navigate": "Navigate",
+    "connect": "Connect",
+    "rights": "All rights reserved.",
+    "location": "Tashkent, Uzbekistan"
+  }
+}
