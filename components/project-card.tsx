@@ -12,7 +12,7 @@ export function ProjectCard({ project }: { project: Project }) {
       href={`/portfolio/${project.slug}`}
       className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card transition-colors hover:border-border-strong"
     >
-      <div className="relative aspect-[16/10] overflow-hidden border-b border-border bg-surface">
+      <div className="relative aspect-16/10 overflow-hidden border-b border-border bg-surface">
         <Image
           src={project.cover}
           alt={t(`projects.${project.id}.title`)}
