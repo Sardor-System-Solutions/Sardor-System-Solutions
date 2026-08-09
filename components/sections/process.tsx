@@ -1,51 +1,52 @@
 import { useTranslations } from "next-intl";
 import { Container } from "@/components/layout/container";
-import { SectionHeader } from "@/components/layout/section";
-import { Reveal } from "@/components/motion/reveal";
-import { processSteps } from "@/content/process";
+import { Section, SectionHeading } from "@/components/layout/section";
+import { DrawLine, Stagger, StaggerItem } from "@/components/animations/reveal";
+import { processSteps } from "@/data/process";
 
-export function Process({
-  header,
-}: {
-  header?: { eyebrow: string; title: string; subtitle: string };
-}) {
+/**
+ * The five stages of a project, on a timeline that draws itself: horizontal
+ * on desktop, vertical on mobile.
+ */
+export function Process() {
   const t = useTranslations("Process");
 
   return (
-    <section className="border-t border-border py-20 sm:py-24 lg:py-28">
+    <Section id="process">
       <Container>
-        <SectionHeader
-          eyebrow={header?.eyebrow ?? t("eyebrow")}
-          title={header?.title ?? t("title")}
-          description={header?.subtitle ?? t("subtitle")}
+        <SectionHeading
+          label={t("label")}
+          title={t("title")}
+          description={t("subtitle")}
         />
 
-        <ol className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {processSteps.map((step, i) => {
-            const Icon = step.icon;
-            return (
-              <Reveal key={step.id} delay={i * 0.06} as="li">
-                <div className="flex h-full flex-col gap-4">
-                  <div className="flex items-center gap-3">
-                    <span className="inline-flex size-10 items-center justify-center rounded-lg border border-border bg-surface text-primary">
-                      <Icon className="size-5" />
-                    </span>
-                    <span className="font-mono text-sm text-muted-foreground">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <h3 className="text-base font-semibold tracking-tight text-foreground">
-                    {t(`steps.${step.id}.title`)}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {t(`steps.${step.id}.description`)}
-                  </p>
-                </div>
-              </Reveal>
-            );
-          })}
-        </ol>
+        <div className="relative mt-16 lg:mt-24">
+          <DrawLine className="absolute left-[3px] top-0 hidden h-full w-px bg-border-strong sm:block md:left-0 md:h-px md:w-full" />
+
+          <Stagger
+            as="ol"
+            className="grid gap-10 sm:pl-10 md:grid-cols-5 md:gap-6 md:pl-0"
+          >
+            {processSteps.map((step, i) => (
+              <StaggerItem key={step} as="li" className="relative md:pt-10">
+                <span
+                  className="absolute -left-10 top-2 hidden size-[7px] rounded-full bg-primary sm:block md:left-0 md:top-0 md:-translate-y-1/2"
+                  aria-hidden
+                />
+                <span className="num text-subtle-foreground">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-3 text-xl tracking-[-0.025em]">
+                  {t(`steps.${step}.title`)}
+                </h3>
+                <p className="mt-2.5 max-w-xs text-pretty text-[0.9375rem] leading-relaxed text-muted-foreground">
+                  {t(`steps.${step}.description`)}
+                </p>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </div>
       </Container>
-    </section>
+    </Section>
   );
 }

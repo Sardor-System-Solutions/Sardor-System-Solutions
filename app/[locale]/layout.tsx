@@ -1,24 +1,30 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Onest, JetBrains_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { siteConfig } from "@/lib/site";
 import { buildMetadata } from "@/lib/seo";
-import { Navbar } from "@/components/layout/navbar";
+import { Header } from "@/components/navigation/header";
 import { Footer } from "@/components/layout/footer";
+import { SmoothScroll } from "@/components/animations/smooth-scroll";
+import { CursorLabel } from "@/components/animations/cursor-label";
 import { OrganizationSchema } from "@/components/structured-data";
 import "../globals.css";
 
-const inter = Inter({
+// A contemporary grotesk with a proper Cyrillic cut — the typography does most
+// of the design work here, so the face matters more than anything else.
+const onest = Onest({
   subsets: ["latin", "cyrillic"],
-  variable: "--font-inter",
+  variable: "--font-onest",
   display: "swap",
 });
 
+// Reserved for numerals: indices, step counters, table figures.
 const mono = JetBrains_Mono({
   subsets: ["latin"],
+  weight: ["400", "500"],
   variable: "--font-mono-jb",
   display: "swap",
 });
@@ -37,7 +43,7 @@ export async function generateMetadata({
 
   return {
     metadataBase: new URL(siteConfig.url),
-    applicationName: siteConfig.name,
+    applicationName: siteConfig.shortName,
     ...buildMetadata({
       locale: hasLocale(routing.locales, locale) ? locale : routing.defaultLocale,
       path: "/",
@@ -45,8 +51,8 @@ export async function generateMetadata({
       description: t("description"),
     }),
     title: {
-      default: `${siteConfig.name} — ${t("title")}`,
-      template: `%s — ${siteConfig.name}`,
+      default: `${siteConfig.shortName} — ${t("title")}`,
+      template: `%s — ${siteConfig.shortName}`,
     },
     icons: { icon: "/logo.png" },
   };
@@ -64,20 +70,23 @@ export default async function LocaleLayout({
     notFound();
   }
   setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "Nav" });
 
   return (
-    <html lang={locale} className={`${inter.variable} ${mono.variable}`}>
+    <html lang={locale} className={`${onest.variable} ${mono.variable}`}>
       <body className="min-h-dvh bg-background font-sans antialiased">
         <OrganizationSchema />
         <NextIntlClientProvider>
           <a
             href="#main"
-            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-6 focus:top-6 focus:z-100 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground"
           >
-            Skip to content
+            {t("skip")}
           </a>
-          <Navbar />
-          <main id="main" className="pt-16">
+          <SmoothScroll />
+          <CursorLabel />
+          <Header />
+          <main id="main" className="pt-20 lg:pt-22">
             {children}
           </main>
           <Footer />

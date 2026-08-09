@@ -1,30 +1,31 @@
 import type { MetadataRoute } from "next";
-import { siteConfig } from "@/lib/site";
+import { localeUrl } from "@/lib/seo";
 import { locales, defaultLocale } from "@/i18n/routing";
-import { projects } from "@/content/projects";
+import { projects } from "@/data/projects";
 
-const staticPaths = ["", "/services", "/portfolio", "/about", "/contact"];
-
-function localizedUrl(locale: string, path: string) {
-  if (locale === defaultLocale) return `${siteConfig.url}${path}` || siteConfig.url;
-  return `${siteConfig.url}/${locale}${path}`;
-}
+const staticPaths = ["/", "/about", "/projects", "/contact"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [
     ...staticPaths,
-    ...projects.map((p) => `/portfolio/${p.slug}`),
+    ...projects.map((p) => `/projects/${p.slug}`),
   ];
 
-  return paths.map((path) => ({
-    url: localizedUrl(defaultLocale, path) || siteConfig.url,
-    lastModified: new Date(),
-    changeFrequency: "monthly",
-    priority: path === "" ? 1 : 0.7,
-    alternates: {
-      languages: Object.fromEntries(
-        locales.map((locale) => [locale, localizedUrl(locale, path)]),
-      ),
-    },
-  }));
+  // One entry per locale, each carrying the full alternates map.
+  return locales.flatMap((locale) =>
+    paths.map((path) => ({
+      url: localeUrl(locale, path),
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: path === "/" ? 1 : 0.7,
+      alternates: {
+        languages: {
+          ...Object.fromEntries(
+            locales.map((code) => [code, localeUrl(code, path)]),
+          ),
+          "x-default": localeUrl(defaultLocale, path),
+        },
+      },
+    })),
+  );
 }

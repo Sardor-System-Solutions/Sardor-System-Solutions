@@ -1,53 +1,69 @@
 @import "tailwindcss";
-@import "tw-animate-css";
-
-@custom-variant dark (&:is(.dark *));
 
 /*
-  SDS design system — dark, premium, navy/blue.
-  The site renders dark-first; tokens are exposed as CSS variables and
-  surfaced to Tailwind via @theme inline so utilities like bg-background,
-  text-muted-foreground, border-border, ring-ring etc. resolve correctly.
+  SDS design system — "editorial".
+
+  Light, paper-like base. Structure comes from hairline rules and a strict
+  grid, not from cards, shadows or gradients. Typography carries the design.
+  A single accent (#116BFF, sampled from the SDS logo) marks actions only.
+
+  Dark surfaces appear only as deliberate contrast: immersive project scenes,
+  the closing CTA and the footer.
 */
 
 :root {
-  --background: #0a0f1c;
-  --foreground: #f8fafc;
+  /* Surfaces */
+  --background: #fbfbfa;
+  --surface: #f2f2ef;
+  --surface-2: #eaeae6;
+  --card: #ffffff;
+  --card-foreground: #0b0b0c;
+  --popover: #ffffff;
+  --popover-foreground: #0b0b0c;
 
-  --surface: #0d1322;
-  --surface-2: #111829;
+  /* Inverted surface — contrast blocks only. */
+  --ink: #0b0b0c;
+  --ink-2: #141416;
+  --ink-foreground: #f7f7f5;
+  --ink-muted: #8f8f8a;
+  --ink-line: rgba(255, 255, 255, 0.14);
 
-  --card: #0e1424;
-  --card-foreground: #f1f5f9;
+  /* Text */
+  --foreground: #0b0b0c;
+  --muted: #f2f2ef;
+  --muted-foreground: #6e6e6a;
+  --subtle-foreground: #9b9b96;
 
-  --popover: #0e1424;
-  --popover-foreground: #f1f5f9;
-
-  --primary: #3b82f6;
+  /* Brand accent — the blue of the SDS mark. */
+  --primary: #116bff;
   --primary-foreground: #ffffff;
+  --primary-hover: #0b52cc;
+  --primary-soft: rgba(17, 107, 255, 0.08);
 
-  --secondary: #161d2e;
-  --secondary-foreground: #e2e8f0;
+  --secondary: #f2f2ef;
+  --secondary-foreground: #0b0b0c;
+  --accent: #f2f2ef;
+  --accent-foreground: #0b0b0c;
 
-  --muted: #131a2a;
-  --muted-foreground: #94a3b8;
-
-  --accent: #1d2740;
-  --accent-foreground: #dbeafe;
-
-  --destructive: #ef4444;
+  --destructive: #c8342b;
   --destructive-foreground: #ffffff;
 
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.14);
-  --input: rgba(255, 255, 255, 0.12);
-  --ring: #3b82f6;
+  /* Hairlines — the structural device of the whole layout. */
+  --border: #e4e4e0;
+  --border-strong: #cfcfc9;
+  /* Slightly darker than a hairline, so schematics read on the soft surface. */
+  --diagram: #bcbcb4;
+  --input: #d7d7d2;
+  --ring: #116bff;
 
-  --radius: 0.75rem;
+  --radius: 0.25rem;
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+  --font-sans: var(--font-onest), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, sans-serif;
   --font-mono: var(--font-mono-jb), ui-monospace, SFMono-Regular, monospace;
+
+  /* Shared motion curve. Every transition on the site uses this. */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @theme inline {
@@ -59,29 +75,38 @@
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-line: var(--ink-line);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-subtle-foreground: var(--subtle-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
+  --color-diagram: var(--diagram);
   --color-input: var(--input);
   --color-ring: var(--ring);
 
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 12px);
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  --radius-xl: 8px;
+  --radius-2xl: 12px;
 }
 
 @layer base {
@@ -90,53 +115,172 @@
   }
 
   html {
-    scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    /* Anchor jumps stay smooth; Lenis takes over wheel scrolling on pointer
+       devices and is disabled under prefers-reduced-motion. */
+    scroll-behavior: smooth;
   }
 
   body {
     background-color: var(--background);
     color: var(--foreground);
     font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv01";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    /* Nothing on the page may cause sideways scroll on small screens. */
+    overflow-x: clip;
   }
 
   ::selection {
-    background-color: color-mix(in oklab, var(--primary) 28%, transparent);
+    background-color: var(--primary);
     color: #ffffff;
   }
 
   :focus-visible {
     outline: 2px solid var(--ring);
-    outline-offset: 2px;
-    border-radius: 4px;
+    outline-offset: 3px;
+    border-radius: 2px;
   }
 
-  h1, h2, h3, h4 {
-    letter-spacing: -0.02em;
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 500;
+    letter-spacing: -0.03em;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
   }
 }
 
 @layer components {
-  /* Subtle dotted/grid backdrop used sparingly behind hero/CTA. */
-  .bg-grid {
-    background-image:
-      linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-    background-size: 56px 56px;
-    -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, #000 60%, transparent 100%);
-    mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, #000 60%, transparent 100%);
+  /*
+    Display scale. Fluid between the mobile and desktop bounds so the
+    composition holds at every width rather than snapping at breakpoints.
+  */
+  .display-0 {
+    font-size: clamp(2.75rem, 0.9rem + 7.6vw, 8rem);
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+    font-weight: 500;
   }
 
-  /* A restrained eyebrow / label style. */
-  .eyebrow {
-    font-family: var(--font-mono);
+  .display-1 {
+    font-size: clamp(2.5rem, 1.1rem + 6vw, 6rem);
+    line-height: 0.96;
+    letter-spacing: -0.04em;
+    font-weight: 500;
+  }
+
+  .display-2 {
+    font-size: clamp(2rem, 1.15rem + 3.4vw, 3.75rem);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    font-weight: 500;
+  }
+
+  .display-3 {
+    font-size: clamp(1.5rem, 1.1rem + 1.8vw, 2.25rem);
+    line-height: 1.12;
+    letter-spacing: -0.028em;
+    font-weight: 500;
+  }
+
+  .lead {
+    font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+    line-height: 1.55;
+    letter-spacing: -0.011em;
+  }
+
+  /* Small uppercase label. Set in the sans face — Cyrillic in a mono face
+     reads clumsily, so the mono is reserved for numerals. */
+  .label {
     font-size: 0.6875rem;
-    letter-spacing: 0.18em;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--muted-foreground);
+  }
+
+  .num {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+  }
+
+  /* Oversized index numeral used on project scenes. */
+  .index-num {
+    font-family: var(--font-mono);
+    font-size: clamp(0.75rem, 0.6rem + 0.4vw, 0.875rem);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.08em;
+  }
+
+  /* Link with an underline that wipes in from the left on hover. */
+  .link-wipe {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size 0.4s var(--ease-out-expo);
+    padding-bottom: 1px;
+  }
+
+  .link-wipe:hover,
+  .link-wipe:focus-visible {
+    background-size: 100% 1px;
+  }
+}
+
+@layer utilities {
+  /*
+    Sheet (mobile menu) enter/exit. Previously supplied by tw-animate-css;
+    written out here so the panel keeps its motion without the dependency.
+  */
+  @keyframes sds-fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @keyframes sds-fade-out {
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes sds-slide-in-right {
+    from {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes sds-slide-out-right {
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+  [data-sheet-overlay][data-state="open"] {
+    animation: sds-fade-in 0.3s var(--ease-out-expo);
+  }
+
+  [data-sheet-overlay][data-state="closed"] {
+    animation: sds-fade-out 0.2s ease-in;
+  }
+
+  [data-sheet-panel][data-state="open"] {
+    animation: sds-slide-in-right 0.45s var(--ease-out-expo);
+  }
+
+  [data-sheet-panel][data-state="closed"] {
+    animation: sds-slide-out-right 0.3s ease-in;
   }
 }
 

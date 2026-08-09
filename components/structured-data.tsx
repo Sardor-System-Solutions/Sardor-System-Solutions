@@ -1,6 +1,13 @@
+import { getTranslations } from "next-intl/server";
 import { siteConfig } from "@/lib/site";
 
-export function OrganizationSchema() {
+/**
+ * Organization JSON-LD. The description is pulled from the locale's own
+ * metadata so search engines see it in the language of the page.
+ */
+export async function OrganizationSchema() {
+  const t = await getTranslations("Meta.home");
+
   const data = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -8,12 +15,12 @@ export function OrganizationSchema() {
     alternateName: siteConfig.shortName,
     url: siteConfig.url,
     logo: `${siteConfig.url}/logo.png`,
-    description: siteConfig.description,
+    description: t("description"),
     email: siteConfig.contacts.email,
     telephone: siteConfig.contacts.phone,
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Tashkent",
+      addressLocality: "Samarkand",
       addressCountry: "UZ",
     },
     sameAs: [siteConfig.contacts.telegram, siteConfig.contacts.instagram],

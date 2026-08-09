@@ -4,31 +4,37 @@ import Link from "next/link";
 // lives in app/[locale]/not-found.tsx and is used for in-app navigation.
 export default function GlobalNotFound() {
   return (
-    <html lang="en">
+    <html lang="ru">
       <body
         style={{
           margin: 0,
           minHeight: "100dvh",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
+          alignItems: "flex-start",
           justifyContent: "center",
           gap: "16px",
-          background: "#0a0f1c",
-          color: "#f8fafc",
+          background: "#ffffff",
+          color: "#0b0b0c",
           fontFamily: "system-ui, -apple-system, sans-serif",
-          textAlign: "center",
-          padding: "24px",
+          padding: "48px",
         }}
       >
-        <h1 style={{ fontSize: "32px", fontWeight: 600, margin: 0 }}>
-          Page not found
+        <h1
+          style={{
+            fontSize: "40px",
+            fontWeight: 500,
+            letterSpacing: "-0.03em",
+            margin: 0,
+          }}
+        >
+          Страница не найдена
         </h1>
-        <p style={{ color: "#94a3b8", margin: 0 }}>
-          The page you&apos;re looking for doesn&apos;t exist.
+        <p style={{ color: "#6e6e6a", margin: 0 }}>
+          Такой страницы нет или она была перенесена.
         </p>
-        <Link href="/" style={{ color: "#3b82f6", textDecoration: "none" }}>
-          Go home
+        <Link href="/" style={{ color: "#116bff", textDecoration: "none" }}>
+          На главную
         </Link>
       </body>
     </html>

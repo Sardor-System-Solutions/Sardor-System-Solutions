@@ -1,6 +1,7 @@
 import type { ElementType, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
+/** The single measure everything on the site lines up to. */
 export function Container({
   children,
   className,
@@ -11,7 +12,12 @@ export function Container({
   as?: ElementType;
 }) {
   return (
-    <Tag className={cn("mx-auto w-full max-w-6xl px-6 lg:px-8", className)}>
+    <Tag
+      className={cn(
+        "mx-auto w-full max-w-[88rem] px-6 sm:px-8 lg:px-12 xl:px-16",
+        className,
+      )}
+    >
       {children}
     </Tag>
   );

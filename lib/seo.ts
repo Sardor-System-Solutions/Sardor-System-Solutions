@@ -2,18 +2,30 @@ import type { Metadata } from "next";
 import { siteConfig } from "./site";
 import { locales, defaultLocale, type Locale } from "@/i18n/routing";
 
-/** Build a localized alternates map for hreflang tags. */
-export function buildAlternates(path: string): Metadata["alternates"] {
+/** Absolute URL for a path in a given locale. The default locale is unprefixed. */
+export function localeUrl(locale: string, path: string) {
   const clean = path === "/" ? "" : path;
+  return locale === defaultLocale
+    ? `${siteConfig.url}${clean || "/"}`
+    : `${siteConfig.url}/${locale}${clean}`;
+}
+
+/**
+ * Canonical for the current locale plus the full hreflang map. Every locale
+ * lists the same set, and `x-default` points at the default locale.
+ */
+export function buildAlternates(
+  locale: Locale,
+  path: string,
+): Metadata["alternates"] {
   const languages: Record<string, string> = {};
-  for (const locale of locales) {
-    languages[locale] =
-      locale === defaultLocale
-        ? `${siteConfig.url}${clean || "/"}`
-        : `${siteConfig.url}/${locale}${clean}`;
+  for (const code of locales) {
+    languages[code] = localeUrl(code, path);
   }
+  languages["x-default"] = localeUrl(defaultLocale, path);
+
   return {
-    canonical: `${siteConfig.url}${clean || "/"}`,
+    canonical: localeUrl(locale, path),
     languages,
   };
 }
@@ -32,14 +44,14 @@ export function buildMetadata({
   return {
     title,
     description,
-    alternates: buildAlternates(path),
+    alternates: buildAlternates(locale, path),
     openGraph: {
       type: "website",
       siteName: siteConfig.name,
       title: `${title} — ${siteConfig.name}`,
       description,
       locale,
-      url: `${siteConfig.url}${path === "/" ? "" : path}`,
+      url: localeUrl(locale, path),
     },
     twitter: {
       card: "summary_large_image",

@@ -4,24 +4,25 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "group/btn inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-md text-[0.9375rem] font-medium tracking-[-0.01em] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:transition-transform [&_svg]:duration-300 hover:[&_svg]:translate-x-0.5",
   {
     variants: {
       variant: {
-        default:
-          "bg-primary text-primary-foreground shadow-sm hover:bg-primary/90",
-        secondary:
-          "border border-border bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:border-border-strong",
+        // The single accent surface on the site.
+        default: "bg-primary text-primary-foreground hover:bg-primary-hover",
+        ink: "bg-foreground text-background hover:bg-foreground/85",
         outline:
-          "border border-border bg-transparent text-foreground hover:bg-secondary hover:border-border-strong",
-        ghost: "text-foreground hover:bg-secondary",
+          "border border-border-strong bg-transparent text-foreground hover:border-foreground hover:bg-transparent",
+        onInk:
+          "border border-ink-line bg-transparent text-ink-foreground hover:border-ink-foreground",
+        ghost: "text-foreground hover:bg-surface",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-10 px-5 py-2",
-        sm: "h-9 rounded-md px-4",
-        lg: "h-12 rounded-lg px-7 text-base",
-        icon: "size-10",
+        sm: "h-9 px-4 text-sm",
+        default: "h-11 px-6",
+        lg: "h-13 px-7",
+        icon: "size-10 [&_svg]:size-5 hover:[&_svg]:translate-x-0",
       },
     },
     defaultVariants: {

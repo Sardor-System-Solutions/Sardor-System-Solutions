@@ -4,24 +4,14 @@ export const siteConfig = {
   url: "https://sds.uz",
   domain: "sds.uz",
   // Update once the production domain is live.
-  description:
-    "Sardor & Danila Systems is a software development studio building web platforms, mobile apps, CRM systems, dashboards, and business automation.",
   contacts: {
     telegram: "https://t.me/sardor_danila_systems",
+    telegramHandle: "@sardor_danila_systems",
     instagram: "https://www.instagram.com/sardor_danila_systems/",
-    phone: "+998883928811",
+    instagramHandle: "@sardor_danila_systems",
+    phone: "+998 88 392-88-11",
     phoneHref: "tel:+998883928811",
     email: "hello@sds.uz",
     emailHref: "mailto:hello@sds.uz",
   },
-  location: "Tashkent, Uzbekistan",
 } as const;
-
-export type NavKey = "services" | "portfolio" | "about" | "contact";
-
-export const navItems: { key: NavKey; href: string }[] = [
-  { key: "services", href: "/services" },
-  { key: "portfolio", href: "/portfolio" },
-  { key: "about", href: "/about" },
-  { key: "contact", href: "/contact" },
-];

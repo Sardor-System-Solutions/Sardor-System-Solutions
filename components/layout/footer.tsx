@@ -1,43 +1,54 @@
 import { useTranslations } from "next-intl";
-import { Send, Instagram, Phone, Mail } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { navItems, siteConfig } from "@/lib/site";
-import { Logo } from "./logo";
+import { navItems } from "@/data/navigation";
+import { siteConfig } from "@/lib/site";
+import { Container } from "./container";
 
+/** Inverted, and the last thing on every page. */
 export function Footer() {
   const t = useTranslations("Footer");
   const tNav = useTranslations("Nav");
+  const tCommon = useTranslations("Common");
   const year = new Date().getFullYear();
 
   const social = [
-    { label: "Telegram", href: siteConfig.contacts.telegram, Icon: Send },
-    { label: "Instagram", href: siteConfig.contacts.instagram, Icon: Instagram },
-    { label: "Phone", href: siteConfig.contacts.phoneHref, Icon: Phone },
-    { label: "Email", href: siteConfig.contacts.emailHref, Icon: Mail },
+    { label: "Telegram", href: siteConfig.contacts.telegram, external: true },
+    { label: "Instagram", href: siteConfig.contacts.instagram, external: true },
+    {
+      label: siteConfig.contacts.email,
+      href: siteConfig.contacts.emailHref,
+      external: false,
+    },
+    {
+      label: siteConfig.contacts.phone,
+      href: siteConfig.contacts.phoneHref,
+      external: false,
+    },
   ];
 
   return (
-    <footer className="border-t border-border bg-surface/40">
-      <div className="mx-auto w-full max-w-6xl px-6 py-16 lg:px-8">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr]">
-          <div className="max-w-sm">
-            <Logo />
-            <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-              {t("tagline")}
+    <footer className="bg-ink text-ink-foreground">
+      <Container>
+        <div className="grid gap-12 border-t border-ink-line py-16 md:grid-cols-12 md:gap-8 lg:py-20">
+          <div className="md:col-span-5">
+            <p className="text-[1.375rem] font-medium leading-none tracking-[-0.03em]">
+              SDS
             </p>
-            <p className="mt-5 text-xs text-muted-foreground">
-              {t("location")}
+            <p className="mt-3 text-sm text-ink-muted">{t("fullName")}</p>
+            <p className="mt-6 max-w-xs text-pretty text-sm leading-relaxed text-ink-muted">
+              {t("tagline")}
             </p>
           </div>
 
-          <div>
-            <h3 className="eyebrow mb-4">{t("navigate")}</h3>
-            <ul className="space-y-3">
+          <div className="md:col-span-3 md:col-start-7">
+            <h2 className="label text-ink-muted">{t("navigate")}</h2>
+            <ul className="mt-5 space-y-3">
               {navItems.map((item) => (
                 <li key={item.key}>
                   <Link
                     href={item.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    className="link-wipe text-[0.9375rem] text-ink-foreground/80 transition-colors hover:text-ink-foreground"
                   >
                     {tNav(item.key)}
                   </Link>
@@ -46,19 +57,19 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
-            <h3 className="eyebrow mb-4">{t("connect")}</h3>
-            <ul className="space-y-3">
-              {social.map(({ label, href, Icon }) => (
+          <div className="md:col-span-3">
+            <h2 className="label text-ink-muted">{t("connect")}</h2>
+            <ul className="mt-5 space-y-3">
+              {social.map(({ label, href, external }) => (
                 <li key={label}>
                   <a
                     href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noopener noreferrer" : undefined}
+                    className="link-wipe inline-flex items-center gap-1 text-[0.9375rem] text-ink-foreground/80 transition-colors hover:text-ink-foreground"
                   >
-                    <Icon className="size-4" />
                     {label}
+                    {external ? <ArrowUpRight className="size-3.5" /> : null}
                   </a>
                 </li>
               ))}
@@ -66,13 +77,13 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-start justify-between gap-3 border-t border-border pt-8 text-xs text-muted-foreground sm:flex-row sm:items-center">
+        <div className="flex flex-col gap-2 border-t border-ink-line py-7 text-xs text-ink-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
-            &copy; {year} {siteConfig.name}. {t("rights")}
+            © {year} {siteConfig.name}. {t("rights")}
           </p>
-          <p className="font-mono tracking-tight">{siteConfig.shortName}</p>
+          <p>{tCommon("location")}</p>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }

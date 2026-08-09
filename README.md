@@ -1,19 +1,40 @@
 # Sardor & Danila Systems (SDS) — Website
 
-A premium, production-ready marketing site for SDS, a software development studio.
+Marketing site for SDS: a team that builds digital products for business —
+web platforms, SaaS, CRM/ERP, WMS, mobile apps and business automation.
+
 Built with Next.js 15 (App Router), TypeScript, Tailwind CSS v4, shadcn/ui,
-Framer Motion, and next-intl. Dark, navy/blue visual language inspired by Linear,
-Vercel, Stripe, and Resend.
+Framer Motion and next-intl.
 
-## Tech stack
+## Design system
 
-- **Framework**: Next.js 15 (App Router, React 19, RSC)
-- **Language**: TypeScript (strict)
-- **Styling**: Tailwind CSS v4 + CSS-variable design tokens
-- **UI**: shadcn/ui primitives (Radix UI)
-- **Motion**: Framer Motion (subtle, reduced-motion aware)
-- **Icons**: Lucide React
-- **i18n**: next-intl with `[locale]` routing (English, Russian, Uzbek)
+Light and editorial. Structure comes from hairline rules and a strict grid
+rather than cards, shadows or gradients; typography carries the design.
+
+- **Surface** — off-white (`#fbfbfa`) with `#f2f2ef` for alternating sections.
+  Near-black is used deliberately and sparingly, as contrast: the closing CTA,
+  the next-project hand-off and the footer.
+- **Accent** — `#116bff`, sampled from the blue of the SDS logo. Used only for
+  actions, links, hover states and small graphic marks.
+- **Type** — [Onest](https://fonts.google.com/specimen/Onest) (variable, Latin +
+  Cyrillic) for everything; JetBrains Mono is reserved for numerals — indices,
+  step counters, table figures.
+- **Scale** — fluid `display-0/1/2/3` and `lead` classes in `app/globals.css`,
+  so composition holds at every width instead of snapping at breakpoints.
+- **Motion** — fade, a short rise, stagger, and an image that uncovers itself,
+  plus inertial scrolling (Lenis) and a pointer label over project visuals.
+  Nothing rotates, nothing loops. Everything degrades under
+  `prefers-reduced-motion`, and the pointer label and smooth scroll are skipped
+  entirely on touch.
+
+  When writing a new `whileInView` animation, make sure the initial and target
+  states list **the same properties**. `useReducedMotion()` resolves to `false`
+  during the server render and can flip after hydration; if the two states
+  animate different properties, the target no longer clears what `initial`
+  applied and the element stays invisible.
+
+Tokens live as CSS variables in `app/globals.css` and are exposed to Tailwind
+through `@theme inline`.
 
 ## Getting started
 
@@ -35,48 +56,119 @@ npm run typecheck
 
 ```
 app/
-  [locale]/            # localized routes
-    layout.tsx         # html/body, fonts, providers, navbar/footer
+  layout.tsx           # pass-through root layout (html/body live in [locale])
+  [locale]/
+    layout.tsx         # html/body, fonts, providers, header/footer
+    template.tsx       # per-route enter transition
     page.tsx           # Home
-    services/          # Services
-    portfolio/         # Portfolio index
-      [slug]/          # Case-study detail
-    about/             # About
+    projects/          # Gallery
+      [slug]/          # Case study (all nine projects)
+    about/             # About — who we are, services, team, process, stack
     contact/           # Contact
     opengraph-image.tsx
     not-found.tsx
-  sitemap.ts  robots.ts
+  not-found.tsx  sitemap.ts  robots.ts
 components/
-  layout/    # navbar, footer, logo, container, section, page-hero, language-switcher
-  sections/  # hero, services-overview, featured-projects, why-sds, process, testimonials, cta, contact-form
-  ui/        # shadcn primitives
-  motion/    # reveal/stagger wrappers
-content/     # typed structural data (services, projects, process, values, team, tech)
-i18n/        # routing, request, navigation config
-lib/         # utils, site config, seo helpers
-messages/    # en.json, ru.json, uz.json
+  animations/  # reveal, stagger, image reveal, draw-line, animated text,
+               # smooth scroll, pointer label, parallax
+  case-study/  # hero, narrative section, features, tech, gallery, next project
+  hero/        # home hero + its visual, page hero
+  layout/      # container, section shell, footer
+  navigation/  # header, mobile menu, logo, language switcher
+  projects/    # showcase scene, gallery card, index rows, visual, glyphs
+  sections/    # selected work, about preview, services, commercial experience,
+               # team, process, tech stack, final CTA, contact form
+  ui/          # button, input, textarea, label, sheet
+data/          # projects, services, process, team, tech, navigation
+types/         # project types
+i18n/          # routing, request, navigation config
+lib/           # utils, site config, seo helpers, hooks
+messages/      # ru.json, en.json, uz.json — all copy
+scripts/       # prepare-screenshots.py
+assets/        # original captures, before cropping (not served)
 ```
 
-## Content & i18n
+## Content and languages
 
-All human-readable copy lives in `messages/{en,ru,uz}.json`, keyed to match the
-structural data in `content/*.ts`. To edit copy, update the message catalogs.
-To add/remove a project, service, etc., update the relevant module in `content/`
-and add matching keys in each message catalog.
+The site ships in three languages: **Russian (default), English and Uzbek**.
+Russian is served unprefixed (`/`, `/projects`), the others under `/en` and
+`/uz`. Adding a locale is a message file plus one entry in `i18n/routing.ts`.
 
-## Editable placeholders
+All copy lives in `messages/{ru,en,uz}.json`, keyed to match the structural data
+in `data/*.ts`. To edit wording, change the message catalogs; to add or remove a
+project or service, update the module in `data/` and add matching keys to all
+three.
+
+Headlines are stored as `titleLines` arrays rather than one string, so each
+language controls its own line breaks.
+
+The three catalogs must stay key-for-key identical — a missing key throws at
+render time rather than falling back. To check:
+
+```bash
+node -e "const f=n=>Object.keys(require('./messages/'+n+'.json'));console.log(f('ru').length,f('en').length,f('uz').length)"
+```
+
+Uzbek is written in Latin script using the proper `ʻ` (U+02BB) and `ʼ` (U+02BC)
+characters rather than ASCII apostrophes — correct typography, and it keeps
+clear of ICU MessageFormat's apostrophe escaping.
+
+Product names and technology names stay in English in every locale.
+
+### How the work is split
+
+`data/projects.ts` separates two kinds of work, and the distinction is
+deliberate:
+
+- `kind: "product"` — products SDS builds and develops **as SDS**.
+- `kind: "commercial"` — projects the team developed **as part of Dotlabs**.
+  They are listed as team experience with the role held, their case study opens
+  with an explicit context note, and the next-project chain never crosses from
+  one kind into the other. They must never be presented as SDS clients.
+
+Every project gets a case study, but the narrative sections are all optional:
+`overview`, `challenge`, `solution`, `features` and `result` render only when
+the message catalog has content for them, so a project we know less about gets
+a shorter page instead of padded-out filler.
+
+### Screenshots
+
+Only real captures are used. `public/work/*.png` are the shipped images; the
+originals are kept in `assets/screenshots/` and are never served.
+
+Regenerate the shipped images with:
+
+```bash
+python3 scripts/prepare-screenshots.py
+```
+
+That script crops off the browser chrome, **blurs any region holding personal
+data**, and resamples to 2000px wide. The Oson Uy CRM capture is a real
+developer's workspace, so its client column — names and phone numbers — is
+redacted there. Any new capture containing personal data must get a redaction
+box in `REDACTIONS` before it ships.
+
+Projects without a capture fall back to an abstract line diagram
+(`components/projects/project-glyph.tsx`) — schematic by design, so it can never
+be mistaken for a real interface. Add a capture to `public/work/`, point `cover`
+at it in `data/projects.ts`, and the card switches automatically. Extra captures
+go in `images[]` and appear as the case study's PRODUCT section.
+
+## Things to fill in
 
 - `lib/site.ts` — production URL (`https://sds.uz`) and email (`hello@sds.uz`).
-  Update once the production domain/email are finalized.
-- Portfolio case-study results contain realistic drafted metrics — replace with
-  verified figures when available (`messages/*.json` → `Portfolio.projects.*.results`).
-- Testimonials are intentionally placeholders until real client quotes are added
-  (`components/sections/testimonials.tsx`).
+- `Project.technologies` in `data/projects.ts` is intentionally empty for every
+  project. Fill it in and the case study's TECHNOLOGY section appears by itself;
+  until then only the studio-level stack on the about page is stated, because we
+  do not assert a per-project stack that has not been confirmed.
+- `Project.year` is likewise empty — the meta row simply omits it.
+- Nothing on the site asserts client counts, project counts, timelines or
+  result metrics. Add them only with verified figures.
 
 ## SEO
 
 - Per-page metadata via the Metadata API + `generateMetadata`
-- `hreflang` alternates for all locales, canonical URLs
+- Per-locale canonical URLs, full `hreflang` alternates and `x-default`
 - OpenGraph/Twitter cards with a generated OG image (`opengraph-image.tsx`)
 - JSON-LD `Organization` + `BreadcrumbList`
 - `sitemap.xml` and `robots.txt`
