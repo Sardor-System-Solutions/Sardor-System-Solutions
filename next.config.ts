@@ -10,11 +10,15 @@ const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 const prefixes = ["", ...locales.map((locale) => `/${locale}`)];
 
 const legacyPaths: { from: string; to: string }[] = [
-  // The portfolio moved to /projects during the 2026 rework.
+  // Case studies kept their own routes through the rework.
   { from: "/portfolio/:slug", to: "/projects/:slug" },
-  { from: "/portfolio", to: "/projects" },
-  // Services are now a section of the about page.
-  { from: "/services", to: "/about#services" },
+  // Everything else is now a section of the one-page site. `/projects` is an
+  // exact match, so it never shadows `/projects/:slug`.
+  { from: "/portfolio", to: "/#projects" },
+  { from: "/projects", to: "/#projects" },
+  { from: "/about", to: "/#about" },
+  { from: "/contact", to: "/#contact" },
+  { from: "/services", to: "/#about" },
 ];
 
 const nextConfig: NextConfig = {

@@ -65,7 +65,7 @@ export function HeroVisual() {
           <RevealImage>
             <div className="relative aspect-video overflow-hidden rounded-lg border border-border bg-surface">
               <Image
-                src="/work/oson-uy.png"
+                src="/work/oson-uy.webp"
                 alt={t("showcaseAltOne")}
                 fill
                 priority
@@ -87,7 +87,7 @@ export function HeroVisual() {
           <RevealImage delay={0.12}>
             <div className="relative aspect-video overflow-hidden rounded-lg border border-border bg-surface">
               <Image
-                src="/work/dashboard.png"
+                src="/work/dashboard.webp"
                 alt={t("showcaseAltTwo")}
                 fill
                 priority

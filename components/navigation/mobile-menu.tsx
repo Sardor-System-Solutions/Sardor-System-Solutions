@@ -3,11 +3,9 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { Link, usePathname } from "@/i18n/navigation";
-import { navItems } from "@/data/navigation";
 import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { scrollToSection } from "@/lib/scroll";
 import {
   Sheet,
   SheetClose,
@@ -15,7 +13,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Logo } from "./logo";
+import { Wordmark } from "./wordmark";
+import { SectionNav } from "./section-nav";
 import { LanguageSwitcher } from "./language-switcher";
 
 /** Two bars that fold into a cross. */
@@ -39,21 +38,18 @@ function MenuGlyph({ open }: { open: boolean }) {
 }
 
 /**
- * Full-screen navigation for small screens — composed for the phone rather
- * than a shrunk-down header: oversized numbered links, then language, then
- * the direct contact routes.
+ * Full-screen navigation for small screens. It reuses `SectionNav`, so the
+ * travelling indicator and the scroll behaviour are identical to desktop —
+ * just at a larger size.
  */
-export function MobileMenu() {
+export function MobileMenu({ active }: { active: string | null }) {
   const t = useTranslations("Nav");
-  const pathname = usePathname();
   const [open, setOpen] = useState(false);
-
-  const isActive = (href: string) => pathname.startsWith(href);
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger
-        className="inline-flex h-10 items-center gap-2.5 rounded-sm pl-3 text-[0.9375rem] text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring lg:hidden"
+        className="-mr-1 inline-flex h-10 items-center gap-2.5 rounded-sm px-1 text-[0.9375rem] text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring lg:hidden"
         aria-label={t("openMenu")}
       >
         {t("menu")}
@@ -66,12 +62,12 @@ export function MobileMenu() {
       >
         <SheetTitle className="sr-only">{t("menu")}</SheetTitle>
 
-        <div className="flex h-20 items-center justify-between border-b border-border px-6 sm:px-8">
+        <div className="flex h-16 items-center justify-between border-b border-border px-6 sm:px-8">
           <SheetClose asChild>
-            <Logo />
+            <Wordmark />
           </SheetClose>
           <SheetClose
-            className="inline-flex h-10 items-center gap-2.5 rounded-sm pl-3 text-[0.9375rem] outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="-mr-1 inline-flex h-10 items-center gap-2.5 rounded-sm px-1 text-[0.9375rem] outline-none focus-visible:ring-2 focus-visible:ring-ring"
             aria-label={t("closeMenu")}
           >
             {t("closeMenu")}
@@ -80,36 +76,26 @@ export function MobileMenu() {
         </div>
 
         <div className="flex flex-1 flex-col justify-between overflow-y-auto px-6 py-10 sm:px-8">
-          <ul className="flex flex-col">
-            {navItems.map((item, i) => (
-              <li key={item.key} className="border-b border-border">
-                <SheetClose asChild>
-                  <Link
-                    href={item.href}
-                    className={cn(
-                      "flex items-baseline gap-5 py-5 text-[2rem] leading-none tracking-[-0.03em] transition-colors",
-                      isActive(item.href) ? "text-primary" : "hover:text-primary",
-                    )}
-                  >
-                    <span className="num text-subtle-foreground">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    {t(item.key)}
-                  </Link>
-                </SheetClose>
-              </li>
-            ))}
-          </ul>
+          <SectionNav
+            active={active}
+            size="lg"
+            className="flex-col items-start gap-4"
+            onNavigate={() => setOpen(false)}
+          />
 
           <div className="mt-12">
-            <SheetClose asChild>
-              <Button asChild size="lg" className="w-full">
-                <Link href="/contact">
-                  {t("cta")}
-                  <ArrowRight />
-                </Link>
-              </Button>
-            </SheetClose>
+            <button
+              type="button"
+              onClick={() => {
+                setOpen(false);
+                // Let the sheet close before the page starts moving.
+                requestAnimationFrame(() => scrollToSection("contact"));
+              }}
+              className="inline-flex h-12 w-full items-center justify-center gap-2.5 rounded-md bg-primary px-6 text-[0.9375rem] font-medium text-primary-foreground transition-colors hover:bg-primary-hover"
+            >
+              {t("cta")}
+              <ArrowRight className="size-4" />
+            </button>
 
             <div className="mt-8 border-t border-border pt-6">
               <LanguageSwitcher size="lg" />

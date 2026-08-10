@@ -3,7 +3,8 @@ import { localeUrl } from "@/lib/seo";
 import { locales, defaultLocale } from "@/i18n/routing";
 import { projects } from "@/data/projects";
 
-const staticPaths = ["/", "/about", "/projects", "/contact"];
+// The marketing site is a single page; only case studies add routes.
+const staticPaths = ["/"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [

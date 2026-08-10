@@ -13,7 +13,6 @@ import {
 } from "@/components/case-study/case-study-section";
 import { ProjectGallery } from "@/components/case-study/project-gallery";
 import { NextProject } from "@/components/case-study/next-project";
-import { FinalCta } from "@/components/sections/final-cta";
 import { BreadcrumbSchema } from "@/components/structured-data";
 import { projects, getProject, getNextProject } from "@/data/projects";
 
@@ -67,7 +66,7 @@ export default async function CaseStudyPage({
       <BreadcrumbSchema
         items={[
           { name: "SDS", url: siteConfig.url },
-          { name: tCase("breadcrumb"), url: `${siteConfig.url}/projects` },
+          { name: tCase("breadcrumb"), url: `${siteConfig.url}/#projects` },
           {
             name: project.title,
             url: `${siteConfig.url}/projects/${project.slug}`,
@@ -119,7 +118,6 @@ export default async function CaseStudyPage({
       />
 
       <NextProject project={getNextProject(project.slug)} />
-      <FinalCta />
     </>
   );
 }

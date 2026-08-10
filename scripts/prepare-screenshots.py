@@ -8,7 +8,9 @@ Three passes:
 2. Blur any region holding personal data. The Oson Uy CRM capture is a real
    developer's workspace, so the client column — names and phone numbers — is
    redacted before the image is ever published.
-3. Resample to 2000px wide and write to public/work/.
+3. Resample to 2000px wide and write WebP to public/work/. The captures are
+   part photographic, part flat UI; WebP handles both far better than PNG and
+   keeps the source Next.js re-encodes from small.
 
 Run:  python3 scripts/prepare-screenshots.py
 Needs Pillow.
@@ -74,8 +76,8 @@ def main() -> None:
             region = resized.crop(box).filter(ImageFilter.GaussianBlur(BLUR_RADIUS))
             resized.paste(region, box)
 
-        destination = OUT / f"{name}.png"
-        resized.save(destination, optimize=True)
+        destination = OUT / f"{name}.webp"
+        resized.save(destination, quality=88, method=6)
 
         note = f" redacted {len(REDACTIONS.get(name, []))} region(s)" if name in REDACTIONS else ""
         print(

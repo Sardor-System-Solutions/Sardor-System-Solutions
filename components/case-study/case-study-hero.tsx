@@ -37,7 +37,7 @@ export async function CaseStudyHero({ project }: { project: Project }) {
       <Container className="pb-12 pt-12 sm:pt-16 lg:pt-20">
         <Reveal>
           <Link
-            href="/projects"
+            href="/#projects"
             className="group inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
             <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1" />

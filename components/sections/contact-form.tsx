@@ -3,11 +3,11 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ArrowRight, Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { siteConfig } from "@/lib/site";
+import { cn } from "@/lib/utils";
 
 type Field = "name" | "company" | "contact" | "message";
 type Errors = Partial<Record<Field, string>>;
@@ -19,7 +19,7 @@ type Errors = Partial<Record<Field, string>>;
  * "Контакт" is free text on purpose — people reach us on Telegram as often as
  * by email, and we should not reject a handle for not looking like an address.
  */
-export function ContactForm() {
+export function ContactForm({ tone = "default" }: { tone?: "default" | "ink" }) {
   const t = useTranslations("Contact.form");
   const [values, setValues] = useState({
     name: "",
@@ -29,6 +29,12 @@ export function ContactForm() {
   });
   const [errors, setErrors] = useState<Errors>({});
   const [submitted, setSubmitted] = useState(false);
+
+  const isInk = tone === "ink";
+  const fieldClass = isInk
+    ? "border-ink-line bg-transparent text-ink-foreground placeholder:text-ink-muted focus-visible:border-primary"
+    : undefined;
+  const labelClass = isInk ? "text-ink-muted" : undefined;
 
   function update(field: Field, value: string) {
     setValues((v) => ({ ...v, [field]: value }));
@@ -75,11 +81,20 @@ export function ContactForm() {
     );
   }
 
+  const error = (field: Field) =>
+    errors[field] ? (
+      <p id={`${field}-error`} className="text-xs text-destructive">
+        {errors[field]}
+      </p>
+    ) : null;
+
   return (
     <form onSubmit={onSubmit} noValidate className="space-y-6">
       <div className="grid gap-6 sm:grid-cols-2">
         <div className="space-y-2.5">
-          <Label htmlFor="name">{t("name")}</Label>
+          <Label htmlFor="name" className={labelClass}>
+            {t("name")}
+          </Label>
           <Input
             id="name"
             value={values.name}
@@ -88,28 +103,30 @@ export function ContactForm() {
             aria-invalid={!!errors.name}
             aria-describedby={errors.name ? "name-error" : undefined}
             autoComplete="name"
+            className={fieldClass}
           />
-          {errors.name ? (
-            <p id="name-error" className="text-xs text-destructive">
-              {errors.name}
-            </p>
-          ) : null}
+          {error("name")}
         </div>
 
         <div className="space-y-2.5">
-          <Label htmlFor="company">{t("company")}</Label>
+          <Label htmlFor="company" className={labelClass}>
+            {t("company")}
+          </Label>
           <Input
             id="company"
             value={values.company}
             onChange={(e) => update("company", e.target.value)}
             placeholder={t("companyPlaceholder")}
             autoComplete="organization"
+            className={fieldClass}
           />
         </div>
       </div>
 
       <div className="space-y-2.5">
-        <Label htmlFor="contact">{t("contact")}</Label>
+        <Label htmlFor="contact" className={labelClass}>
+          {t("contact")}
+        </Label>
         <Input
           id="contact"
           value={values.contact}
@@ -117,16 +134,15 @@ export function ContactForm() {
           placeholder={t("contactPlaceholder")}
           aria-invalid={!!errors.contact}
           aria-describedby={errors.contact ? "contact-error" : undefined}
+          className={fieldClass}
         />
-        {errors.contact ? (
-          <p id="contact-error" className="text-xs text-destructive">
-            {errors.contact}
-          </p>
-        ) : null}
+        {error("contact")}
       </div>
 
       <div className="space-y-2.5">
-        <Label htmlFor="message">{t("message")}</Label>
+        <Label htmlFor="message" className={labelClass}>
+          {t("message")}
+        </Label>
         <Textarea
           id="message"
           value={values.message}
@@ -135,18 +151,22 @@ export function ContactForm() {
           rows={6}
           aria-invalid={!!errors.message}
           aria-describedby={errors.message ? "message-error" : undefined}
+          className={fieldClass}
         />
-        {errors.message ? (
-          <p id="message-error" className="text-xs text-destructive">
-            {errors.message}
-          </p>
-        ) : null}
+        {error("message")}
       </div>
 
-      <Button type="submit" size="lg" className="w-full sm:w-auto">
+      <button
+        type="submit"
+        className={cn(
+          "group inline-flex h-12 w-full items-center justify-center gap-2.5 rounded-md px-6 text-[0.9375rem] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 sm:w-auto",
+          "bg-primary text-primary-foreground hover:bg-primary-hover",
+          isInk && "focus-visible:ring-offset-ink",
+        )}
+      >
         {t("submit")}
-        <ArrowRight />
-      </Button>
+        <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+      </button>
     </form>
   );
 }

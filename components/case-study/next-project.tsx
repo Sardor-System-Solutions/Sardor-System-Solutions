@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import type { Project } from "@/types/project";
 import { Container } from "@/components/layout/container";
@@ -8,7 +8,11 @@ import { ProjectVisual } from "@/components/projects/project-visual";
 
 /**
  * The end of a case study hands straight to the next one, so the portfolio
- * reads as one continuous pass rather than a series of dead ends.
+ * reads as one continuous pass.
+ *
+ * The way back out is always offered alongside it — the chain cycles, so a
+ * visitor could otherwise loop indefinitely with no obvious exit. Nothing
+ * redirects on its own; leaving is always the visitor's choice.
  */
 export function NextProject({ project }: { project: Project }) {
   const t = useTranslations("Projects");
@@ -21,12 +25,10 @@ export function NextProject({ project }: { project: Project }) {
         <Link
           href={`/projects/${project.slug}`}
           data-cursor={tWork("cursorNext")}
-          className="group block py-20 sm:py-24 lg:py-28"
+          className="group block border-b border-ink-line py-20 sm:py-24 lg:py-28"
         >
           <Reveal>
-            <span className="label text-ink-muted">
-              {tCase("nextProject")}
-            </span>
+            <span className="label text-ink-muted">{tCase("nextProject")}</span>
           </Reveal>
 
           <div className="mt-8 grid items-center gap-10 md:grid-cols-12">
@@ -55,6 +57,19 @@ export function NextProject({ project }: { project: Project }) {
             </Reveal>
           </div>
         </Link>
+
+        <Reveal>
+          <div className="flex flex-col gap-4 py-10 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-ink-muted">{tCase("endOfCase")}</p>
+            <Link
+              href="/#projects"
+              className="group inline-flex items-center gap-2.5 text-[1.0625rem] font-medium"
+            >
+              <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1.5" />
+              {tCase("backToProjects")}
+            </Link>
+          </div>
+        </Reveal>
       </Container>
     </section>
   );

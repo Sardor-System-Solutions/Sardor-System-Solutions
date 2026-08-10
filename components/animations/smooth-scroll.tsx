@@ -2,14 +2,14 @@
 
 import { useEffect } from "react";
 import Lenis from "lenis";
+import { registerLenis, scrollToHash } from "@/lib/scroll";
 
 /**
  * Inertial wheel scrolling on pointer devices.
  *
- * Deliberately narrow: it is skipped entirely on touch (native momentum
- * scrolling is better there) and under `prefers-reduced-motion`, and it leaves
- * anchor navigation to the browser. Nothing in the layout depends on it, so if
- * it never initialises the site simply scrolls normally.
+ * Deliberately narrow: skipped on touch (native momentum is better there) and
+ * under `prefers-reduced-motion`. Nothing in the layout depends on it — if it
+ * never starts, `scrollToSection` falls back to the platform.
  */
 export function SmoothScroll() {
   useEffect(() => {
@@ -17,7 +17,12 @@ export function SmoothScroll() {
     const reduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    if (!finePointer || reduced) return;
+
+    if (!finePointer || reduced) {
+      // Still honour a hash arriving from another route.
+      scrollToHash();
+      return;
+    }
 
     const lenis = new Lenis({
       duration: 1.05,
@@ -25,6 +30,7 @@ export function SmoothScroll() {
       smoothWheel: true,
       touchMultiplier: 1.6,
     });
+    registerLenis(lenis);
 
     let frame = 0;
     const raf = (time: number) => {
@@ -33,9 +39,13 @@ export function SmoothScroll() {
     };
     frame = requestAnimationFrame(raf);
 
+    // Landing on /#projects from a case study should settle on the section.
+    scrollToHash();
+
     return () => {
       cancelAnimationFrame(frame);
       lenis.destroy();
+      registerLenis(null);
     };
   }, []);
 

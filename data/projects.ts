@@ -10,7 +10,7 @@ import type { Project, ProjectSlug } from "@/types/project";
 */
 
 const shot = (name: string, captionKey?: string): Project["cover"] => ({
-  src: `/work/${name}.png`,
+  src: `/work/${name}.webp`,
   width: 2000,
   height: 1091,
   ratio: "wide",

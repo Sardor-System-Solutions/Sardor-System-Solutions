@@ -54,17 +54,17 @@ npm run typecheck
 
 ## Project structure
 
+The marketing site is a **single page** — hero, about, projects and contact are
+sections of `/`, not routes. Case studies keep their own routes.
+
 ```
 app/
   layout.tsx           # pass-through root layout (html/body live in [locale])
   [locale]/
     layout.tsx         # html/body, fonts, providers, header/footer
     template.tsx       # per-route enter transition
-    page.tsx           # Home
-    projects/          # Gallery
-      [slug]/          # Case study (all nine projects)
-    about/             # About — who we are, services, team, process, stack
-    contact/           # Contact
+    page.tsx           # the whole one-page site
+    projects/[slug]/   # case study (all nine projects)
     opengraph-image.tsx
     not-found.tsx
   not-found.tsx  sitemap.ts  robots.ts
@@ -72,26 +72,44 @@ components/
   animations/  # reveal, stagger, image reveal, draw-line, animated text,
                # smooth scroll, pointer label, parallax
   case-study/  # hero, narrative section, features, tech, gallery, next project
-  hero/        # home hero + its visual, page hero
+  hero/        # the hero's paired screenshots
   layout/      # container, section shell, footer
-  navigation/  # header, mobile menu, logo, language switcher
-  projects/    # showcase scene, gallery card, index rows, visual, glyphs
-  sections/    # selected work, about preview, services, commercial experience,
-               # team, process, tech stack, final CTA, contact form
+  navigation/  # header, section nav, mobile menu, wordmark, language switcher
+  projects/    # showcase scene, index rows, visual, glyphs
+  sections/    # hero, about, projects (+ show more), contact, contact form
   ui/          # button, input, textarea, label, sheet
-data/          # projects, services, process, team, tech, navigation
+data/          # projects, services, tech, navigation
 types/         # project types
 i18n/          # routing, request, navigation config
-lib/           # utils, site config, seo helpers, hooks
+lib/           # utils, site config, seo helpers, scroll, active-section hook
 messages/      # ru.json, en.json, uz.json — all copy
 scripts/       # prepare-screenshots.py
 assets/        # original captures, before cropping (not served)
 ```
 
+### One-page navigation
+
+`data/navigation.ts` lists the sections; the ids there are the anchors on the
+page and what the header tracks.
+
+- `lib/scroll.ts` is the only thing that moves the page. `SmoothScroll`
+  registers the Lenis instance with it; `scrollToSection` uses Lenis when it
+  exists and falls back to the platform otherwise, so navigation still works on
+  touch, with reduced motion, and before hydration.
+- `lib/use-active-section.ts` watches a thin band across the middle of the
+  viewport with an IntersectionObserver — no scroll-offset arithmetic. Nothing
+  is highlighted while the visitor is still in the hero, and hitting the bottom
+  of the page always selects the last section.
+- The header's underline is one element shared across items via Framer's
+  `layoutId`, so it travels between them instead of fading in and out.
+
+Old routes (`/about`, `/projects`, `/contact`, `/portfolio`, `/services`)
+permanently redirect to the matching anchor, for every locale.
+
 ## Content and languages
 
 The site ships in three languages: **Russian (default), English and Uzbek**.
-Russian is served unprefixed (`/`, `/projects`), the others under `/en` and
+Russian is served unprefixed (`/`, `/projects/oson-uy`), the others under `/en` and
 `/uz`. Adding a locale is a message file plus one entry in `i18n/routing.ts`.
 
 All copy lives in `messages/{ru,en,uz}.json`, keyed to match the structural data
@@ -143,7 +161,8 @@ python3 scripts/prepare-screenshots.py
 ```
 
 That script crops off the browser chrome, **blurs any region holding personal
-data**, and resamples to 2000px wide. The Oson Uy CRM capture is a real
+data**, and writes WebP at 2000px wide (the three sources together are ~220 KB
+rather than ~2 MB as PNG). The Oson Uy CRM capture is a real
 developer's workspace, so its client column — names and phone numbers — is
 redacted there. Any new capture containing personal data must get a redaction
 box in `REDACTIONS` before it ships.

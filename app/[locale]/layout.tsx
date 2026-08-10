@@ -86,7 +86,7 @@ export default async function LocaleLayout({
           <SmoothScroll />
           <CursorLabel />
           <Header />
-          <main id="main" className="pt-20 lg:pt-22">
+          <main id="main">
             {children}
           </main>
           <Footer />

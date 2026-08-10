@@ -7,21 +7,11 @@
     "projects": {
       "title": "Projects",
       "description": "SDS projects: the Oson Uy platform, its mobile app and CRM, WMS, KidsCity.uz, EVRO PLAZA — and the team's commercial experience."
-    },
-    "about": {
-      "title": "About",
-      "description": "SDS is a development team. Web development, mobile apps, CRM and ERP, WMS and business process automation."
-    },
-    "contact": {
-      "title": "Contact",
-      "description": "Tell us about the project. We will propose an approach and show how the problem can become a digital product."
     }
   },
-
   "Common": {
     "location": "Samarkand, Uzbekistan"
   },
-
   "Nav": {
     "about": "About",
     "projects": "Projects",
@@ -32,48 +22,35 @@
     "closeMenu": "Close menu",
     "home": "Back home",
     "skip": "Skip to content",
-    "language": "Language"
+    "language": "Language",
+    "back": "Back"
   },
-
   "Hero": {
     "label": "Digital product development",
-    "titleLines": ["We build digital", "products for business."],
-    "subtitle": "Web platforms, mobile apps, CRM and automation systems — from idea to launch.",
-    "primaryCta": "Discuss a project",
-    "secondaryCta": "See projects",
+    "titleLines": [
+      "We build digital",
+      "products for business."
+    ],
+    "subtitle": "Web platforms, mobile apps and automation systems.",
+    "primaryCta": "See projects",
+    "secondaryCta": "Discuss a project",
     "showcaseCaptionOne": "Oson Uy — the platform",
     "showcaseCaptionTwo": "Oson Uy CRM — the developer's workspace",
     "showcaseAltOne": "The Oson Uy platform interface",
     "showcaseAltTwo": "The Oson Uy CRM interface — the developer's workspace"
   },
-
   "Work": {
     "label": "Projects",
-    "title": "Selected work",
+    "title": "Projects",
     "subtitle": "Products we build and develop as SDS.",
-    "ownLabel": "SDS projects",
-    "viewAll": "All projects",
     "viewProject": "View project",
     "cursorView": "View",
-    "cursorNext": "Next"
+    "cursorNext": "Next",
+    "showMore": "Show more",
+    "showLess": "Hide projects"
   },
-
-  "AboutPreview": {
-    "label": "About SDS",
-    "statementLines": [
-      "We do not just build interfaces.",
-      "We build the tools a business",
-      "actually runs on."
-    ],
-    "body": "SDS is a small development team. We take a business problem, design a system around it and carry it through to launch — then keep developing the product together with the company.",
-    "cta": "About the studio"
-  },
-
   "Services": {
     "label": "Services",
-    "title": "What we build",
-    "previewTitle": "What we do",
-    "viewAll": "All services",
     "items": {
       "web": {
         "title": "Web development",
@@ -132,7 +109,6 @@
       }
     }
   },
-
   "Commercial": {
     "label": "Team experience",
     "title": "The team's commercial experience",
@@ -143,29 +119,10 @@
     "disclaimer": "These projects came to the team through Dotlabs. We took part in building them end to end. SDS was not the contracting party.",
     "caseNote": "This project was developed by the team as part of Dotlabs, where we handled full-stack development. It is the team's commercial experience, not a project contracted to SDS."
   },
-
-  "Cta": {
-    "titleLines": ["Have a problem", "to solve?"],
-    "subtitle": "Tell us about it.",
-    "primary": "Discuss a project",
-    "secondary": "See projects",
-    "directLabel": "Or write to us directly"
-  },
-
   "Footer": {
-    "fullName": "Sardor & Danila Systems",
     "tagline": "Digital product development for business.",
-    "navigate": "Navigation",
-    "connect": "Contact",
     "rights": "All rights reserved."
   },
-
-  "ProjectsPage": {
-    "label": "Projects",
-    "titleLines": ["Products,", "not pages."],
-    "subtitle": "Our own SDS products and the team's commercial experience — kept apart so it is clear which is which."
-  },
-
   "CaseStudy": {
     "breadcrumb": "Projects",
     "backToProjects": "All projects",
@@ -183,74 +140,27 @@
       "features": "Features",
       "result": "Result",
       "context": "Context"
-    }
+    },
+    "endOfCase": "That is the end of this case study."
   },
-
   "About": {
     "label": "About",
-    "titleLines": ["Sardor & Danila", "Systems"],
-    "subtitle": "We build digital products that solve real business problems.",
-    "intro": {
-      "label": "Who we are",
-      "body": [
-        "SDS is a development team. We build web platforms and SaaS products, CRM and ERP systems, warehouse systems, mobile apps and corporate websites, and we automate business processes.",
-        "We are not a website studio. Our work is digital products built around a specific company process — with roles, data and scenarios, not a set of standalone pages.",
-        "The founders are Sardor and Danila. Alongside its own SDS products, the team has commercial development experience from its time at Dotlabs."
-      ]
-    }
+    "statementLines": [
+      "We do not just build interfaces,",
+      "we build the tools a business",
+      "actually runs on."
+    ],
+    "body": "SDS is a small development team. We take a business problem, design a system around it and carry it through to launch.",
+    "teamLabel": "Team",
+    "team": "Sardor and Danila — full-stack developers.",
+    "stackLabel": "Stack"
   },
-
-  "Team": {
-    "label": "Team",
-    "title": "Who does the work",
-    "roles": {
-      "sardor": "Full-stack Developer",
-      "danila": "Full-stack Developer"
-    }
-  },
-
-  "Process": {
-    "label": "Process",
-    "title": "From an idea to a working product.",
-    "subtitle": "The same clear path on every project.",
-    "steps": {
-      "analysis": {
-        "title": "Analysis",
-        "description": "We study the business and define the problem."
-      },
-      "design": {
-        "title": "Design",
-        "description": "We shape the UX/UI and the product architecture."
-      },
-      "build": {
-        "title": "Development",
-        "description": "We build and test the system."
-      },
-      "launch": {
-        "title": "Launch",
-        "description": "We ship the product and hand it over."
-      },
-      "growth": {
-        "title": "Growth",
-        "description": "We keep developing the product with the company."
-      }
-    }
-  },
-
-  "Tech": {
-    "label": "Technology",
-    "subtitle": "We pick tools to fit the problem, not the other way round.",
-    "groups": {
-      "frontend": "Frontend",
-      "backend": "Backend",
-      "data": "Data",
-      "mobile": "Mobile"
-    }
-  },
-
   "Contact": {
     "label": "Contact",
-    "titleLines": ["Got a project?", "Let's talk."],
+    "titleLines": [
+      "Got a project?",
+      "Let's talk."
+    ],
     "subtitle": "Describe the problem — we will propose an approach and show how it can become a digital product.",
     "form": {
       "title": "Form",
@@ -281,13 +191,11 @@
       "location": "Location"
     }
   },
-
   "NotFound": {
     "title": "Page not found",
     "subtitle": "This page does not exist, or it has been moved.",
     "cta": "Back home"
   },
-
   "Projects": {
     "oson-uy": {
       "category": "B2B SaaS / Real estate",
@@ -315,7 +223,6 @@
         "home": "The home page and the housing search"
       }
     },
-
     "oson-uy-mobile": {
       "category": "Mobile app",
       "description": "The mobile app of the Oson Uy platform.",
@@ -329,7 +236,6 @@
       "result": [],
       "captions": {}
     },
-
     "oson-uy-crm": {
       "category": "CRM / Admin panel",
       "description": "The developer's workspace: enquiries, projects, floors, prices and plans in one panel.",
@@ -356,7 +262,6 @@
         "overview": "The workspace summary and recent enquiries. Personal data is redacted."
       }
     },
-
     "wms": {
       "category": "WMS / Warehouse system",
       "description": "A system for managing a warehouse and the movement of construction materials.",
@@ -370,7 +275,6 @@
       "result": [],
       "captions": {}
     },
-
     "kidscity": {
       "category": "E-commerce",
       "description": "An online store: product catalogue, cart, favourites and a customer account.",
@@ -391,7 +295,6 @@
         "advantages": "A page from the store"
       }
     },
-
     "evro-plaza": {
       "category": "Corporate website",
       "description": "The corporate website of a property development company.",
@@ -405,7 +308,6 @@
       "result": [],
       "captions": {}
     },
-
     "pishcool": {
       "category": "Web development",
       "description": "Polyglot International School",
@@ -417,7 +319,6 @@
       "result": [],
       "captions": {}
     },
-
     "samyak": {
       "category": "Web development",
       "description": "A commercial project developed by the team.",
@@ -429,7 +330,6 @@
       "result": [],
       "captions": {}
     },
-
     "tespack": {
       "category": "Web development",
       "description": "A commercial project developed by the team.",

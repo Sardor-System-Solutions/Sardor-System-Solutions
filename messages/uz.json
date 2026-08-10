@@ -7,21 +7,11 @@
     "projects": {
       "title": "Loyihalar",
       "description": "SDS loyihalari: Oson Uy platformasi, mobil ilova va CRM, WMS, KidsCity.uz, EVRO PLAZA — hamda jamoaning tijorat tajribasi."
-    },
-    "about": {
-      "title": "Kompaniya haqida",
-      "description": "SDS — dasturchilar jamoasi. Veb-ishlab chiqish, mobil ilovalar, CRM va ERP, WMS hamda biznes-jarayonlarni avtomatlashtirish."
-    },
-    "contact": {
-      "title": "Aloqa",
-      "description": "Loyihangiz haqida gapirib bering. Yondashuvni taklif qilamiz va vazifani qanday raqamli mahsulotga aylantirish mumkinligini koʻrsatamiz."
     }
   },
-
   "Common": {
     "location": "Samarqand, Oʻzbekiston"
   },
-
   "Nav": {
     "about": "Kompaniya haqida",
     "projects": "Loyihalar",
@@ -32,48 +22,35 @@
     "closeMenu": "Menyuni yopish",
     "home": "Bosh sahifaga",
     "skip": "Kontentga oʻtish",
-    "language": "Til"
+    "language": "Til",
+    "back": "Orqaga"
   },
-
   "Hero": {
     "label": "Raqamli mahsulotlar ishlab chiqish",
-    "titleLines": ["Biznes uchun raqamli", "mahsulotlar yaratamiz."],
-    "subtitle": "Veb-platformalar, mobil ilovalar, CRM va avtomatlashtirish tizimlari — gʻoyadan ishga tushirishgacha.",
-    "primaryCta": "Loyihani muhokama qilish",
-    "secondaryCta": "Loyihalarni koʻrish",
+    "titleLines": [
+      "Biznes uchun raqamli",
+      "mahsulotlar yaratamiz."
+    ],
+    "subtitle": "Veb-platformalar, mobil ilovalar va avtomatlashtirish tizimlari.",
+    "primaryCta": "Loyihalarni koʻrish",
+    "secondaryCta": "Loyihani muhokama qilish",
     "showcaseCaptionOne": "Oson Uy — platforma",
     "showcaseCaptionTwo": "Oson Uy CRM — quruvchi kabineti",
     "showcaseAltOne": "Oson Uy platformasining interfeysi",
     "showcaseAltTwo": "Oson Uy CRM interfeysi — quruvchi kabineti"
   },
-
   "Work": {
     "label": "Loyihalar",
-    "title": "Tanlangan loyihalar",
+    "title": "Loyihalar",
     "subtitle": "SDS sifatida yaratadigan va rivojlantiradigan mahsulotlarimiz.",
-    "ownLabel": "SDS loyihalari",
-    "viewAll": "Barcha loyihalar",
     "viewProject": "Loyihani koʻrish",
     "cursorView": "Koʻrish",
-    "cursorNext": "Keyingi"
+    "cursorNext": "Keyingi",
+    "showMore": "Yana koʻrsatish",
+    "showLess": "Loyihalarni yashirish"
   },
-
-  "AboutPreview": {
-    "label": "SDS haqida",
-    "statementLines": [
-      "Biz shunchaki interfeys yaratmaymiz.",
-      "Biz biznesga ishlashga yordam beradigan",
-      "vositalar yaratamiz."
-    ],
-    "body": "SDS — kichik dasturchilar jamoasi. Biznes vazifasini olamiz, unga mos tizimni loyihalaymiz va ishga tushirishgacha olib boramiz, keyin esa mahsulotni kompaniya bilan birga rivojlantiramiz.",
-    "cta": "Kompaniya haqida"
-  },
-
   "Services": {
     "label": "Xizmatlar",
-    "title": "Biz nima yaratamiz",
-    "previewTitle": "Yoʻnalishlar",
-    "viewAll": "Barcha xizmatlar",
     "items": {
       "web": {
         "title": "Veb-ishlab chiqish",
@@ -132,7 +109,6 @@
       }
     }
   },
-
   "Commercial": {
     "label": "Jamoa tajribasi",
     "title": "Jamoaning tijorat tajribasi",
@@ -143,29 +119,10 @@
     "disclaimer": "Bu loyihalar jamoaga Dotlabs orqali topshirilgan. Biz ularni toʻliq ishlab chiqishda qatnashganmiz. SDS shartnoma boʻyicha bevosita ijrochi boʻlmagan.",
     "caseNote": "Loyiha jamoa tomonidan Dotlabs tarkibida ishlab chiqilgan, biz full-stack ishlab chiqishga javob berganmiz. Bu jamoaning tijorat tajribasi, SDS buyurtmachi boʻlgan loyiha emas."
   },
-
-  "Cta": {
-    "titleLines": ["Biznesingiz uchun", "vazifa bormi?"],
-    "subtitle": "Bu haqda bizga gapirib bering.",
-    "primary": "Loyihani muhokama qilish",
-    "secondary": "Loyihalarni koʻrish",
-    "directLabel": "Yoki toʻgʻridan-toʻgʻri yozing"
-  },
-
   "Footer": {
-    "fullName": "Sardor & Danila Systems",
     "tagline": "Biznes uchun raqamli mahsulotlar ishlab chiqish.",
-    "navigate": "Navigatsiya",
-    "connect": "Aloqa",
     "rights": "Barcha huquqlar himoyalangan."
   },
-
-  "ProjectsPage": {
-    "label": "Loyihalar",
-    "titleLines": ["Sahifalar emas,", "mahsulotlar."],
-    "subtitle": "SDS oʻz mahsulotlari va jamoaning tijorat tajribasi — nima nima ekani aniq boʻlishi uchun ajratilgan."
-  },
-
   "CaseStudy": {
     "breadcrumb": "Loyihalar",
     "backToProjects": "Barcha loyihalar",
@@ -183,74 +140,27 @@
       "features": "Imkoniyatlar",
       "result": "Natija",
       "context": "Kontekst"
-    }
+    },
+    "endOfCase": "Bu keysning soʻnggi boʻlimi."
   },
-
   "About": {
     "label": "Kompaniya haqida",
-    "titleLines": ["Sardor & Danila", "Systems"],
-    "subtitle": "Biznesning real vazifalarini hal qiladigan raqamli mahsulotlar yaratamiz.",
-    "intro": {
-      "label": "Biz kimmiz",
-      "body": [
-        "SDS — dasturchilar jamoasi. Biz veb-platformalar va SaaS mahsulotlar, CRM va ERP tizimlar, ombor tizimlari, mobil ilovalar hamda korporativ saytlar yaratamiz, shuningdek biznes-jarayonlarni avtomatlashtiramiz.",
-        "Biz sayt studiyasi emasmiz. Bizning ishimiz — kompaniyaning aniq jarayoni uchun raqamli mahsulotlar: rollar, maʼlumotlar va stsenariylar bilan, alohida sahifalar toʻplami emas.",
-        "Asoschilar — Sardor va Danila. SDS oʻz mahsulotlaridan tashqari, jamoada Dotlabs tarkibidagi tijorat ishlab chiqish tajribasi bor."
-      ]
-    }
+    "statementLines": [
+      "Biz shunchaki interfeys emas,",
+      "biznes ishlaydigan vositalarni",
+      "yaratamiz."
+    ],
+    "body": "SDS — kichik dasturchilar jamoasi. Biznes vazifasini olamiz, unga mos tizimni loyihalaymiz va ishga tushirishgacha olib boramiz.",
+    "teamLabel": "Jamoa",
+    "team": "Sardor va Danila — full-stack dasturchilar.",
+    "stackLabel": "Stek"
   },
-
-  "Team": {
-    "label": "Jamoa",
-    "title": "Ishni kim bajaradi",
-    "roles": {
-      "sardor": "Full-stack Developer",
-      "danila": "Full-stack Developer"
-    }
-  },
-
-  "Process": {
-    "label": "Jarayon",
-    "title": "Gʻoyadan ishlaydigan mahsulotgacha.",
-    "subtitle": "Har bir loyihada bir xil tushunarli yoʻl.",
-    "steps": {
-      "analysis": {
-        "title": "Tahlil",
-        "description": "Biznesni oʻrganamiz va vazifani aniqlaymiz."
-      },
-      "design": {
-        "title": "Loyihalash",
-        "description": "UX/UI va mahsulot arxitekturasini yaratamiz."
-      },
-      "build": {
-        "title": "Ishlab chiqish",
-        "description": "Tizimni ishlab chiqamiz va sinovdan oʻtkazamiz."
-      },
-      "launch": {
-        "title": "Ishga tushirish",
-        "description": "Mahsulotni ishga tushiramiz va ishga topshiramiz."
-      },
-      "growth": {
-        "title": "Rivojlantirish",
-        "description": "Mahsulotni kompaniya bilan birga rivojlantiramiz."
-      }
-    }
-  },
-
-  "Tech": {
-    "label": "Texnologiyalar",
-    "subtitle": "Vositalarni vazifaga qarab tanlaymiz, aksincha emas.",
-    "groups": {
-      "frontend": "Frontend",
-      "backend": "Backend",
-      "data": "Maʼlumotlar",
-      "mobile": "Mobile"
-    }
-  },
-
   "Contact": {
     "label": "Aloqa",
-    "titleLines": ["Loyihangiz bormi?", "Keling, muhokama qilamiz."],
+    "titleLines": [
+      "Loyihangiz bormi?",
+      "Keling, muhokama qilamiz."
+    ],
     "subtitle": "Vazifani yozing — yondashuvni taklif qilamiz va uni qanday raqamli mahsulotga aylantirish mumkinligini koʻrsatamiz.",
     "form": {
       "title": "Shakl",
@@ -281,13 +191,11 @@
       "location": "Manzil"
     }
   },
-
   "NotFound": {
     "title": "Sahifa topilmadi",
     "subtitle": "Bunday sahifa yoʻq yoki u koʻchirilgan.",
     "cta": "Bosh sahifaga"
   },
-
   "Projects": {
     "oson-uy": {
       "category": "B2B SaaS / Koʻchmas mulk",
@@ -315,7 +223,6 @@
         "home": "Bosh sahifa va uy tanlash"
       }
     },
-
     "oson-uy-mobile": {
       "category": "Mobil ilova",
       "description": "Oson Uy platformasining mobil ilovasi.",
@@ -329,7 +236,6 @@
       "result": [],
       "captions": {}
     },
-
     "oson-uy-crm": {
       "category": "CRM / Boshqaruv paneli",
       "description": "Quruvchi kabineti: arizalar, loyihalar, qavatlar, narxlar va tariflar bitta panelda.",
@@ -356,7 +262,6 @@
         "overview": "Kabinet statistikasi va soʻnggi arizalar. Shaxsiy maʼlumotlar yashirilgan."
       }
     },
-
     "wms": {
       "category": "WMS / Ombor tizimi",
       "description": "Ombor va qurilish materiallari harakatini boshqarish tizimi.",
@@ -370,7 +275,6 @@
       "result": [],
       "captions": {}
     },
-
     "kidscity": {
       "category": "E-commerce",
       "description": "Onlayn doʻkon: tovarlar katalogi, savat, saralanganlar va xaridorning shaxsiy kabineti.",
@@ -391,7 +295,6 @@
         "advantages": "Doʻkon sahifasi"
       }
     },
-
     "evro-plaza": {
       "category": "Korporativ sayt",
       "description": "Quruvchi kompaniyaning korporativ sayti.",
@@ -405,7 +308,6 @@
       "result": [],
       "captions": {}
     },
-
     "pishcool": {
       "category": "Veb-ishlab chiqish",
       "description": "Polyglot International School",
@@ -417,7 +319,6 @@
       "result": [],
       "captions": {}
     },
-
     "samyak": {
       "category": "Veb-ishlab chiqish",
       "description": "Jamoa ishlab chiqqan tijorat loyihasi.",
@@ -429,7 +330,6 @@
       "result": [],
       "captions": {}
     },
-
     "tespack": {
       "category": "Veb-ishlab chiqish",
       "description": "Jamoa ishlab chiqqan tijorat loyihasi.",

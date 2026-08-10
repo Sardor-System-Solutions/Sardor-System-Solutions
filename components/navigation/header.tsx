@@ -2,13 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Link, usePathname } from "@/i18n/navigation";
-import { navItems } from "@/data/navigation";
+import { navSectionIds } from "@/data/navigation";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { useActiveSection } from "@/lib/use-active-section";
+import { scrollToSection } from "@/lib/scroll";
 import { Container } from "@/components/layout/container";
-import { Logo } from "./logo";
+import { Wordmark } from "./wordmark";
+import { SectionNav } from "./section-nav";
 import { LanguageSwitcher } from "./language-switcher";
 import { MobileMenu } from "./mobile-menu";
 
@@ -24,65 +26,66 @@ function useScrolled(threshold = 8) {
 }
 
 /**
- * Fixed header. Transparent over the top of the page, then settles into a
- * blurred bar with a hairline once scrolling starts. Deliberately flat — no
- * pill, no shadow stack.
+ * Fixed header. A floating bar with a moderate radius: transparent at the top
+ * of the page, settling into a blurred panel once scrolling starts.
+ *
+ * It has two modes. On the one-page site it carries the section navigation
+ * with the travelling indicator. Inside a case study there are no sections to
+ * track, so it swaps to a single "back" action and gets out of the way.
  */
 export function Header() {
   const t = useTranslations("Nav");
   const pathname = usePathname();
   const scrolled = useScrolled();
 
-  const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname.startsWith(href);
+  const isCaseStudy = pathname.startsWith("/projects/");
+  const active = useActiveSection(navSectionIds);
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-500",
-        scrolled
-          ? "border-border bg-background/75 backdrop-blur-xl"
-          : "border-transparent bg-transparent",
-      )}
-    >
-      <Container>
-        <nav
+    <header className="fixed inset-x-0 top-0 z-50">
+      <Container className="pt-3 sm:pt-4">
+        <div
           className={cn(
-            "flex items-center justify-between transition-[height] duration-500",
-            scrolled ? "h-16" : "h-20 lg:h-22",
+            "flex items-center justify-between gap-6 rounded-xl px-4 transition-[background-color,box-shadow,backdrop-filter,height] duration-500 sm:px-5",
+            scrolled ? "h-14" : "h-16",
+            scrolled
+              ? "bg-background/70 shadow-[0_1px_0_0_var(--border)] backdrop-blur-xl"
+              : "bg-transparent",
           )}
         >
-          <Logo showFullName />
+          <Wordmark />
 
-          <div className="hidden items-center gap-9 lg:flex">
-            {navItems.map((item) => (
-              <Link
-                key={item.key}
-                href={item.href}
-                className={cn(
-                  "link-wipe text-[0.9375rem] tracking-[-0.01em] transition-colors",
-                  isActive(item.href)
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground",
-                )}
-              >
-                {t(item.key)}
-              </Link>
-            ))}
-          </div>
+          {isCaseStudy ? (
+            <Link
+              href="/#projects"
+              className="group inline-flex items-center gap-2 text-[0.9375rem] text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1" />
+              {t("back")}
+            </Link>
+          ) : (
+            <>
+              <SectionNav
+                active={active}
+                className="hidden gap-8 lg:flex"
+              />
 
-          <div className="hidden items-center gap-6 lg:flex">
-            <LanguageSwitcher />
-            <Button asChild size="sm">
-              <Link href="/contact">
-                {t("cta")}
-                <ArrowRight />
-              </Link>
-            </Button>
-          </div>
+              <div className="hidden items-center gap-6 lg:flex">
+                <LanguageSwitcher />
+                <button
+                  type="button"
+                  onClick={() => scrollToSection("contact")}
+                  className="group inline-flex h-9 items-center gap-2 rounded-md bg-primary px-4 text-[0.875rem] font-medium text-primary-foreground transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                >
+                  {t("cta")}
+                  <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+                </button>
+              </div>
 
-          <MobileMenu />
-        </nav>
+              <MobileMenu active={active} />
+            </>
+          )}
+        </div>
       </Container>
     </header>
   );

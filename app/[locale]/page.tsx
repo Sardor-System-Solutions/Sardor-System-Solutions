@@ -1,11 +1,13 @@
 import { setRequestLocale } from "next-intl/server";
-import { HomeHero } from "@/components/hero/home-hero";
-import { SelectedWork } from "@/components/sections/selected-work";
-import { AboutPreview } from "@/components/sections/about-preview";
-import { ServicesPreview } from "@/components/sections/services-preview";
-import { CommercialExperience } from "@/components/sections/commercial-experience";
-import { FinalCta } from "@/components/sections/final-cta";
+import { HeroSection } from "@/components/sections/hero-section";
+import { AboutSection } from "@/components/sections/about-section";
+import { ProjectsSection } from "@/components/sections/projects-section";
+import { ContactSection } from "@/components/sections/contact-section";
 
+/**
+ * The whole site, minus the case studies: hero, about, projects, contact.
+ * Section ids here are what the header's indicator tracks.
+ */
 export default async function HomePage({
   params,
 }: {
@@ -16,12 +18,10 @@ export default async function HomePage({
 
   return (
     <>
-      <HomeHero />
-      <SelectedWork />
-      <AboutPreview />
-      <ServicesPreview />
-      <CommercialExperience />
-      <FinalCta />
+      <HeroSection />
+      <AboutSection />
+      <ProjectsSection />
+      <ContactSection />
     </>
   );
 }
