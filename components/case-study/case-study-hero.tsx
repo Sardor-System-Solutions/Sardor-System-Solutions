@@ -1,7 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import type { Project } from "@/types/project";
+import type { Locale, Project } from "@/types/project";
+import { projectCopy } from "@/lib/get-projects";
 import { Container } from "@/components/layout/container";
 import { Reveal, RevealImage } from "@/components/animations/reveal";
 import { AnimatedText } from "@/components/animations/animated-text";
@@ -12,13 +13,19 @@ import { ProjectVisual } from "@/components/projects/project-visual";
  * meta strip, then the lead visual. Meta rows only appear when the data is
  * actually there — an unknown year is simply absent, never invented.
  */
-export async function CaseStudyHero({ project }: { project: Project }) {
-  const t = await getTranslations("Projects");
+export async function CaseStudyHero({
+  project,
+  locale,
+}: {
+  project: Project;
+  locale: Locale;
+}) {
   const tCase = await getTranslations("CaseStudy");
+  const copy = projectCopy(project, locale);
 
   const meta = [
-    { label: tCase("labels.category"), value: t(`${project.slug}.category`) },
-    { label: tCase("labels.role"), value: t(`${project.slug}.role`) },
+    { label: tCase("labels.category"), value: copy.category },
+    { label: tCase("labels.role"), value: copy.role },
     ...(project.year
       ? [{ label: tCase("labels.year"), value: project.year }]
       : []),
@@ -30,7 +37,7 @@ export async function CaseStudyHero({ project }: { project: Project }) {
           },
         ]
       : []),
-  ];
+  ].filter((row) => Boolean(row.value));
 
   return (
     <>
@@ -48,7 +55,7 @@ export async function CaseStudyHero({ project }: { project: Project }) {
         <div className="mt-12 grid gap-8 md:grid-cols-12">
           <div className="md:col-span-3">
             <Reveal>
-              <span className="label">{t(`${project.slug}.category`)}</span>
+              <span className="label">{copy.category}</span>
             </Reveal>
           </div>
           <div className="md:col-span-9">
@@ -57,7 +64,7 @@ export async function CaseStudyHero({ project }: { project: Project }) {
             </h1>
             <Reveal delay={0.18}>
               <p className="lead mt-8 max-w-2xl text-pretty text-muted-foreground">
-                {t(`${project.slug}.description`)}
+                {copy.description}
               </p>
             </Reveal>
           </div>
@@ -105,7 +112,7 @@ export async function CaseStudyHero({ project }: { project: Project }) {
           {project.cover?.captionKey ? (
             <figcaption className="mt-4 flex items-center gap-3 text-sm text-muted-foreground">
               <span className="h-px w-6 bg-border-strong" aria-hidden />
-              {t(`${project.slug}.captions.${project.cover.captionKey}`)}
+              {copy.captions[project.cover.captionKey]}
             </figcaption>
           ) : null}
         </figure>

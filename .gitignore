@@ -7,3 +7,7 @@ next-env.d.ts
 .env*.local
 .DS_Store
 .vercel
+.env
+
+# Local CRM store (development driver)
+.data/

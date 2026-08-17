@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
-import type { Project } from "@/types/project";
+import type { Locale, Project } from "@/types/project";
+import { projectCopy } from "@/lib/get-projects";
 import { Container } from "@/components/layout/container";
 import { Reveal, RevealImage } from "@/components/animations/reveal";
 import { ProjectVisual } from "@/components/projects/project-visual";
@@ -8,9 +9,15 @@ import { ProjectVisual } from "@/components/projects/project-visual";
  * The PRODUCT section: the real captures we have of a project, at full width.
  * Skipped entirely when there are none — no placeholder screens.
  */
-export function ProjectGallery({ project }: { project: Project }) {
-  const t = useTranslations("Projects");
+export function ProjectGallery({
+  project,
+  locale,
+}: {
+  project: Project;
+  locale: Locale;
+}) {
   const tCase = useTranslations("CaseStudy");
+  const copy = projectCopy(project, locale);
 
   if (project.images.length === 0) return null;
 
@@ -35,7 +42,7 @@ export function ProjectGallery({ project }: { project: Project }) {
               {image.captionKey ? (
                 <figcaption className="mt-4 flex items-center gap-3 text-sm text-muted-foreground">
                   <span className="h-px w-6 bg-border-strong" aria-hidden />
-                  {t(`${project.slug}.captions.${image.captionKey}`)}
+                  {copy.captions[image.captionKey]}
                 </figcaption>
               ) : null}
               <span className="sr-only">{i + 1}</span>

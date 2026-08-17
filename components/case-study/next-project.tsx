@@ -1,7 +1,8 @@
 import { useTranslations } from "next-intl";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import type { Project } from "@/types/project";
+import type { Locale, Project } from "@/types/project";
+import { projectCopy } from "@/lib/get-projects";
 import { Container } from "@/components/layout/container";
 import { Reveal } from "@/components/animations/reveal";
 import { ProjectVisual } from "@/components/projects/project-visual";
@@ -14,8 +15,13 @@ import { ProjectVisual } from "@/components/projects/project-visual";
  * visitor could otherwise loop indefinitely with no obvious exit. Nothing
  * redirects on its own; leaving is always the visitor's choice.
  */
-export function NextProject({ project }: { project: Project }) {
-  const t = useTranslations("Projects");
+export function NextProject({
+  project,
+  locale,
+}: {
+  project: Project;
+  locale: Locale;
+}) {
   const tCase = useTranslations("CaseStudy");
   const tWork = useTranslations("Work");
 
@@ -24,7 +30,6 @@ export function NextProject({ project }: { project: Project }) {
       <Container>
         <Link
           href={`/projects/${project.slug}`}
-          data-cursor={tWork("cursorNext")}
           className="group block border-b border-ink-line py-20 sm:py-24 lg:py-28"
         >
           <Reveal>
@@ -38,7 +43,7 @@ export function NextProject({ project }: { project: Project }) {
                   {project.title}
                 </h2>
                 <p className="mt-5 text-ink-muted">
-                  {t(`${project.slug}.category`)}
+                  {projectCopy(project, locale).category}
                 </p>
                 <span className="mt-8 inline-flex items-center gap-2.5 text-[0.9375rem] font-medium">
                   {tWork("viewProject")}

@@ -34,8 +34,8 @@
     "subtitle": "Veb-platformalar, mobil ilovalar va avtomatlashtirish tizimlari.",
     "primaryCta": "Loyihalarni koʻrish",
     "secondaryCta": "Loyihani muhokama qilish",
-    "showcaseCaptionOne": "Oson Uy — platforma",
-    "showcaseCaptionTwo": "Oson Uy CRM — quruvchi kabineti",
+    "showcaseCaptionOne": "Oson Uy · vitrina",
+    "showcaseCaptionTwo": "Oson Uy · quruvchi kabineti",
     "showcaseAltOne": "Oson Uy platformasining interfeysi",
     "showcaseAltTwo": "Oson Uy CRM interfeysi — quruvchi kabineti"
   },
@@ -44,8 +44,6 @@
     "title": "Loyihalar",
     "subtitle": "SDS sifatida yaratadigan va rivojlantiradigan mahsulotlarimiz.",
     "viewProject": "Loyihani koʻrish",
-    "cursorView": "Koʻrish",
-    "cursorNext": "Keyingi",
     "showMore": "Yana koʻrsatish",
     "showLess": "Loyihalarni yashirish"
   },
@@ -195,151 +193,5 @@
     "title": "Sahifa topilmadi",
     "subtitle": "Bunday sahifa yoʻq yoki u koʻchirilgan.",
     "cta": "Bosh sahifaga"
-  },
-  "Projects": {
-    "oson-uy": {
-      "category": "B2B SaaS / Koʻchmas mulk",
-      "description": "Koʻchmas mulk bozori uchun platforma: turar-joy majmualari katalogi va parametrlar boʻyicha kvartira tanlash.",
-      "role": "Ishlab chiqish: SDS jamoasi",
-      "overview": [
-        "Oson Uy — quruvchilar turar-joy majmualarini joylashtiradigan, xaridorlar esa kvartirani parametrlar boʻyicha tanlaydigan platforma. SDS mahsulot uchun toʻliq javob beradi: vitrina, katalog, tanlash va quruvchi kabineti."
-      ],
-      "challenge": [
-        "Xaridorga kvartiralarni aniq parametrlar — hudud, tuman, kvadrat metr narxi va maydon boʻyicha solishtirish kerak. Quruvchiga esa oʻz katalogini boshqarish va arizalarni koʻrish kerak. Ikkala vazifa bitta tizimda ishlashi shart, aks holda vitrinadagi maʼlumotlar tez orada haqiqatdan uzoqlashadi."
-      ],
-      "solution": [
-        "Platformani bir-biriga bogʻlangan ikki qismdan yigʻdik: katalog va tanlash bilan ochiq vitrina hamda loyihalar, qavatlar, narxlar va arizalar yuritiladigan quruvchi kabineti. Maʼlumotlar umumiy, shuning uchun kabinetdagi oʻzgarish darhol xaridorga koʻrinadi."
-      ],
-      "features": [
-        "Hudud, tuman, m² narxi va maydon boʻyicha tanlash",
-        "Turar-joy majmualari katalogi",
-        "Quruvchi kabineti",
-        "Koʻp tilli interfeys"
-      ],
-      "result": [
-        "Platforma ishlamoqda va rivojlanmoqda. Uning atrofida uchta mahsulotdan iborat ekotizim qurilgan: vitrina, mobil ilova va CRM."
-      ],
-      "captions": {
-        "home": "Bosh sahifa va uy tanlash"
-      }
-    },
-    "oson-uy-mobile": {
-      "category": "Mobil ilova",
-      "description": "Oson Uy platformasining mobil ilovasi.",
-      "role": "Ishlab chiqish: SDS jamoasi",
-      "overview": [
-        "Oson Uy ekotizimining mobil qismi: platforma bilan bitta maʼlumotlar bazasida, telefondan katalog va uy tanlashga kirish."
-      ],
-      "challenge": [],
-      "solution": [],
-      "features": [],
-      "result": [],
-      "captions": {}
-    },
-    "oson-uy-crm": {
-      "category": "CRM / Boshqaruv paneli",
-      "description": "Quruvchi kabineti: arizalar, loyihalar, qavatlar, narxlar va tariflar bitta panelda.",
-      "role": "Ishlab chiqish: SDS jamoasi",
-      "overview": [
-        "Oson Uy platformasining boshqaruv qismi. Quruvchi oʻz loyihalarini yuritadi, xaridorlar arizalarini kuzatadi va xaridor vitrinada koʻradigan maʼlumotlarni boshqaradi."
-      ],
-      "challenge": [
-        "Yangi qurilishdagi savdo ikki narsaga tayanadi: arizalar qanchalik tez koʻrib chiqilishi va obyektlar boʻyicha maʼlumotlarning dolzarbligi. Ikkalasi ham jadval va yozishmalarda turar ekan, quruvchi umumiy manzarani koʻrmaydi."
-      ],
-      "solution": [
-        "Arizalar, loyihalar, qavatlar, kvadrat metr narxlari va tariflar bitta joyda joylashgan kabinetni yigʻdik. Kirishda quruvchi oʻz faoliyati boʻyicha qisqacha statistikani va soʻnggi arizalarni koʻradi."
-      ],
-      "features": [
-        "Holatlari bilan xaridor arizalari",
-        "Loyihalar, qavatlar va m² narxlari",
-        "Tariflar va quruvchi profili",
-        "Kabinetdagi faoliyat boʻyicha qisqacha statistika"
-      ],
-      "result": [
-        "Vitrinadagi katalog va quruvchining maʼlumotlari bitta tizimda — kabinetda oʻzgargan narsa darhol xaridorga yetib boradi."
-      ],
-      "captions": {
-        "overview": "Kabinet statistikasi va soʻnggi arizalar. Shaxsiy maʼlumotlar yashirilgan."
-      }
-    },
-    "wms": {
-      "category": "WMS / Ombor tizimi",
-      "description": "Ombor va qurilish materiallari harakatini boshqarish tizimi.",
-      "role": "Ishlab chiqish: SDS jamoasi",
-      "overview": [
-        "Qurilish materiallari ombori uchun ichki tizim: pozitsiyalar va ularning harakati jadvallar hamda tarqoq yozuvlar oʻrniga bitta konturda hisobga olinadi."
-      ],
-      "challenge": [],
-      "solution": [],
-      "features": [],
-      "result": [],
-      "captions": {}
-    },
-    "kidscity": {
-      "category": "E-commerce",
-      "description": "Onlayn doʻkon: tovarlar katalogi, savat, saralanganlar va xaridorning shaxsiy kabineti.",
-      "role": "Ishlab chiqish: SDS jamoasi",
-      "overview": [
-        "Bolalar kiyimlari onlayn doʻkoni: katalog va tovar kartochkalari, savat, saralanganlar, savol-javob boʻlimi va koʻp tilli interfeys."
-      ],
-      "challenge": [],
-      "solution": [],
-      "features": [
-        "Katalog va tovar kartochkalari",
-        "Savat va saralanganlar",
-        "Xaridorning shaxsiy kabineti",
-        "Koʻp tilli interfeys"
-      ],
-      "result": [],
-      "captions": {
-        "advantages": "Doʻkon sahifasi"
-      }
-    },
-    "evro-plaza": {
-      "category": "Korporativ sayt",
-      "description": "Quruvchi kompaniyaning korporativ sayti.",
-      "role": "Ishlab chiqish: SDS jamoasi",
-      "overview": [
-        "EVRO PLAZA quruvchi kompaniyasining sayti: kompaniya va uning obyektlari."
-      ],
-      "challenge": [],
-      "solution": [],
-      "features": [],
-      "result": [],
-      "captions": {}
-    },
-    "pishcool": {
-      "category": "Veb-ishlab chiqish",
-      "description": "Polyglot International School",
-      "role": "Full-stack development",
-      "overview": [],
-      "challenge": [],
-      "solution": [],
-      "features": [],
-      "result": [],
-      "captions": {}
-    },
-    "samyak": {
-      "category": "Veb-ishlab chiqish",
-      "description": "Jamoa ishlab chiqqan tijorat loyihasi.",
-      "role": "Full-stack development",
-      "overview": [],
-      "challenge": [],
-      "solution": [],
-      "features": [],
-      "result": [],
-      "captions": {}
-    },
-    "tespack": {
-      "category": "Veb-ishlab chiqish",
-      "description": "Jamoa ishlab chiqqan tijorat loyihasi.",
-      "role": "Full-stack development",
-      "overview": [],
-      "challenge": [],
-      "solution": [],
-      "features": [],
-      "result": [],
-      "captions": {}
-    }
   }
 }

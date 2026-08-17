@@ -1,12 +1,13 @@
 import type { MetadataRoute } from "next";
 import { localeUrl } from "@/lib/seo";
 import { locales, defaultLocale } from "@/i18n/routing";
-import { projects } from "@/data/projects";
+import { getProjects } from "@/lib/get-projects";
 
 // The marketing site is a single page; only case studies add routes.
 const staticPaths = ["/"];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const projects = await getProjects();
   const paths = [
     ...staticPaths,
     ...projects.map((p) => `/projects/${p.slug}`),

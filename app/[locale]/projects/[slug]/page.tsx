@@ -5,6 +5,13 @@ import { hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
+import {
+  getProjects,
+  getProjectBySlugPublic,
+  getNextProjectOf,
+  projectCopy,
+} from "@/lib/get-projects";
+import type { Locale } from "@/types/project";
 import { CaseStudyHero } from "@/components/case-study/case-study-hero";
 import {
   CaseStudyFeatures,
@@ -14,9 +21,9 @@ import {
 import { ProjectGallery } from "@/components/case-study/project-gallery";
 import { NextProject } from "@/components/case-study/next-project";
 import { BreadcrumbSchema } from "@/components/structured-data";
-import { projects, getProject, getNextProject } from "@/data/projects";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const projects = await getProjects();
   return routing.locales.flatMap((locale) =>
     projects.map((p) => ({ locale, slug: p.slug })),
   );
@@ -28,15 +35,19 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const project = getProject(slug);
+  const project = await getProjectBySlugPublic(slug);
   if (!project) return {};
 
-  const t = await getTranslations({ locale, namespace: "Projects" });
+  const resolved = hasLocale(routing.locales, locale)
+    ? locale
+    : routing.defaultLocale;
+  const copy = projectCopy(project, resolved as Locale);
+
   return buildMetadata({
-    locale: hasLocale(routing.locales, locale) ? locale : routing.defaultLocale,
+    locale: resolved,
     path: `/projects/${slug}`,
-    title: `${project.title} — ${t(`${project.slug}.category`)}`,
-    description: t(`${project.slug}.description`),
+    title: copy.category ? `${project.title} — ${copy.category}` : project.title,
+    description: copy.description,
   });
 }
 
@@ -48,18 +59,19 @@ export default async function CaseStudyPage({
   const { locale, slug } = await params;
   setRequestLocale(locale);
 
-  const project = getProject(slug);
+  const projects = await getProjects();
+  const project = projects.find((p) => p.slug === slug);
   if (!project) notFound();
 
-  const t = await getTranslations("Projects");
+  const resolved = (
+    hasLocale(routing.locales, locale) ? locale : routing.defaultLocale
+  ) as Locale;
+  // Project copy now lives in the DB (edited through /admin) rather than in
+  // messages/*.json; only the page's own labels come from the catalogues.
+  const copy = projectCopy(project, resolved);
+
   const tCase = await getTranslations("CaseStudy");
   const tCommercial = await getTranslations("Commercial");
-
-  // Every narrative block is optional: a project we know less about simply
-  // gets a shorter page rather than padded-out filler.
-  const paragraphs = (key: string) =>
-    (t.raw(`${project.slug}.${key}`) as string[] | undefined) ?? [];
-  const features = (t.raw(`${project.slug}.features`) as string[]) ?? [];
 
   return (
     <>
@@ -74,7 +86,7 @@ export default async function CaseStudyPage({
         ]}
       />
 
-      <CaseStudyHero project={project} />
+      <CaseStudyHero project={project} locale={resolved} />
 
       {/* Dotlabs-era work states its context up front, so the page can never
           be mistaken for an SDS client engagement. */}
@@ -85,24 +97,26 @@ export default async function CaseStudyPage({
         />
       ) : null}
 
+      {/* Every narrative block is optional: a project we know less about
+          simply gets a shorter page rather than padded-out filler. */}
       <CaseStudySection
         label={tCase("labels.overview")}
-        body={paragraphs("overview")}
+        body={copy.overview}
       />
       <CaseStudySection
         label={tCase("labels.challenge")}
-        body={paragraphs("challenge")}
+        body={copy.challenge}
       />
       <CaseStudySection
         label={tCase("labels.solution")}
-        body={paragraphs("solution")}
+        body={copy.solution}
       />
 
-      <ProjectGallery project={project} />
+      <ProjectGallery project={project} locale={resolved} />
 
-      {features.length > 0 ? (
+      {copy.features.length > 0 ? (
         <CaseStudySection label={tCase("labels.features")}>
-          <CaseStudyFeatures items={features} />
+          <CaseStudyFeatures items={copy.features} />
         </CaseStudySection>
       ) : null}
 
@@ -112,12 +126,12 @@ export default async function CaseStudyPage({
         </CaseStudySection>
       ) : null}
 
-      <CaseStudySection
-        label={tCase("labels.result")}
-        body={paragraphs("result")}
-      />
+      <CaseStudySection label={tCase("labels.result")} body={copy.result} />
 
-      <NextProject project={getNextProject(project.slug)} />
+      <NextProject
+        project={getNextProjectOf(projects, project.slug)}
+        locale={resolved}
+      />
     </>
   );
 }

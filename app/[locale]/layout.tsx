@@ -9,7 +9,6 @@ import { buildMetadata } from "@/lib/seo";
 import { Header } from "@/components/navigation/header";
 import { Footer } from "@/components/layout/footer";
 import { SmoothScroll } from "@/components/animations/smooth-scroll";
-import { CursorLabel } from "@/components/animations/cursor-label";
 import { OrganizationSchema } from "@/components/structured-data";
 import "../globals.css";
 
@@ -84,7 +83,6 @@ export default async function LocaleLayout({
             {t("skip")}
           </a>
           <SmoothScroll />
-          <CursorLabel />
           <Header />
           <main id="main">
             {children}

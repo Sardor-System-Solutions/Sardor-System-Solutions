@@ -14,7 +14,7 @@ import { ProjectVisual } from "./project-visual";
  * while still reading as a composed scene. Alternating sides stops a run of
  * them from turning into a list.
  *
- * The whole scene is one link, and carries the pointer label.
+ * The whole scene is one link.
  *
  * `category`/`description` now come from the project's `i18n` field in the
  * DB (picked by `locale`) instead of `t(`${slug}.category`)` against the
@@ -40,7 +40,6 @@ export function ProjectShowcase({
     <article>
       <Link
         href={`/projects/${project.slug}`}
-        data-cursor={tWork("cursorView")}
         className="group block"
       >
         <div className="grid items-start gap-6 md:grid-cols-12 md:gap-10">
@@ -50,8 +49,19 @@ export function ProjectShowcase({
               flipped ? "md:col-start-9" : "md:col-start-1",
             )}
           >
-            <div className="flex items-baseline gap-4 border-t border-border-strong pt-5">
-              <span className="index-num text-subtle-foreground">
+            {/* Hover reads through the layout itself — the rule, the index
+                and the title — rather than a floating badge chasing the
+                pointer. */}
+            <div className="relative flex items-baseline gap-4 pt-5">
+              <span
+                aria-hidden
+                className="absolute inset-x-0 top-0 h-px bg-border-strong"
+              />
+              <span
+                aria-hidden
+                className="absolute left-0 top-0 h-px w-full origin-left scale-x-0 bg-primary transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"
+              />
+              <span className="index-num text-subtle-foreground transition-colors duration-300 group-hover:text-primary">
                 {String(index + 1).padStart(2, "0")}
               </span>
               <h3 className="display-3 transition-colors duration-300 group-hover:text-primary">
@@ -65,7 +75,7 @@ export function ProjectShowcase({
               {copy.description}
             </p>
 
-            <span className="mt-6 inline-flex items-center gap-2 pl-9 text-[0.9375rem] font-medium">
+            <span className="mt-6 inline-flex items-center gap-2 pl-9 text-[0.9375rem] font-medium transition-colors duration-300 group-hover:text-primary">
               {tWork("viewProject")}
               <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1.5" />
             </span>

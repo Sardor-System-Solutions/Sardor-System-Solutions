@@ -36,6 +36,12 @@ rather than cards, shadows or gradients; typography carries the design.
 Tokens live as CSS variables in `app/globals.css` and are exposed to Tailwind
 through `@theme inline`.
 
+## Admin & CRM
+
+The internal tool — sales CRM plus the site's CMS — lives at `/admin`.
+Setup, roles and the day-to-day workflow are documented in
+**[ADMIN.md](ADMIN.md)**.
+
 ## Getting started
 
 ```bash

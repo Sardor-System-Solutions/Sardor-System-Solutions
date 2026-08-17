@@ -1,0 +1,457 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "slug": "oson-uy",
+      "title": "Oson Uy",
+      "kind": "product",
+      "glyph": "platform",
+      "cover": {
+        "src": "/work/oson-uy.webp",
+        "width": 2000,
+        "height": 1091,
+        "ratio": "wide",
+        "captionKey": "home"
+      },
+      "images": [
+        {
+          "src": "/work/dashboard.webp",
+          "width": 2000,
+          "height": 1091,
+          "ratio": "wide",
+          "captionKey": "crm"
+        }
+      ],
+      "href": "https://oson-uy.uz",
+      "domain": "oson-uy.uz",
+      "technologies": [],
+      "featured": true,
+      "span": "half",
+      "i18n": {
+        "en": {
+          "category": "B2B SaaS / Real estate",
+          "description": "An ecosystem for the property market: the platform, a mobile app and the developer's CRM.",
+          "role": "Development: SDS team",
+          "overview": [
+            "Oson Uy is the product property developers list their residential complexes on and buyers search by parameter. It has three surfaces: the public storefront, a mobile app and the developer's workspace. All three run on one database, so a change in the workspace is immediately visible to the buyer.",
+            "SDS is responsible for the whole product — from the storefront and the search through to the management panel."
+          ],
+          "challenge": [
+            "A buyer needs to compare apartments on concrete parameters — region, district, price per square metre and area. A developer needs to manage their own catalogue and see incoming enquiries. Both have to work inside one system, or the data on the storefront quickly drifts from reality."
+          ],
+          "solution": [
+            "We built the product as three connected surfaces on a shared core: a public storefront with the catalogue and search, a mobile app, and a developer's workspace holding projects, floors, prices and enquiries. They share the same data, so an edit in the workspace reaches the buyer straight away — on the site and in the app."
+          ],
+          "features": [
+            "Search by region, district, price per m² and area",
+            "Catalogue of residential complexes",
+            "Mobile app on the same database as the platform",
+            "Developer's workspace: buyer enquiries with statuses",
+            "Projects, floors and prices per m²",
+            "Plans and the developer profile",
+            "Multilingual interface"
+          ],
+          "result": [
+            "The product is live and still being developed. The storefront, the mobile app and the CRM live in one system rather than as three separate projects."
+          ],
+          "captions": {
+            "home": "The storefront: home page and housing search",
+            "crm": "The developer's workspace: summary and recent enquiries. Personal data is redacted."
+          }
+        },
+        "ru": {
+          "category": "B2B SaaS / Недвижимость",
+          "description": "Экосистема для рынка недвижимости: платформа, мобильное приложение и CRM застройщика.",
+          "role": "Разработка: команда SDS",
+          "overview": [
+            "Oson Uy — продукт, на котором застройщики размещают жилые комплексы, а покупатели подбирают квартиры по параметрам. У него три части: публичная витрина, мобильное приложение и кабинет застройщика. Все три работают на одной базе данных, поэтому изменения в кабинете сразу видны покупателю.",
+            "SDS отвечает за продукт целиком — от витрины и подбора до управляющей панели."
+          ],
+          "challenge": [
+            "Покупателю нужно сравнивать квартиры по конкретным параметрам — региону, району, цене за квадратный метр и площади. Застройщику нужно самому управлять своим каталогом и видеть заявки. Обе задачи должны работать в одной системе, иначе данные на витрине быстро расходятся с реальностью."
+          ],
+          "solution": [
+            "Мы собрали продукт из трёх связанных частей на общем ядре: публичная витрина с каталогом и подбором, мобильное приложение и кабинет застройщика, где ведутся проекты, этажи, цены и заявки. Данные общие, поэтому правка в кабинете сразу доходит до покупателя — и на сайте, и в приложении."
+          ],
+          "features": [
+            "Подбор по региону, району, цене за м² и площади",
+            "Каталог жилых комплексов",
+            "Мобильное приложение на одной базе с платформой",
+            "Кабинет застройщика: заявки покупателей со статусами",
+            "Проекты, этажи и цены за м²",
+            "Тарифы и профиль застройщика",
+            "Мультиязычный интерфейс"
+          ],
+          "result": [
+            "Продукт работает и развивается. Витрина, мобильное приложение и CRM живут в одном контуре, а не как три отдельных проекта."
+          ],
+          "captions": {
+            "home": "Витрина: главная страница и подбор жилья",
+            "crm": "Кабинет застройщика: сводка и последние заявки. Персональные данные скрыты."
+          }
+        },
+        "uz": {
+          "category": "B2B SaaS / Koʻchmas mulk",
+          "description": "Koʻchmas mulk bozori uchun ekotizim: platforma, mobil ilova va quruvchi CRM tizimi.",
+          "role": "Ishlab chiqish: SDS jamoasi",
+          "overview": [
+            "Oson Uy — quruvchilar turar-joy majmualarini joylashtiradigan, xaridorlar esa kvartirani parametrlar boʻyicha tanlaydigan mahsulot. Uning uchta qismi bor: ochiq vitrina, mobil ilova va quruvchi kabineti. Uchalasi bitta maʼlumotlar bazasida ishlaydi, shuning uchun kabinetdagi oʻzgarish darhol xaridorga koʻrinadi.",
+            "SDS mahsulot uchun toʻliq javob beradi — vitrina va tanlashdan boshqaruv paneligacha."
+          ],
+          "challenge": [
+            "Xaridorga kvartiralarni aniq parametrlar — hudud, tuman, kvadrat metr narxi va maydon boʻyicha solishtirish kerak. Quruvchiga esa oʻz katalogini boshqarish va arizalarni koʻrish kerak. Ikkala vazifa bitta tizimda ishlashi shart, aks holda vitrinadagi maʼlumotlar tez orada haqiqatdan uzoqlashadi."
+          ],
+          "solution": [
+            "Mahsulotni umumiy yadro ustida bir-biriga bogʻlangan uchta qismdan yigʻdik: katalog va tanlash bilan ochiq vitrina, mobil ilova hamda loyihalar, qavatlar, narxlar va arizalar yuritiladigan quruvchi kabineti. Maʼlumotlar umumiy, shuning uchun kabinetdagi tahrir darhol xaridorga yetib boradi — saytda ham, ilovada ham."
+          ],
+          "features": [
+            "Hudud, tuman, m² narxi va maydon boʻyicha tanlash",
+            "Turar-joy majmualari katalogi",
+            "Platforma bilan bitta bazadagi mobil ilova",
+            "Quruvchi kabineti: holatlari bilan xaridor arizalari",
+            "Loyihalar, qavatlar va m² narxlari",
+            "Tariflar va quruvchi profili",
+            "Koʻp tilli interfeys"
+          ],
+          "result": [
+            "Mahsulot ishlamoqda va rivojlanmoqda. Vitrina, mobil ilova va CRM uchta alohida loyiha emas, bitta konturda yashaydi."
+          ],
+          "captions": {
+            "home": "Vitrina: bosh sahifa va uy tanlash",
+            "crm": "Quruvchi kabineti: statistika va soʻnggi arizalar. Shaxsiy maʼlumotlar yashirilgan."
+          }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "slug": "wms",
+      "title": "WMS",
+      "kind": "product",
+      "glyph": "warehouse",
+      "images": [],
+      "technologies": [],
+      "featured": true,
+      "span": "half",
+      "i18n": {
+        "en": {
+          "category": "WMS / Warehouse system",
+          "description": "A system for managing a warehouse and the movement of construction materials.",
+          "role": "Development: SDS team",
+          "overview": [
+            "An internal system for a construction materials warehouse: items and their movement tracked in one place instead of spreadsheets and scattered records."
+          ],
+          "challenge": [],
+          "solution": [],
+          "features": [],
+          "result": [],
+          "captions": {}
+        },
+        "ru": {
+          "category": "WMS / Складская система",
+          "description": "Система управления складом и движением строительных материалов.",
+          "role": "Разработка: команда SDS",
+          "overview": [
+            "Внутренняя система для склада строительных материалов: учёт позиций и их движения в одном контуре вместо таблиц и разрозненных записей."
+          ],
+          "challenge": [],
+          "solution": [],
+          "features": [],
+          "result": [],
+          "captions": {}
+        },
+        "uz": {
+          "category": "WMS / Ombor tizimi",
+          "description": "Ombor va qurilish materiallari harakatini boshqarish tizimi.",
+          "role": "Ishlab chiqish: SDS jamoasi",
+          "overview": [
+            "Qurilish materiallari ombori uchun ichki tizim: pozitsiyalar va ularning harakati jadvallar hamda tarqoq yozuvlar oʻrniga bitta konturda hisobga olinadi."
+          ],
+          "challenge": [],
+          "solution": [],
+          "features": [],
+          "result": [],
+          "captions": {}
+        }
+      }
+    },
+    {
+      "id": 3,
+      "slug": "kidscity",
+      "title": "KidsCity.uz",
+      "kind": "product",
+      "glyph": "store",
+      "cover": {
+        "src": "/work/kidscity.webp",
+        "width": 2000,
+        "height": 1091,
+        "ratio": "wide",
+        "captionKey": "advantages"
+      },
+      "images": [],
+      "href": "https://kidscity.uz",
+      "domain": "kidscity.uz",
+      "technologies": [],
+      "featured": true,
+      "span": "half",
+      "i18n": {
+        "en": {
+          "category": "E-commerce",
+          "description": "An online store: product catalogue, cart, favourites and a customer account.",
+          "role": "Development: SDS team",
+          "overview": [
+            "An online store for children's clothing: catalogue and product pages, cart, favourites, an FAQ section and a multilingual interface."
+          ],
+          "challenge": [],
+          "solution": [],
+          "features": [
+            "Catalogue and product pages",
+            "Cart and favourites",
+            "Customer account",
+            "Multilingual interface"
+          ],
+          "result": [],
+          "captions": {
+            "advantages": "A page from the store"
+          }
+        },
+        "ru": {
+          "category": "E-commerce",
+          "description": "Интернет-магазин: каталог товаров, корзина, избранное и личный кабинет покупателя.",
+          "role": "Разработка: команда SDS",
+          "overview": [
+            "Интернет-магазин детской одежды: каталог и карточки товаров, корзина, избранное, раздел вопросов и ответов и мультиязычный интерфейс."
+          ],
+          "challenge": [],
+          "solution": [],
+          "features": [
+            "Каталог и карточки товаров",
+            "Корзина и избранное",
+            "Личный кабинет покупателя",
+            "Мультиязычный интерфейс"
+          ],
+          "result": [],
+          "captions": {
+            "advantages": "Страница магазина"
+          }
+        },
+        "uz": {
+          "category": "E-commerce",
+          "description": "Onlayn doʻkon: tovarlar katalogi, savat, saralanganlar va xaridorning shaxsiy kabineti.",
+          "role": "Ishlab chiqish: SDS jamoasi",
+          "overview": [
+            "Bolalar kiyimlari onlayn doʻkoni: katalog va tovar kartochkalari, savat, saralanganlar, savol-javob boʻlimi va koʻp tilli interfeys."
+          ],
+          "challenge": [],
+          "solution": [],
+          "features": [
+            "Katalog va tovar kartochkalari",
+            "Savat va saralanganlar",
+            "Xaridorning shaxsiy kabineti",
+            "Koʻp tilli interfeys"
+          ],
+          "result": [],
+          "captions": {
+            "advantages": "Doʻkon sahifasi"
+          }
+        }
+      }
+    },
+    {
+      "id": 4,
+      "slug": "evro-plaza",
+      "title": "EVRO PLAZA",
+      "kind": "product",
+      "glyph": "site",
+      "images": [],
+      "technologies": [],
+      "featured": true,
+      "span": "half",
+      "i18n": {
+        "en": {
+          "category": "Corporate website",
+          "description": "The corporate website of a property development company.",
+          "role": "Development: SDS team",
+          "overview": [
+            "The website of the property developer EVRO PLAZA: the company and its projects."
+          ],
+          "challenge": [],
+          "solution": [],
+          "features": [],
+          "result": [],
+          "captions": {}
+        },
+        "ru": {
+          "category": "Корпоративный сайт",
+          "description": "Корпоративный сайт девелоперской компании.",
+          "role": "Разработка: команда SDS",
+          "overview": [
+            "Сайт девелоперской компании EVRO PLAZA: презентация компании и её объектов."
+          ],
+          "challenge": [],
+          "solution": [],
+          "features": [],
+          "result": [],
+          "captions": {}
+        },
+        "uz": {
+          "category": "Korporativ sayt",
+          "description": "Quruvchi kompaniyaning korporativ sayti.",
+          "role": "Ishlab chiqish: SDS jamoasi",
+          "overview": [
+            "EVRO PLAZA quruvchi kompaniyasining sayti: kompaniya va uning obyektlari."
+          ],
+          "challenge": [],
+          "solution": [],
+          "features": [],
+          "result": [],
+          "captions": {}
+        }
+      }
+    },
+    {
+      "id": 5,
+      "slug": "pishcool",
+      "title": "Pishcool",
+      "kind": "commercial",
+      "glyph": "site",
+      "href": "https://pishcool.uz",
+      "domain": "pishcool.uz",
+      "images": [],
+      "technologies": [],
+      "featured": false,
+      "span": "half",
+      "i18n": {
+        "en": {
+          "category": "Web development",
+          "description": "Polyglot International School",
+          "role": "Full-stack development",
+          "overview": [],
+          "challenge": [],
+          "solution": [],
+          "features": [],
+          "result": [],
+          "captions": {}
+        },
+        "ru": {
+          "category": "Веб-разработка",
+          "description": "Polyglot International School",
+          "role": "Full-stack development",
+          "overview": [],
+          "challenge": [],
+          "solution": [],
+          "features": [],
+          "result": [],
+          "captions": {}
+        },
+        "uz": {
+          "category": "Veb-ishlab chiqish",
+          "description": "Polyglot International School",
+          "role": "Full-stack development",
+          "overview": [],
+          "challenge": [],
+          "solution": [],
+          "features": [],
+          "result": [],
+          "captions": {}
+        }
+      }
+    },
+    {
+      "id": 6,
+      "slug": "samyak",
+      "title": "Samyak",
+      "kind": "commercial",
+      "glyph": "site",
+      "href": "https://samyak.uz",
+      "domain": "samyak.uz",
+      "images": [],
+      "technologies": [],
+      "featured": false,
+      "span": "half",
+      "i18n": {
+        "en": {
+          "category": "Web development",
+          "description": "A commercial project developed by the team.",
+          "role": "Full-stack development",
+          "overview": [],
+          "challenge": [],
+          "solution": [],
+          "features": [],
+          "result": [],
+          "captions": {}
+        },
+        "ru": {
+          "category": "Веб-разработка",
+          "description": "Коммерческий проект, разработанный командой.",
+          "role": "Full-stack development",
+          "overview": [],
+          "challenge": [],
+          "solution": [],
+          "features": [],
+          "result": [],
+          "captions": {}
+        },
+        "uz": {
+          "category": "Veb-ishlab chiqish",
+          "description": "Jamoa ishlab chiqqan tijorat loyihasi.",
+          "role": "Full-stack development",
+          "overview": [],
+          "challenge": [],
+          "solution": [],
+          "features": [],
+          "result": [],
+          "captions": {}
+        }
+      }
+    },
+    {
+      "id": 7,
+      "slug": "tespack",
+      "title": "Tespack",
+      "kind": "commercial",
+      "glyph": "site",
+      "href": "https://tespack.uz",
+      "domain": "tespack.uz",
+      "images": [],
+      "technologies": [],
+      "featured": false,
+      "span": "half",
+      "i18n": {
+        "en": {
+          "category": "Web development",
+          "description": "A commercial project developed by the team.",
+          "role": "Full-stack development",
+          "overview": [],
+          "challenge": [],
+          "solution": [],
+          "features": [],
+          "result": [],
+          "captions": {}
+        },
+        "ru": {
+          "category": "Веб-разработка",
+          "description": "Коммерческий проект, разработанный командой.",
+          "role": "Full-stack development",
+          "overview": [],
+          "challenge": [],
+          "solution": [],
+          "features": [],
+          "result": [],
+          "captions": {}
+        },
+        "uz": {
+          "category": "Veb-ishlab chiqish",
+          "description": "Jamoa ishlab chiqqan tijorat loyihasi.",
+          "role": "Full-stack development",
+          "overview": [],
+          "challenge": [],
+          "solution": [],
+          "features": [],
+          "result": [],
+          "captions": {}
+        }
+      }
+    }
+  ]
+}

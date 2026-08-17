@@ -2,11 +2,14 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
+/**
+ * Sign-in. Same light system as the rest of the site — no separate dark tool
+ * aesthetic. The submit logic is unchanged.
+ */
 export default function AdminLoginPage() {
     const router = useRouter();
     const [login, setLogin] = useState("");
@@ -38,41 +41,53 @@ export default function AdminLoginPage() {
     }
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-zinc-950 px-4">
-            <Card className="w-full max-w-sm border-zinc-800 bg-zinc-900 text-zinc-100">
-                <CardHeader>
-                    <CardTitle className="text-xl">Вход в админку</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        <div className="space-y-2">
-                            <Label htmlFor="login">Логин</Label>
-                            <Input
-                                id="login"
-                                value={login}
-                                onChange={(e) => setLogin(e.target.value)}
-                                autoComplete="username"
-                                required
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <Label htmlFor="password">Пароль</Label>
-                            <Input
-                                id="password"
-                                type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                autoComplete="current-password"
-                                required
-                            />
-                        </div>
-                        {error ? <p className="text-sm text-red-400">{error}</p> : null}
-                        <Button type="submit" className="w-full" disabled={loading}>
-                            {loading ? "Входим..." : "Войти"}
-                        </Button>
-                    </form>
-                </CardContent>
-            </Card>
+        <div className="flex min-h-[70vh] items-center justify-center px-6">
+            <div className="w-full max-w-sm">
+                <div className="border-b border-border pb-6">
+                    <span className="label">SDS · Админка</span>
+                    <h1 className="display-3 mt-3">Вход</h1>
+                </div>
+
+                <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+                    <div className="space-y-2.5">
+                        <Label htmlFor="login">Логин</Label>
+                        <Input
+                            id="login"
+                            value={login}
+                            onChange={(e) => setLogin(e.target.value)}
+                            autoComplete="username"
+                            required
+                        />
+                    </div>
+
+                    <div className="space-y-2.5">
+                        <Label htmlFor="password">Пароль</Label>
+                        <Input
+                            id="password"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            autoComplete="current-password"
+                            required
+                        />
+                    </div>
+
+                    {error ? (
+                        <p className="border-l-2 border-destructive pl-3 text-sm text-destructive">
+                            {error}
+                        </p>
+                    ) : null}
+
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="group inline-flex h-12 w-full items-center justify-center gap-2.5 rounded-md bg-primary px-6 text-[0.9375rem] font-medium text-primary-foreground transition-colors hover:bg-primary-hover disabled:opacity-60"
+                    >
+                        {loading ? "Входим…" : "Войти"}
+                        <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                    </button>
+                </form>
+            </div>
         </div>
     );
 }

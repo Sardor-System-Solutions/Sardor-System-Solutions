@@ -12,9 +12,14 @@ export default async function EditProjectPage({
     if (!project) notFound();
 
     return (
-        <div className="space-y-6">
-            <h1 className="text-2xl font-semibold">Редактировать: {project.title}</h1>
-            <ProjectForm initial={project} />
+        <div>
+            <div className="border-b border-border pb-8">
+                <span className="label">Проекты · /{project.slug}</span>
+                <h1 className="display-3 mt-3">{project.title}</h1>
+            </div>
+            <div className="mt-10">
+                <ProjectForm initial={project} />
+            </div>
         </div>
     );
 }

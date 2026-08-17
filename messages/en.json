@@ -34,8 +34,8 @@
     "subtitle": "Web platforms, mobile apps and automation systems.",
     "primaryCta": "See projects",
     "secondaryCta": "Discuss a project",
-    "showcaseCaptionOne": "Oson Uy — the platform",
-    "showcaseCaptionTwo": "Oson Uy CRM — the developer's workspace",
+    "showcaseCaptionOne": "Oson Uy · storefront",
+    "showcaseCaptionTwo": "Oson Uy · developer's workspace",
     "showcaseAltOne": "The Oson Uy platform interface",
     "showcaseAltTwo": "The Oson Uy CRM interface — the developer's workspace"
   },
@@ -44,8 +44,6 @@
     "title": "Projects",
     "subtitle": "Products we build and develop as SDS.",
     "viewProject": "View project",
-    "cursorView": "View",
-    "cursorNext": "Next",
     "showMore": "Show more",
     "showLess": "Hide projects"
   },
@@ -195,151 +193,5 @@
     "title": "Page not found",
     "subtitle": "This page does not exist, or it has been moved.",
     "cta": "Back home"
-  },
-  "Projects": {
-    "oson-uy": {
-      "category": "B2B SaaS / Real estate",
-      "description": "A platform for the property market: a catalogue of residential complexes and apartment search by parameter.",
-      "role": "Development: SDS team",
-      "overview": [
-        "Oson Uy is a platform where property developers list their residential complexes and buyers find apartments by parameter. SDS is responsible for the whole product: the storefront, the catalogue, the search and the developer's workspace."
-      ],
-      "challenge": [
-        "A buyer needs to compare apartments on concrete parameters — region, district, price per square metre and area. A developer needs to manage their own catalogue and see incoming enquiries. Both have to work inside one system, or the data on the storefront quickly drifts from reality."
-      ],
-      "solution": [
-        "We built the platform as two connected halves: a public storefront with the catalogue and search, and a developer's workspace holding projects, floors, prices and enquiries. They share the same data, so a change in the workspace is immediately visible to the buyer."
-      ],
-      "features": [
-        "Search by region, district, price per m² and area",
-        "Catalogue of residential complexes",
-        "Developer's workspace",
-        "Multilingual interface"
-      ],
-      "result": [
-        "The platform is live and still being developed. Three products have grown around it: the storefront, the mobile app and the CRM."
-      ],
-      "captions": {
-        "home": "The home page and the housing search"
-      }
-    },
-    "oson-uy-mobile": {
-      "category": "Mobile app",
-      "description": "The mobile app of the Oson Uy platform.",
-      "role": "Development: SDS team",
-      "overview": [
-        "The mobile part of the Oson Uy ecosystem: access to the catalogue and the search from a phone, on the same database as the platform."
-      ],
-      "challenge": [],
-      "solution": [],
-      "features": [],
-      "result": [],
-      "captions": {}
-    },
-    "oson-uy-crm": {
-      "category": "CRM / Admin panel",
-      "description": "The developer's workspace: enquiries, projects, floors, prices and plans in one panel.",
-      "role": "Development: SDS team",
-      "overview": [
-        "The management side of the Oson Uy platform. A developer runs their projects, tracks buyer enquiries and manages the data buyers see on the storefront."
-      ],
-      "challenge": [
-        "Selling new-build apartments rests on two things: how quickly enquiries are handled, and how current the listing data is. While both live in spreadsheets and chat threads, a developer has no overall picture."
-      ],
-      "solution": [
-        "We built a workspace where enquiries, projects, floors, prices per square metre and plans all sit in one place. On opening it, a developer sees a summary of their activity and the most recent enquiries."
-      ],
-      "features": [
-        "Buyer enquiries with statuses",
-        "Projects, floors and prices per m²",
-        "Plans and the developer profile",
-        "An activity summary for the workspace"
-      ],
-      "result": [
-        "The public catalogue and the developer's own data live in one system — whatever changes in the workspace is immediately available to buyers."
-      ],
-      "captions": {
-        "overview": "The workspace summary and recent enquiries. Personal data is redacted."
-      }
-    },
-    "wms": {
-      "category": "WMS / Warehouse system",
-      "description": "A system for managing a warehouse and the movement of construction materials.",
-      "role": "Development: SDS team",
-      "overview": [
-        "An internal system for a construction materials warehouse: items and their movement tracked in one place instead of spreadsheets and scattered records."
-      ],
-      "challenge": [],
-      "solution": [],
-      "features": [],
-      "result": [],
-      "captions": {}
-    },
-    "kidscity": {
-      "category": "E-commerce",
-      "description": "An online store: product catalogue, cart, favourites and a customer account.",
-      "role": "Development: SDS team",
-      "overview": [
-        "An online store for children's clothing: catalogue and product pages, cart, favourites, an FAQ section and a multilingual interface."
-      ],
-      "challenge": [],
-      "solution": [],
-      "features": [
-        "Catalogue and product pages",
-        "Cart and favourites",
-        "Customer account",
-        "Multilingual interface"
-      ],
-      "result": [],
-      "captions": {
-        "advantages": "A page from the store"
-      }
-    },
-    "evro-plaza": {
-      "category": "Corporate website",
-      "description": "The corporate website of a property development company.",
-      "role": "Development: SDS team",
-      "overview": [
-        "The website of the property developer EVRO PLAZA: the company and its projects."
-      ],
-      "challenge": [],
-      "solution": [],
-      "features": [],
-      "result": [],
-      "captions": {}
-    },
-    "pishcool": {
-      "category": "Web development",
-      "description": "Polyglot International School",
-      "role": "Full-stack development",
-      "overview": [],
-      "challenge": [],
-      "solution": [],
-      "features": [],
-      "result": [],
-      "captions": {}
-    },
-    "samyak": {
-      "category": "Web development",
-      "description": "A commercial project developed by the team.",
-      "role": "Full-stack development",
-      "overview": [],
-      "challenge": [],
-      "solution": [],
-      "features": [],
-      "result": [],
-      "captions": {}
-    },
-    "tespack": {
-      "category": "Web development",
-      "description": "A commercial project developed by the team.",
-      "role": "Full-stack development",
-      "overview": [],
-      "challenge": [],
-      "solution": [],
-      "features": [],
-      "result": [],
-      "captions": {}
-    }
   }
 }

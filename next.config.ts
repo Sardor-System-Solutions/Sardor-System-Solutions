@@ -10,8 +10,16 @@ const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 const prefixes = ["", ...locales.map((locale) => `/${locale}`)];
 
 const legacyPaths: { from: string; to: string }[] = [
+  // The CMS moved under /admin/content when the CRM was added.
+  { from: "/admin/projects", to: "/admin/content" },
+  { from: "/admin/projects/new", to: "/admin/content/projects/new" },
+  { from: "/admin/projects/:slug/edit", to: "/admin/content/projects/:slug/edit" },
   // Case studies kept their own routes through the rework.
   { from: "/portfolio/:slug", to: "/projects/:slug" },
+  // Oson Uy ships as one product with three surfaces; the old satellite
+  // slugs fold into the parent case study.
+  { from: "/projects/oson-uy-mobile", to: "/projects/oson-uy" },
+  { from: "/projects/oson-uy-crm", to: "/projects/oson-uy" },
   // Everything else is now a section of the one-page site. `/projects` is an
   // exact match, so it never shadows `/projects/:slug`.
   { from: "/portfolio", to: "/#projects" },
@@ -28,6 +36,11 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: path.join(__dirname),
   images: {
     formats: ["image/avif", "image/webp"],
+    // Covers uploaded through /admin are served from Vercel Blob, so
+    // next/image has to be told the host is allowed.
+    remotePatterns: [
+      { protocol: "https", hostname: "*.public.blob.vercel-storage.com" },
+    ],
   },
   async redirects() {
     return prefixes.flatMap((prefix) =>

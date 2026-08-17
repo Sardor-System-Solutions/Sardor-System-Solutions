@@ -1,0 +1,330 @@
+/**
+ * CRM domain model.
+ *
+ * The public-site content (portfolio projects) is a separate concern and keeps
+ * living in `types/project.ts`. A *client project* — commercial work we are
+ * actually paid to build — is `ClientProject` here and is never mixed with the
+ * portfolio entry, though it can point at one once a case study is published.
+ */
+
+export const ROLES = ["ADMIN", "SALES", "DEVELOPER"] as const;
+export type Role = (typeof ROLES)[number];
+
+export const LEAD_STAGES = [
+  "NEW",
+  "CONTACTED",
+  "INTERESTED",
+  "MEETING",
+  "PROPOSAL",
+  "NEGOTIATION",
+  "WON",
+  "LOST",
+  "NOT_NOW",
+] as const;
+export type LeadStage = (typeof LEAD_STAGES)[number];
+
+/** The columns of the kanban — terminal and parked stages sit outside it. */
+export const PIPELINE_STAGES: LeadStage[] = [
+  "NEW",
+  "CONTACTED",
+  "INTERESTED",
+  "MEETING",
+  "PROPOSAL",
+  "NEGOTIATION",
+  "WON",
+  "LOST",
+];
+
+export const PROSPECT_STAGES = [
+  "TO_CONTACT",
+  "CONTACTED",
+  "INTERESTED",
+  "MEETING",
+  "PROPOSAL",
+  "WON",
+  "LOST",
+] as const;
+export type ProspectStage = (typeof PROSPECT_STAGES)[number];
+
+export const SOURCES = [
+  "INSTAGRAM",
+  "TELEGRAM",
+  "WEBSITE",
+  "REFERRAL",
+  "COLD_CALL",
+  "EMAIL",
+  "LINKEDIN",
+  "PERSONAL",
+  "LONDON_OUTREACH",
+  "OTHER",
+] as const;
+export type Source = (typeof SOURCES)[number];
+
+export const TASK_STATUSES = ["TODO", "IN_PROGRESS", "DONE", "CANCELLED"] as const;
+export type TaskStatus = (typeof TASK_STATUSES)[number];
+
+export const PRIORITIES = ["LOW", "MEDIUM", "HIGH", "URGENT"] as const;
+export type Priority = (typeof PRIORITIES)[number];
+
+export const MEETING_TYPES = ["CALL", "VIDEO", "MEETING", "OTHER"] as const;
+export type MeetingType = (typeof MEETING_TYPES)[number];
+
+export const ACTIVITY_KINDS = [
+  "NOTE",
+  "CALL",
+  "MEETING",
+  "MESSAGE",
+  "EMAIL",
+  "PROPOSAL_SENT",
+  "STATUS_CHANGE",
+  "PAYMENT",
+  "TASK_COMPLETED",
+  "PROJECT_CREATED",
+  "CONVERTED",
+  "CREATED",
+  "UPDATED",
+] as const;
+export type ActivityKind = (typeof ACTIVITY_KINDS)[number];
+
+export const PROPOSAL_STATUSES = [
+  "DRAFT",
+  "SENT",
+  "VIEWED",
+  "NEGOTIATION",
+  "ACCEPTED",
+  "REJECTED",
+] as const;
+export type ProposalStatus = (typeof PROPOSAL_STATUSES)[number];
+
+export const CLIENT_PROJECT_STATUSES = [
+  "PLANNING",
+  "DESIGN",
+  "DEVELOPMENT",
+  "TESTING",
+  "LAUNCH",
+  "COMPLETED",
+  "PAUSED",
+  "CANCELLED",
+] as const;
+export type ClientProjectStatus = (typeof CLIENT_PROJECT_STATUSES)[number];
+
+/** What an activity is attached to. */
+export type EntityType = "lead" | "prospect" | "client" | "project" | "task";
+
+export interface User {
+  id: string;
+  name: string;
+  login: string;
+  role: Role;
+  /** PBKDF2 hash; absent for the bootstrap admin, which authenticates by env. */
+  passwordHash?: string;
+  passwordSalt?: string;
+  active: boolean;
+  createdAt: string;
+}
+
+export interface Money {
+  amount: number;
+  currency: string;
+}
+
+export interface Prospect {
+  id: string;
+  company: string;
+  contactName?: string;
+  website?: string;
+  instagram?: string;
+  telegram?: string;
+  email?: string;
+  phone?: string;
+  country?: string;
+  city?: string;
+  service?: string;
+  estimatedBudget?: Money;
+  source: Source;
+  stage: ProspectStage;
+  ownerId?: string;
+  nextActionTitle?: string;
+  nextActionAt?: string;
+  notes?: string;
+  /** Set once converted, so the trail from prospect to lead is never lost. */
+  convertedLeadId?: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string;
+}
+
+export interface Lead {
+  id: string;
+  firstName: string;
+  lastName?: string;
+  company?: string;
+  position?: string;
+  phone?: string;
+  email?: string;
+  telegram?: string;
+  instagram?: string;
+  linkedin?: string;
+  country?: string;
+  city?: string;
+  source: Source;
+  ownerId?: string;
+  stage: LeadStage;
+  service?: string;
+  description?: string;
+  budget?: Money;
+  proposedPrice?: Money;
+  timeline?: string;
+  priority: Priority;
+  nextActionTitle?: string;
+  nextActionAt?: string;
+  notes?: string;
+  /** Where it came from, when it started life as a prospect. */
+  prospectId?: string;
+  /** Set on conversion — a lead is never deleted to make a client. */
+  clientId?: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string;
+}
+
+export interface Client {
+  id: string;
+  name: string;
+  company?: string;
+  email?: string;
+  phone?: string;
+  telegram?: string;
+  country?: string;
+  city?: string;
+  ownerId?: string;
+  leadId?: string;
+  notes?: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string;
+}
+
+export interface Payment {
+  id: string;
+  amount: number;
+  currency: string;
+  paidAt: string;
+  note?: string;
+  createdBy: string;
+}
+
+export interface ClientProject {
+  id: string;
+  clientId: string;
+  name: string;
+  description?: string;
+  status: ClientProjectStatus;
+  startDate?: string;
+  deadline?: string;
+  price?: Money;
+  payments: Payment[];
+  ownerId?: string;
+  team: string[];
+  requirements?: string;
+  notes?: string;
+  leadId?: string;
+  /** Slug of the public portfolio entry, if the case was ever published. */
+  portfolioSlug?: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string;
+}
+
+export interface Task {
+  id: string;
+  title: string;
+  description?: string;
+  status: TaskStatus;
+  priority: Priority;
+  dueAt?: string;
+  ownerId?: string;
+  entityType?: EntityType;
+  entityId?: string;
+  createdAt: string;
+  updatedAt: string;
+  completedAt?: string;
+  deletedAt?: string;
+}
+
+export interface Meeting {
+  id: string;
+  title: string;
+  type: MeetingType;
+  startAt: string;
+  location?: string;
+  description?: string;
+  ownerId?: string;
+  entityType?: EntityType;
+  entityId?: string;
+  done: boolean;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string;
+}
+
+export interface Proposal {
+  id: string;
+  /** A proposal always belongs to a lead — that is where the deal lives. */
+  leadId: string;
+  clientId?: string;
+  title: string;
+  services: string[];
+  price: Money;
+  timeline?: string;
+  description?: string;
+  status: ProposalStatus;
+  sentAt?: string;
+  createdBy: string;
+  createdByName: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string;
+}
+
+export interface Activity {
+  id: string;
+  kind: ActivityKind;
+  entityType: EntityType;
+  entityId: string;
+  summary: string;
+  detail?: string;
+  /** Populated on STATUS_CHANGE so the history reads as a diff. */
+  from?: string;
+  to?: string;
+  actorId: string;
+  actorName: string;
+  createdAt: string;
+}
+
+/** The whole CRM, as persisted. One document keeps writes atomic. */
+export interface CrmData {
+  version: number;
+  users: User[];
+  prospects: Prospect[];
+  leads: Lead[];
+  clients: Client[];
+  projects: ClientProject[];
+  tasks: Task[];
+  meetings: Meeting[];
+  proposals: Proposal[];
+  activities: Activity[];
+}
+
+export const emptyCrmData: CrmData = {
+  version: 1,
+  users: [],
+  prospects: [],
+  leads: [],
+  clients: [],
+  projects: [],
+  tasks: [],
+  meetings: [],
+  proposals: [],
+  activities: [],
+};

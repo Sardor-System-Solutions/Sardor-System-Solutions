@@ -18,7 +18,7 @@ export function Wordmark({
       href="/"
       aria-label={siteConfig.name}
       className={cn(
-        "group inline-flex items-baseline gap-2 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4",
+        "group inline-flex items-baseline rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4",
         className,
       )}
     >
@@ -30,10 +30,6 @@ export function Wordmark({
       >
         SDS
       </span>
-      <span
-        aria-hidden
-        className="size-1 shrink-0 translate-y-[-0.15em] rounded-full bg-primary"
-      />
     </Link>
   );
 }

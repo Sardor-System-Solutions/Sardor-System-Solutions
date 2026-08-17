@@ -2,14 +2,13 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { ArrowRight } from "lucide-react";
 import type { Project, ProjectTranslation, Locale } from "@/types/project";
 import { emptyTranslation, LOCALES } from "@/types/project";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
     Select,
@@ -29,6 +28,31 @@ function linesToArray(v: string) {
 }
 function arrayToLines(v: string[] | undefined) {
     return (v ?? []).join("\n");
+}
+
+/** A titled block of fields — hairline rule and a small label, like the site. */
+function Fieldset({
+    title,
+    hint,
+    children,
+}: {
+    title: string;
+    hint?: string;
+    children: React.ReactNode;
+}) {
+    return (
+        <section className="grid gap-6 border-t border-border pt-8 md:grid-cols-12 md:gap-8">
+            <div className="md:col-span-3">
+                <h2 className="label">{title}</h2>
+                {hint ? (
+                    <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
+                        {hint}
+                    </p>
+                ) : null}
+            </div>
+            <div className="md:col-span-9">{children}</div>
+        </section>
+    );
 }
 
 export function ProjectForm({ initial }: { initial?: Project }) {
@@ -115,27 +139,32 @@ export function ProjectForm({ initial }: { initial?: Project }) {
             return;
         }
 
-        router.push("/admin");
+        router.push("/admin/content");
         router.refresh();
     }
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-6">
-            <Card className="border-zinc-800 bg-zinc-900">
-                <CardHeader>
-                    <CardTitle className="text-base">Основное</CardTitle>
-                </CardHeader>
-                <CardContent className="grid gap-4 sm:grid-cols-2">
-                    <div className="space-y-2">
-                        <Label>Название (не переводится)</Label>
+        <form onSubmit={handleSubmit} className="space-y-10">
+            <Fieldset
+                title="Основное"
+                hint="Название и slug не переводятся — они одинаковы во всех локалях."
+            >
+                <div className="grid gap-5 sm:grid-cols-2">
+                    <div className="space-y-2.5">
+                        <Label>Название</Label>
                         <Input
                             value={form.title}
                             onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
                             required
                         />
                     </div>
-                    <div className="space-y-2">
-                        <Label>Slug {isEdit ? "(нельзя изменить)" : "(необязательно — сгенерируется из названия)"}</Label>
+                    <div className="space-y-2.5">
+                        <Label>
+                            Slug{" "}
+                            <span className="font-normal normal-case tracking-normal text-subtle-foreground">
+                                {isEdit ? "(нельзя изменить)" : "(можно оставить пустым)"}
+                            </span>
+                        </Label>
                         <Input
                             value={form.slug}
                             disabled={isEdit}
@@ -144,7 +173,7 @@ export function ProjectForm({ initial }: { initial?: Project }) {
                         />
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="space-y-2.5">
                         <Label>Тип</Label>
                         <Select
                             value={form.kind}
@@ -152,14 +181,14 @@ export function ProjectForm({ initial }: { initial?: Project }) {
                         >
                             <SelectTrigger><SelectValue /></SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="product">product (проект SDS)</SelectItem>
-                                <SelectItem value="commercial">commercial (Dotlabs)</SelectItem>
+                                <SelectItem value="product">Проект SDS</SelectItem>
+                                <SelectItem value="commercial">Опыт команды (Dotlabs)</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>
 
-                    <div className="space-y-2">
-                        <Label>Заглушка-иконка (если нет фото)</Label>
+                    <div className="space-y-2.5">
+                        <Label>Схема, если нет фото</Label>
                         <Select
                             value={form.glyph}
                             onValueChange={(v: Project["glyph"]) => setForm((f) => ({ ...f, glyph: v }))}
@@ -173,16 +202,16 @@ export function ProjectForm({ initial }: { initial?: Project }) {
                         </Select>
                     </div>
 
-                    <div className="space-y-2">
-                        <Label>Ссылка (href)</Label>
+                    <div className="space-y-2.5">
+                        <Label>Ссылка</Label>
                         <Input
                             value={form.href ?? ""}
                             onChange={(e) => setForm((f) => ({ ...f, href: e.target.value }))}
                             placeholder="https://oson-uy.uz"
                         />
                     </div>
-                    <div className="space-y-2">
-                        <Label>Домен для отображения</Label>
+                    <div className="space-y-2.5">
+                        <Label>Домен для показа</Label>
                         <Input
                             value={form.domain ?? ""}
                             onChange={(e) => setForm((f) => ({ ...f, domain: e.target.value }))}
@@ -190,16 +219,16 @@ export function ProjectForm({ initial }: { initial?: Project }) {
                         />
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="space-y-2.5">
                         <Label>Год</Label>
                         <Input
                             value={form.year ?? ""}
                             onChange={(e) => setForm((f) => ({ ...f, year: e.target.value }))}
-                            placeholder="2024"
+                            placeholder="оставьте пустым, если не подтверждён"
                         />
                     </div>
-                    <div className="space-y-2">
-                        <Label>Технологии (через запятую)</Label>
+                    <div className="space-y-2.5">
+                        <Label>Технологии через запятую</Label>
                         <Input
                             value={form.technologies.join(", ")}
                             onChange={(e) =>
@@ -211,142 +240,153 @@ export function ProjectForm({ initial }: { initial?: Project }) {
                             placeholder="Next.js, PostgreSQL"
                         />
                     </div>
+                </div>
 
-                    <div className="flex items-center gap-3 pt-2">
-                        <Switch
-                            checked={form.featured}
-                            onCheckedChange={(v) => setForm((f) => ({ ...f, featured: v }))}
-                        />
-                        <Label>Показывать на главной (featured)</Label>
-                    </div>
-                </CardContent>
-            </Card>
+                <div className="mt-6 flex items-center gap-3 border-t border-border pt-6">
+                    <Switch
+                        id="featured"
+                        checked={form.featured}
+                        onCheckedChange={(v) => setForm((f) => ({ ...f, featured: v }))}
+                    />
+                    <Label htmlFor="featured" className="cursor-pointer">
+                        Показывать на главной
+                    </Label>
+                </div>
+            </Fieldset>
 
-            <Card className="border-zinc-800 bg-zinc-900">
-                <CardHeader>
-                    <CardTitle className="text-base">Обложка</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
+            <Fieldset
+                title="Обложка"
+                hint="Реальный скриншот продукта. Если фото нет — на сайте покажется схема."
+            >
+                <div className="space-y-4">
                     {form.cover ? (
+                        // Preview of an arbitrary uploaded URL — optimisation is pointless here.
+                        // eslint-disable-next-line @next/next/no-img-element
                         <img
                             src={form.cover.src}
                             alt=""
-                            className="aspect-video w-full max-w-md rounded-lg border border-zinc-800 object-cover"
+                            className="aspect-video w-full max-w-lg rounded-lg border border-border object-cover"
                         />
-                    ) : null}
+                    ) : (
+                        <div className="flex aspect-video w-full max-w-lg items-center justify-center rounded-lg border border-dashed border-border bg-surface text-sm text-subtle-foreground">
+                            Обложка не загружена
+                        </div>
+                    )}
+
                     <Input
                         type="file"
                         accept="image/webp,image/png,image/jpeg,image/avif"
                         disabled={uploading}
+                        className="max-w-lg cursor-pointer file:mr-4 file:cursor-pointer file:rounded-sm file:border-0 file:bg-foreground file:px-3 file:py-1 file:text-sm file:text-background"
                         onChange={(e) => {
                             const file = e.target.files?.[0];
                             if (file) void handleCoverUpload(file);
                         }}
                     />
-                    {uploading ? <p className="text-sm text-zinc-400">Загружаем...</p> : null}
-                </CardContent>
-            </Card>
+                    {uploading ? (
+                        <p className="text-sm text-muted-foreground">Загружаем…</p>
+                    ) : null}
+                </div>
+            </Fieldset>
 
-            <Card className="border-zinc-800 bg-zinc-900">
-                <CardHeader>
-                    <CardTitle className="text-base">Переводы</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <Tabs defaultValue="en">
-                        <TabsList className="mb-4">
-                            {LOCALES.map((locale) => (
-                                <TabsTrigger key={locale} value={locale}>
-                                    {LOCALE_LABEL[locale]}
-                                </TabsTrigger>
-                            ))}
-                        </TabsList>
+            <Fieldset
+                title="Переводы"
+                hint="Пустые поля просто не отображаются на сайте — лучше оставить пусто, чем придумать."
+            >
+                <Tabs defaultValue="ru">
+                    <TabsList className="mb-6">
+                        {LOCALES.map((locale) => (
+                            <TabsTrigger key={locale} value={locale}>
+                                {LOCALE_LABEL[locale]}
+                            </TabsTrigger>
+                        ))}
+                    </TabsList>
 
-                        {LOCALES.map((locale) => {
-                            const t = form.i18n[locale];
-                            return (
-                                <TabsContent key={locale} value={locale} className="space-y-4">
-                                    <div className="grid gap-4 sm:grid-cols-2">
-                                        <div className="space-y-2">
-                                            <Label>Категория</Label>
-                                            <Input
-                                                value={t.category}
-                                                onChange={(e) => updateTranslation(locale, { category: e.target.value })}
-                                            />
-                                        </div>
-                                        <div className="space-y-2">
-                                            <Label>Роль</Label>
-                                            <Input
-                                                value={t.role}
-                                                onChange={(e) => updateTranslation(locale, { role: e.target.value })}
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="space-y-2">
-                                        <Label>Краткое описание</Label>
-                                        <Textarea
-                                            value={t.description}
-                                            onChange={(e) => updateTranslation(locale, { description: e.target.value })}
-                                            rows={2}
+                    {LOCALES.map((locale) => {
+                        const t = form.i18n[locale];
+                        return (
+                            <TabsContent key={locale} value={locale} className="space-y-5">
+                                <div className="grid gap-5 sm:grid-cols-2">
+                                    <div className="space-y-2.5">
+                                        <Label>Категория</Label>
+                                        <Input
+                                            value={t.category}
+                                            onChange={(e) => updateTranslation(locale, { category: e.target.value })}
                                         />
                                     </div>
+                                    <div className="space-y-2.5">
+                                        <Label>Роль</Label>
+                                        <Input
+                                            value={t.role}
+                                            onChange={(e) => updateTranslation(locale, { role: e.target.value })}
+                                        />
+                                    </div>
+                                </div>
 
-                                    <div className="space-y-2">
-                                        <Label>Overview (каждый абзац с новой строки)</Label>
+                                <div className="space-y-2.5">
+                                    <Label>Краткое описание</Label>
+                                    <Textarea
+                                        value={t.description}
+                                        onChange={(e) => updateTranslation(locale, { description: e.target.value })}
+                                        rows={2}
+                                    />
+                                </div>
+
+                                {(
+                                    [
+                                        ["overview", "О проекте", "Каждый абзац с новой строки"],
+                                        ["challenge", "Задача", "Каждый абзац с новой строки"],
+                                        ["solution", "Решение", "Каждый абзац с новой строки"],
+                                        ["features", "Возможности", "По одному пункту на строку"],
+                                        ["result", "Результат", "Без выдуманных цифр"],
+                                    ] as const
+                                ).map(([field, title, hint]) => (
+                                    <div key={field} className="space-y-2.5">
+                                        <Label>
+                                            {title}{" "}
+                                            <span className="font-normal normal-case tracking-normal text-subtle-foreground">
+                                                — {hint}
+                                            </span>
+                                        </Label>
                                         <Textarea
-                                            value={arrayToLines(t.overview)}
-                                            onChange={(e) => updateTranslation(locale, { overview: linesToArray(e.target.value) })}
+                                            value={arrayToLines(t[field])}
+                                            onChange={(e) =>
+                                                updateTranslation(locale, {
+                                                    [field]: linesToArray(e.target.value),
+                                                })
+                                            }
                                             rows={3}
                                         />
                                     </div>
-                                    <div className="space-y-2">
-                                        <Label>Challenge</Label>
-                                        <Textarea
-                                            value={arrayToLines(t.challenge)}
-                                            onChange={(e) => updateTranslation(locale, { challenge: linesToArray(e.target.value) })}
-                                            rows={3}
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label>Solution</Label>
-                                        <Textarea
-                                            value={arrayToLines(t.solution)}
-                                            onChange={(e) => updateTranslation(locale, { solution: linesToArray(e.target.value) })}
-                                            rows={3}
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label>Features (по одному пункту на строку)</Label>
-                                        <Textarea
-                                            value={arrayToLines(t.features)}
-                                            onChange={(e) => updateTranslation(locale, { features: linesToArray(e.target.value) })}
-                                            rows={3}
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label>Result</Label>
-                                        <Textarea
-                                            value={arrayToLines(t.result)}
-                                            onChange={(e) => updateTranslation(locale, { result: linesToArray(e.target.value) })}
-                                            rows={3}
-                                        />
-                                    </div>
-                                </TabsContent>
-                            );
-                        })}
-                    </Tabs>
-                </CardContent>
-            </Card>
+                                ))}
+                            </TabsContent>
+                        );
+                    })}
+                </Tabs>
+            </Fieldset>
 
-            {error ? <p className="text-sm text-red-400">{error}</p> : null}
+            {error ? (
+                <p className="border-l-2 border-destructive pl-4 text-sm leading-relaxed text-destructive">
+                    {error}
+                </p>
+            ) : null}
 
-            <div className="flex justify-end gap-3">
-                <Button type="button" variant="secondary" onClick={() => router.push("/admin")}>
+            <div className="flex flex-wrap items-center justify-end gap-4 border-t border-border pt-8">
+                <button
+                    type="button"
+                    onClick={() => router.push("/admin/content")}
+                    className="text-[0.9375rem] text-muted-foreground transition-colors hover:text-foreground"
+                >
                     Отмена
-                </Button>
-                <Button type="submit" disabled={saving || uploading}>
-                    {saving ? "Сохраняем..." : "Сохранить"}
-                </Button>
+                </button>
+                <button
+                    type="submit"
+                    disabled={saving || uploading}
+                    className="group inline-flex h-11 items-center gap-2.5 rounded-md bg-primary px-6 text-[0.9375rem] font-medium text-primary-foreground transition-colors hover:bg-primary-hover disabled:opacity-60"
+                >
+                    {saving ? "Сохраняем…" : "Сохранить"}
+                    <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                </button>
             </div>
         </form>
     );
