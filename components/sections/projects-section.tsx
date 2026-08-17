@@ -9,11 +9,7 @@ import { Section, SectionHeading } from "@/components/layout/section";
 import { Reveal, EASE } from "@/components/animations/reveal";
 import { ProjectShowcase } from "@/components/projects/project-showcase";
 import { ProjectIndex } from "@/components/projects/project-index";
-import {
-  commercialProjects,
-  featuredProjects,
-  productProjects,
-} from "@/data/projects";
+import type { Locale, Project } from "@/types/project";
 
 /**
  * The centre of the site.
@@ -21,14 +17,27 @@ import {
  * The five strongest products are shown straight away; everything else — the
  * remaining SDS product and the team's Dotlabs-era work — unfolds in place
  * behind "show more". There is no separate projects route to navigate to.
+ *
+ * Data comes from the DB (via the server parent, see projects-section-data.tsx)
+ * instead of the old hardcoded `data/projects.ts` import. `locale` is passed
+ * down so ProjectShowcase / ProjectIndex can pick the right translation out
+ * of each project's `i18n` field without their own useTranslations("Projects").
  */
-export function ProjectsSection() {
+export function ProjectsSection({
+  locale,
+  featuredProjects,
+  productRest,
+  commercialProjects,
+}: {
+  locale: Locale;
+  featuredProjects: Project[];
+  productRest: Project[];
+  commercialProjects: Project[];
+}) {
   const t = useTranslations("Work");
   const tCommercial = useTranslations("Commercial");
   const reduced = useReducedMotion();
   const [expanded, setExpanded] = useState(false);
-
-  const rest = productProjects.filter((project) => !project.featured);
 
   return (
     <Section id="projects">
@@ -44,6 +53,7 @@ export function ProjectsSection() {
             <ProjectShowcase
               key={project.slug}
               project={project}
+              locale={locale}
               index={i}
               priority={i === 0}
             />
@@ -59,10 +69,11 @@ export function ProjectsSection() {
                 transition={{ duration: 0.6, ease: EASE }}
                 className="space-y-16 lg:space-y-24"
               >
-                {rest.map((project, i) => (
+                {productRest.map((project, i) => (
                   <ProjectShowcase
                     key={project.slug}
                     project={project}
+                    locale={locale}
                     index={featuredProjects.length + i}
                   />
                 ))}
@@ -80,7 +91,7 @@ export function ProjectsSection() {
                   </Reveal>
 
                   <div className="mt-10">
-                    <ProjectIndex projects={commercialProjects} />
+                    <ProjectIndex projects={commercialProjects} locale={locale} />
                   </div>
 
                   <Reveal>

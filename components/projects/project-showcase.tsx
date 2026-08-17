@@ -1,7 +1,8 @@
 import { useTranslations } from "next-intl";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import type { Project } from "@/types/project";
+import type { Locale, Project } from "@/types/project";
+import { projectCopy } from "@/lib/get-projects";
 import { cn } from "@/lib/utils";
 import { Reveal, RevealImage } from "@/components/animations/reveal";
 import { Parallax } from "@/components/animations/parallax";
@@ -14,21 +15,25 @@ import { ProjectVisual } from "./project-visual";
  * them from turning into a list.
  *
  * The whole scene is one link, and carries the pointer label.
+ *
+ * `category`/`description` now come from the project's `i18n` field in the
+ * DB (picked by `locale`) instead of `t(`${slug}.category`)` against the
+ * old static messages/*.json — that copy is edited through /admin now.
  */
 export function ProjectShowcase({
   project,
+  locale,
   index,
   priority = false,
 }: {
   project: Project;
+  locale: Locale;
   index: number;
   priority?: boolean;
 }) {
-  const t = useTranslations("Projects");
   const tWork = useTranslations("Work");
 
-  const category = t(`${project.slug}.category`);
-  const description = t(`${project.slug}.description`);
+  const copy = projectCopy(project, locale);
   const flipped = index % 2 === 1;
 
   return (
@@ -38,11 +43,7 @@ export function ProjectShowcase({
         data-cursor={tWork("cursorView")}
         className="group block"
       >
-        {/* Tops align, so the meta's hairline sits on the same line as the top
-            edge of the visual. */}
         <div className="grid items-start gap-6 md:grid-cols-12 md:gap-10">
-          {/* Explicit placement on md+, so the mobile order below is free to
-              lead with the visual. */}
           <Reveal
             className={cn(
               "md:row-start-1 md:col-span-4",
@@ -58,10 +59,10 @@ export function ProjectShowcase({
               </h3>
             </div>
 
-            <p className="label mt-4 pl-9">{category}</p>
+            <p className="label mt-4 pl-9">{copy.category}</p>
 
             <p className="mt-5 max-w-sm text-pretty pl-9 text-[0.9375rem] leading-relaxed text-muted-foreground">
-              {description}
+              {copy.description}
             </p>
 
             <span className="mt-6 inline-flex items-center gap-2 pl-9 text-[0.9375rem] font-medium">
