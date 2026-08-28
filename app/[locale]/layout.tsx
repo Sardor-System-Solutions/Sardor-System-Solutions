@@ -54,6 +54,10 @@ export async function generateMetadata({
       template: `%s — ${siteConfig.shortName}`,
     },
     icons: { icon: "/logo.png" },
+    // Ownership proof for Google Search Console. Rendered as
+    // <meta name="google-site-verification" content="..."> on every page,
+    // including the unprefixed homepage Google checks.
+    verification: { google: "TBF1fVjs6-bsAsaIw-Oy_oFFdnopP74YVqgLdyofNaQ" },
   };
 }
 
