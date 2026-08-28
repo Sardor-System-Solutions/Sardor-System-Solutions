@@ -31,6 +31,7 @@ export default async function AdminDashboardPage() {
   const tasks = crm.tasks.filter((t) => !t.deletedAt);
 
   const today = new Date().toISOString().slice(0, 10);
+  // Retired stages are included so a lead saved under one still counts.
   const openStages = ["NEW", "CONTACTED", "INTERESTED", "MEETING", "PROPOSAL", "NEGOTIATION"];
 
   const active = leads.filter((l) => openStages.includes(l.stage));
@@ -57,7 +58,7 @@ export default async function AdminDashboardPage() {
   const pipelineValue = sum(active, (l) => l.proposedPrice?.amount ?? l.budget?.amount ?? 0);
   const wonValue = sum(won, (l) => l.proposedPrice?.amount ?? l.budget?.amount ?? 0);
   const currency =
-    active[0]?.proposedPrice?.currency ?? active[0]?.budget?.currency ?? "USD";
+    active[0]?.proposedPrice?.currency ?? active[0]?.budget?.currency ?? "UZS";
 
   const isEmpty = leads.length === 0 && prospects.length === 0;
 
@@ -77,10 +78,10 @@ export default async function AdminDashboardPage() {
       {isEmpty ? (
         <EmptyState
           title="В CRM пока пусто"
-          hint="Начните с реестра компаний, которым стоит написать, — из него лиды создаются в один клик."
+          hint="Добавьте первого лида — или соберите список компаний, которым стоит написать."
           action={
-            <PrimaryAction href="/admin/crm/prospects">
-              Добавить prospect
+            <PrimaryAction href="/admin/crm/leads/new">
+              Добавить лид
             </PrimaryAction>
           }
         />

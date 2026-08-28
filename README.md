@@ -81,7 +81,7 @@ components/
   hero/        # the hero's paired screenshots
   layout/      # container, section shell, footer
   navigation/  # header, section nav, mobile menu, wordmark, language switcher
-  projects/    # showcase scene, index rows, visual, glyphs
+  projects/    # card for the grid, visual, glyphs
   sections/    # hero, about, projects (+ show more), contact, contact form
   ui/          # button, input, textarea, label, sheet
 data/          # projects, services, tech, navigation

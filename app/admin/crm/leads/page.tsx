@@ -3,9 +3,9 @@ import { redirect } from "next/navigation";
 import { getSessionUser } from "@/lib/auth";
 import { canSeeFinance } from "@/lib/crm/rbac";
 import { AuthzError, listLeads } from "@/lib/crm/repo";
-import { LEAD_STAGES } from "@/types/crm";
+import { ACTIVE_LEAD_STAGES, pipelineColumn, type LeadStage } from "@/types/crm";
 import {
-  EmptyState, PageHeader, PrimaryAction, PriorityTag, StageBadge,
+  EmptyState, PageHeader, PrimaryAction, PriorityTag, StageBadge, STAGE_LABEL,
   formatDate, formatMoney,
 } from "@/components/crm/ui";
 
@@ -30,7 +30,8 @@ export default async function LeadsPage({
   const showMoney = canSeeFinance(user.role);
 
   const filtered = leads.filter((l) => {
-    if (stage && l.stage !== stage) return false;
+    if (stage && pipelineColumn(l.stage) !== pipelineColumn(stage as LeadStage))
+      return false;
     if (!needle) return true;
     return [l.firstName, l.lastName, l.company, l.email, l.phone, l.city]
       .filter(Boolean)
@@ -40,7 +41,7 @@ export default async function LeadsPage({
   return (
     <div className="space-y-10">
       <PageHeader
-        label="CRM"
+        label="Продажи"
         title="Лиды"
         hint={`${leads.length} всего`}
         action={<PrimaryAction href="/admin/crm/leads/new">Новый лид</PrimaryAction>}
@@ -62,7 +63,9 @@ export default async function LeadsPage({
             className="mt-2.5 flex h-11 rounded-md border border-input bg-background px-4 text-[0.9375rem]"
           >
             <option value="">Все</option>
-            {LEAD_STAGES.map((s) => <option key={s} value={s}>{s}</option>)}
+            {ACTIVE_LEAD_STAGES.map((s) => (
+              <option key={s} value={s}>{STAGE_LABEL[s] ?? s}</option>
+            ))}
           </select>
         </div>
         <button type="submit" className="h-11 rounded-md border border-border-strong px-5 text-[0.9375rem] transition-colors hover:border-foreground">

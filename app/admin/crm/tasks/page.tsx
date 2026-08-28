@@ -75,7 +75,7 @@ export default async function TasksPage() {
 
   return (
     <div className="space-y-10">
-      <PageHeader label="CRM" title="Задачи" hint={`${open.length} открытых`} />
+      <PageHeader label="Продажи" title="Задачи" hint={`${open.length} открытых`} />
 
       <div className="grid gap-12 lg:grid-cols-[1fr_22rem]">
         <div className="space-y-10">

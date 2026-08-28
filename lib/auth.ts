@@ -1,4 +1,5 @@
 import "server-only";
+import { cache } from "react";
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import type { Role, User } from "@/types/crm";
@@ -55,7 +56,11 @@ export async function destroySession() {
   store.delete(COOKIE_NAME);
 }
 
-export async function getSessionUser(): Promise<SessionUser | null> {
+/**
+ * Who is signed in. Verified once per request — the layout, the page and every
+ * repository call ask for it, and re-verifying the JWT each time is pure cost.
+ */
+export const getSessionUser = cache(async function getSessionUser(): Promise<SessionUser | null> {
   const store = await cookies();
   const token = store.get(COOKIE_NAME)?.value;
   if (!token) return null;
@@ -72,7 +77,7 @@ export async function getSessionUser(): Promise<SessionUser | null> {
   } catch {
     return null;
   }
-}
+});
 
 export async function isAuthed() {
   return (await getSessionUser()) !== null;

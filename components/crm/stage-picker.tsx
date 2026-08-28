@@ -1,7 +1,7 @@
 "use client";
 
 import { useTransition } from "react";
-import { LEAD_STAGES, type LeadStage } from "@/types/crm";
+import { ACTIVE_LEAD_STAGES, type LeadStage } from "@/types/crm";
 import { STAGE_LABEL } from "./ui";
 import { setLeadStageAction } from "@/app/admin/crm/actions";
 import { cn } from "@/lib/utils";
@@ -21,7 +21,7 @@ export function StagePicker({
 
   return (
     <div className={cn("flex flex-wrap gap-1.5", pending && "opacity-60")}>
-      {LEAD_STAGES.map((option) => {
+      {ACTIVE_LEAD_STAGES.map((option) => {
         const active = option === stage;
         return (
           <button

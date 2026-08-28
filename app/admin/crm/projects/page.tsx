@@ -5,7 +5,9 @@ import { canSeeFinance } from "@/lib/crm/rbac";
 import {
   AuthzError, listClients, listProjects, projectFinance,
 } from "@/lib/crm/repo";
-import { EmptyState, PageHeader, formatDate, formatMoney } from "@/components/crm/ui";
+import {
+  CURRENCY_OPTIONS, DEFAULT_CURRENCY, EmptyState, PageHeader, formatDate, formatMoney,
+} from "@/components/crm/ui";
 import { ActionForm } from "@/components/crm/action-form";
 import { Field, FieldRow, SelectField, TextField } from "@/components/crm/fields";
 import { ProjectStatusPicker } from "@/components/crm/project-status";
@@ -39,13 +41,13 @@ export default async function ClientProjectsPage() {
       const f = projectFinance(project);
       return { total: acc.total + f.total, paid: acc.paid + f.paid, currency: f.currency };
     },
-    { total: 0, paid: 0, currency: "USD" },
+    { total: 0, paid: 0, currency: DEFAULT_CURRENCY },
   );
 
   return (
     <div className="space-y-10">
       <PageHeader
-        label="CRM"
+        label="Работа"
         title="Проекты клиентов"
         hint={
           showMoney && projects.length
@@ -159,13 +161,10 @@ export default async function ClientProjectsPage() {
                 />
                 <Field label="Название" name="name" required placeholder="CRM-система" />
                 <FieldRow>
-                  <Field label="Стоимость" name="price" placeholder="6000" />
+                  <Field label="Стоимость" name="price" placeholder="15 000 000" />
                   <SelectField
-                    label="Валюта" name="currency" defaultValue="USD"
-                    options={[
-                      { value: "USD", label: "USD" }, { value: "GBP", label: "GBP" },
-                      { value: "EUR", label: "EUR" }, { value: "UZS", label: "UZS" },
-                    ]}
+                    label="Валюта" name="currency" defaultValue={DEFAULT_CURRENCY}
+                    options={CURRENCY_OPTIONS}
                   />
                 </FieldRow>
                 <Field label="Дедлайн" name="deadline" type="date" />

@@ -40,7 +40,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const existing = await readProjects();
+  const existing = await readProjects({ fresh: true });
   if (existing.some((p) => p.slug === slug)) {
     return NextResponse.json(
       { error: `Проект со slug «${slug}» уже существует.` },

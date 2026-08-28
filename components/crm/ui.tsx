@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import type { LeadStage, Priority, ProspectStage, TaskStatus } from "@/types/crm";
+import type { LeadStage, Priority, ProspectStage, Source, TaskStatus } from "@/types/crm";
 
 /*
   The small pieces every CRM screen is built from. Same hairline language as
@@ -110,6 +110,51 @@ export function StageBadge({ stage }: { stage: LeadStage | ProspectStage }) {
   );
 }
 
+/*
+  Sources, currencies and their labels live here rather than being retyped on
+  every screen — they were drifting apart across three files.
+*/
+
+/** Every value that can appear in a record, including ones no longer offered. */
+export const SOURCE_LABEL: Record<string, string> = {
+  INSTAGRAM: "Instagram",
+  TELEGRAM: "Telegram",
+  WEBSITE: "Сайт",
+  REFERRAL: "Рекомендация",
+  COLD_CALL: "Звонок",
+  PERSONAL: "Личный контакт",
+  EMAIL: "Email",
+  LINKEDIN: "LinkedIn",
+  LONDON_OUTREACH: "London outreach",
+  OTHER: "Другое",
+};
+
+/** Offered when adding — the channels work actually arrives through here. */
+export const SOURCE_OPTIONS: Source[] = [
+  "INSTAGRAM",
+  "TELEGRAM",
+  "REFERRAL",
+  "COLD_CALL",
+  "WEBSITE",
+  "PERSONAL",
+  "OTHER",
+];
+
+export const DEFAULT_CURRENCY = "UZS";
+
+/** Sums first — the other currency is for the occasional export job. */
+export const CURRENCY_OPTIONS = [
+  { value: "UZS", label: "сум" },
+  { value: "USD", label: "USD" },
+];
+
+export function sourceOptions() {
+  return SOURCE_OPTIONS.map((value) => ({
+    value,
+    label: SOURCE_LABEL[value] ?? value,
+  }));
+}
+
 const PRIORITY_TONE: Record<Priority, string> = {
   LOW: "text-subtle-foreground",
   MEDIUM: "text-muted-foreground",
@@ -208,7 +253,7 @@ export function formatMoney(money?: { amount: number; currency: string }) {
   if (!money || !money.amount) return "—";
   return new Intl.NumberFormat("ru-RU", {
     style: "currency",
-    currency: money.currency || "USD",
+    currency: money.currency || DEFAULT_CURRENCY,
     maximumFractionDigits: 0,
   }).format(money.amount);
 }

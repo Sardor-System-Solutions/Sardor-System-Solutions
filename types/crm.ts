@@ -23,17 +23,47 @@ export const LEAD_STAGES = [
 ] as const;
 export type LeadStage = (typeof LEAD_STAGES)[number];
 
-/** The columns of the kanban — terminal and parked stages sit outside it. */
+/**
+ * The stages offered in the interface.
+ *
+ * Short on purpose: a two-person team selling in one city moves a deal from
+ * first contact to a meeting to a price, and the finer gradations were only
+ * ever guesses. `LeadStage` keeps the retired values so records written before
+ * this still read correctly — see `pipelineColumn`.
+ */
+export const ACTIVE_LEAD_STAGES: LeadStage[] = [
+  "NEW",
+  "CONTACTED",
+  "MEETING",
+  "PROPOSAL",
+  "WON",
+  "LOST",
+  "NOT_NOW",
+];
+
+/** The columns of the kanban — the parked stage sits outside it. */
 export const PIPELINE_STAGES: LeadStage[] = [
   "NEW",
   "CONTACTED",
-  "INTERESTED",
   "MEETING",
   "PROPOSAL",
-  "NEGOTIATION",
   "WON",
   "LOST",
 ];
+
+/** Retired stages, and the column a lead in one of them is shown in. */
+const FOLDED_INTO: Partial<Record<LeadStage, LeadStage>> = {
+  INTERESTED: "CONTACTED",
+  NEGOTIATION: "PROPOSAL",
+};
+
+/**
+ * Where a lead belongs on the board. Without this, a lead saved under a stage
+ * that is no longer a column would simply disappear from the funnel.
+ */
+export function pipelineColumn(stage: LeadStage): LeadStage {
+  return FOLDED_INTO[stage] ?? stage;
+}
 
 export const PROSPECT_STAGES = [
   "TO_CONTACT",

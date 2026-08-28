@@ -1,4 +1,5 @@
 import "server-only";
+import { cache } from "react";
 import { getSessionUser, type SessionUser } from "@/lib/auth";
 import { can, type Permission } from "./rbac";
 import { mutateCrm, readCrm } from "./store";
@@ -56,9 +57,19 @@ const alive = <T extends { deletedAt?: string }>(rows: T[]) =>
 
 /* ---------------------------------- reads --------------------------------- */
 
+/*
+  One document read per request.
+
+  Every list below asks for the whole CRM, and a single screen calls several of
+  them — leads, tasks, meetings, notifications in the layout. `cache` makes
+  them share one read for the duration of the request; the store's own memo
+  covers the gap between requests.
+*/
+const crmOnce = cache(readCrm);
+
 export async function getCrm(): Promise<CrmData> {
   await requirePermission("crm.view");
-  return readCrm();
+  return crmOnce();
 }
 
 export async function listProspects() {
@@ -760,7 +771,7 @@ export async function updateClientProject(
 
 /** Money summary for one project — the only place these sums are computed. */
 export function projectFinance(project: ClientProject) {
-  const currency = project.price?.currency ?? project.payments[0]?.currency ?? "USD";
+  const currency = project.price?.currency ?? project.payments[0]?.currency ?? "UZS";
   const total = project.price?.amount ?? 0;
   const paid = project.payments.reduce((sum, p) => sum + p.amount, 0);
   return { currency, total, paid, remaining: Math.max(total - paid, 0) };

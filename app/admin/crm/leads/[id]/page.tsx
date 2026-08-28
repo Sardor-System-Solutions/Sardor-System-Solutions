@@ -6,7 +6,10 @@ import { canSeeFinance } from "@/lib/crm/rbac";
 import { AuthzError, activitiesFor, getLead } from "@/lib/crm/repo";
 import { ACTIVITY_KINDS, PRIORITIES } from "@/types/crm";
 import {
+  CURRENCY_OPTIONS,
+  DEFAULT_CURRENCY,
   PRIORITY_LABEL,
+  SOURCE_LABEL,
   StageBadge,
   formatDate,
   formatDateTime,
@@ -142,6 +145,7 @@ export default async function LeadPage({
                   action={setNextActionAction.bind(null, lead.id)}
                   submitLabel="Назначить"
                   pendingLabel="Сохраняем…"
+                  resetOnSuccess={false}
                 >
                   <FieldRow>
                     <Field
@@ -216,9 +220,8 @@ export default async function LeadPage({
               <Row label="Телефон" value={lead.phone} />
               <Row label="Email" value={lead.email} />
               <Row label="Telegram" value={lead.telegram} />
-              <Row label="LinkedIn" value={lead.linkedin} />
-              <Row label="Локация" value={[lead.city, lead.country].filter(Boolean).join(", ")} />
-              <Row label="Источник" value={lead.source} />
+              <Row label="Город" value={lead.city} />
+              <Row label="Откуда" value={SOURCE_LABEL[lead.source] ?? lead.source} />
             </div>
           </section>
 
@@ -241,7 +244,10 @@ export default async function LeadPage({
           <section>
             <h2 className="label border-b border-border pb-3">Редактировать</h2>
             <div className="mt-5">
-              <ActionForm action={updateLeadAction.bind(null, lead.id)}>
+              <ActionForm
+                action={updateLeadAction.bind(null, lead.id)}
+                resetOnSuccess={false}
+              >
                 <Field label="Компания" name="company" defaultValue={lead.company} />
                 <Field label="Телефон" name="phone" defaultValue={lead.phone} />
                 <Field label="Email" name="email" defaultValue={lead.email} />
@@ -256,11 +262,8 @@ export default async function LeadPage({
                 ) : null}
                 <SelectField
                   label="Валюта" name="currency"
-                  defaultValue={lead.budget?.currency ?? "USD"}
-                  options={[
-                    { value: "USD", label: "USD" }, { value: "GBP", label: "GBP" },
-                    { value: "EUR", label: "EUR" }, { value: "UZS", label: "UZS" },
-                  ]}
+                  defaultValue={lead.budget?.currency ?? DEFAULT_CURRENCY}
+                  options={CURRENCY_OPTIONS}
                 />
                 <SelectField
                   label="Приоритет" name="priority" defaultValue={lead.priority}

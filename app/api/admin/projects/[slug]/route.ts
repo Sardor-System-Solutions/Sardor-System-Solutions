@@ -28,7 +28,7 @@ export async function PUT(
     return NextResponse.json({ error: "Некорректный запрос." }, { status: 400 });
   }
 
-  const projects = await readProjects();
+  const projects = await readProjects({ fresh: true });
   const existing = projects.find((p) => p.slug === currentSlug);
   if (!existing) {
     return NextResponse.json({ error: "Проект не найден." }, { status: 404 });

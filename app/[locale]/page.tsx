@@ -5,7 +5,6 @@ import type { Locale } from "@/types/project";
 import {
   getProjects,
   commercialProjectsOf,
-  featuredProjectsOf,
   productProjectsOf,
 } from "@/lib/get-projects";
 import { HeroSection } from "@/components/sections/hero-section";
@@ -33,7 +32,11 @@ export default async function HomePage({
   ) as Locale;
 
   const projects = await getProjects();
-  const products = productProjectsOf(projects);
+  // Featured or not, every product is a card in the same grid now — the flag
+  // only decides the order, so the strongest work is read first.
+  const products = productProjectsOf(projects).sort(
+    (a, b) => Number(b.featured) - Number(a.featured),
+  );
 
   return (
     <>
@@ -41,8 +44,7 @@ export default async function HomePage({
       <AboutSection />
       <ProjectsSection
         locale={resolved}
-        featuredProjects={featuredProjectsOf(products)}
-        productRest={products.filter((project) => !project.featured)}
+        products={products}
         commercialProjects={commercialProjectsOf(projects)}
       />
       <ContactSection />

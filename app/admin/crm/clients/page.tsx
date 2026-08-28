@@ -21,7 +21,7 @@ export default async function ClientsPage() {
 
   return (
     <div className="space-y-10">
-      <PageHeader label="CRM" title="Клиенты" hint={`${clients.length} всего`} />
+      <PageHeader label="Работа" title="Клиенты" hint={`${clients.length} всего`} />
 
       {wonWithoutClient.length > 0 ? (
         <div className="border-l-2 border-primary pl-4">

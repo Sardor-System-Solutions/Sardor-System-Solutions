@@ -35,7 +35,7 @@ export default async function MeetingsPage() {
 
   return (
     <div className="space-y-10">
-      <PageHeader label="CRM" title="Встречи" hint={`${upcoming.length} впереди`} />
+      <PageHeader label="Продажи" title="Встречи" hint={`${upcoming.length} впереди`} />
 
       <div className="grid gap-12 lg:grid-cols-[1fr_22rem]">
         <div className="space-y-10">

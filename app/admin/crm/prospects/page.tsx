@@ -1,24 +1,22 @@
 import { redirect } from "next/navigation";
 import { AuthzError, listProspects } from "@/lib/crm/repo";
 import { getSessionUser } from "@/lib/auth";
-import { SOURCES, PROSPECT_STAGES } from "@/types/crm";
+import { PROSPECT_STAGES } from "@/types/crm";
 import {
+  CURRENCY_OPTIONS,
+  DEFAULT_CURRENCY,
   EmptyState,
   PageHeader,
+  SOURCE_LABEL,
   StageBadge,
+  STAGE_LABEL,
   formatDate,
   formatMoney,
+  sourceOptions,
 } from "@/components/crm/ui";
 import { ActionForm, ActionButton } from "@/components/crm/action-form";
 import { Field, FieldRow, SelectField, TextField } from "@/components/crm/fields";
 import { addProspectAction, convertProspectAction } from "../actions";
-
-const SOURCE_LABEL: Record<string, string> = {
-  INSTAGRAM: "Instagram", TELEGRAM: "Telegram", WEBSITE: "Сайт",
-  REFERRAL: "Рекомендация", COLD_CALL: "Холодный звонок", EMAIL: "Email",
-  LINKEDIN: "LinkedIn", PERSONAL: "Личный контакт",
-  LONDON_OUTREACH: "London outreach", OTHER: "Другое",
-};
 
 /**
  * The register of companies worth approaching. Deliberately a short form —
@@ -46,7 +44,7 @@ export default async function ProspectsPage({
   const filtered = prospects.filter((p) => {
     if (stage && p.stage !== stage) return false;
     if (!needle) return true;
-    return [p.company, p.contactName, p.email, p.phone, p.city, p.country]
+    return [p.company, p.contactName, p.email, p.phone, p.city]
       .filter(Boolean)
       .some((v) => v!.toLowerCase().includes(needle));
   });
@@ -54,9 +52,9 @@ export default async function ProspectsPage({
   return (
     <div className="space-y-10">
       <PageHeader
-        label="CRM"
-        title="Prospects"
-        hint={`${prospects.length} компаний в реестре`}
+        label="Продажи"
+        title="Кому написать"
+        hint={`${prospects.length} компаний в списке`}
       />
 
       <form className="flex flex-wrap items-end gap-4" method="get">
@@ -75,7 +73,9 @@ export default async function ProspectsPage({
             className="mt-2.5 flex h-11 rounded-md border border-input bg-background px-4 text-[0.9375rem]"
           >
             <option value="">Все</option>
-            {PROSPECT_STAGES.map((s) => <option key={s} value={s}>{s}</option>)}
+            {PROSPECT_STAGES.map((s) => (
+              <option key={s} value={s}>{STAGE_LABEL[s] ?? s}</option>
+            ))}
           </select>
         </div>
         <button type="submit" className="h-11 rounded-md border border-border-strong px-5 text-[0.9375rem] transition-colors hover:border-foreground">
@@ -139,33 +139,27 @@ export default async function ProspectsPage({
           <h2 className="label border-b border-border pb-3">Добавить</h2>
           <div className="mt-6">
             <ActionForm action={addProspectAction} submitLabel="Добавить" pendingLabel="Добавляем…">
-              <Field label="Компания" name="company" required placeholder="ABC Coffee" />
-              <Field label="Контакт" name="contactName" placeholder="John Smith" />
-              <Field label="Сайт" name="website" placeholder="https://abc.co.uk" />
+              <Field label="Компания" name="company" required placeholder="Registon Coffee" />
+              <Field label="Контакт" name="contactName" placeholder="Азиз" />
               <FieldRow>
-                <Field label="Email" name="email" type="email" />
-                <Field label="Телефон" name="phone" />
+                <Field label="Телефон" name="phone" placeholder="+998 90 123 45 67" />
+                <Field label="Telegram" name="telegram" placeholder="@username" />
               </FieldRow>
               <FieldRow>
-                <Field label="Город" name="city" placeholder="London" />
-                <Field label="Страна" name="country" placeholder="UK" />
+                <Field label="Instagram" name="instagram" placeholder="@registon.coffee" />
+                <Field label="Город" name="city" placeholder="Самарканд" />
               </FieldRow>
-              <Field label="Услуга" name="service" placeholder="Website redesign" />
+              <Field label="Что можем сделать" name="service" placeholder="Сайт для кафе" />
               <FieldRow>
-                <Field label="Бюджет" name="budget" placeholder="3000" />
+                <Field label="Бюджет" name="budget" placeholder="5 000 000" />
                 <SelectField
-                  label="Валюта" name="currency" defaultValue="GBP"
-                  options={[
-                    { value: "GBP", label: "GBP" },
-                    { value: "USD", label: "USD" },
-                    { value: "EUR", label: "EUR" },
-                    { value: "UZS", label: "UZS" },
-                  ]}
+                  label="Валюта" name="currency" defaultValue={DEFAULT_CURRENCY}
+                  options={CURRENCY_OPTIONS}
                 />
               </FieldRow>
               <SelectField
-                label="Источник" name="source" defaultValue="LONDON_OUTREACH"
-                options={SOURCES.map((s) => ({ value: s, label: SOURCE_LABEL[s] ?? s }))}
+                label="Откуда" name="source" defaultValue="INSTAGRAM"
+                options={sourceOptions()}
               />
               <FieldRow>
                 <Field label="Следующее действие" name="nextActionTitle" placeholder="Позвонить" />

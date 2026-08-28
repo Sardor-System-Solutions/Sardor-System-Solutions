@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, type ReactNode } from "react";
+import { useActionState, useEffect, useRef, useState, type ReactNode } from "react";
 import { useFormStatus } from "react-dom";
 import { cn } from "@/lib/utils";
 import type { ActionResult } from "@/app/admin/crm/actions";
@@ -8,6 +8,11 @@ import type { ActionResult } from "@/app/admin/crm/actions";
 /*
   One wrapper for every CRM form, so each screen gets a pending state, an
   inline error and a consistent submit without repeating the plumbing.
+
+  A save also has to be *visible*. On success the form clears itself and says
+  so for a moment: without that, a form that keeps what was typed while the
+  list quietly refreshes above it reads as "nothing happened", and the record
+  gets entered a second time.
 */
 
 function Submit({ label, pendingLabel }: { label: string; pendingLabel: string }) {
@@ -30,6 +35,9 @@ export function ActionForm({
   pendingLabel = "Сохраняем…",
   className,
   footer,
+  /** Clear the fields after a successful save. Off for forms you keep editing. */
+  resetOnSuccess = true,
+  savedLabel = "Сохранено",
 }: {
   action: (form: FormData) => Promise<ActionResult>;
   children: ReactNode;
@@ -37,14 +45,27 @@ export function ActionForm({
   pendingLabel?: string;
   className?: string;
   footer?: ReactNode;
+  resetOnSuccess?: boolean;
+  savedLabel?: string;
 }) {
   const [state, formAction] = useActionState(
     async (_prev: ActionResult | null, form: FormData) => action(form),
     null,
   );
+  const formRef = useRef<HTMLFormElement>(null);
+  const [saved, setSaved] = useState(false);
+
+  // Every submit returns a new result object, so this fires once per save.
+  useEffect(() => {
+    if (!state?.ok) return;
+    if (resetOnSuccess) formRef.current?.reset();
+    setSaved(true);
+    const timer = setTimeout(() => setSaved(false), 2500);
+    return () => clearTimeout(timer);
+  }, [state, resetOnSuccess]);
 
   return (
-    <form action={formAction} className={cn("space-y-6", className)}>
+    <form ref={formRef} action={formAction} className={cn("space-y-6", className)}>
       {children}
 
       {state && !state.ok ? (
@@ -55,6 +76,11 @@ export function ActionForm({
 
       <div className="flex items-center gap-4">
         <Submit label={submitLabel} pendingLabel={pendingLabel} />
+        {saved ? (
+          <span className="text-sm text-primary" role="status">
+            {savedLabel}
+          </span>
+        ) : null}
         {footer}
       </div>
     </form>

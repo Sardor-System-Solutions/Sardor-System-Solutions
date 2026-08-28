@@ -9,7 +9,8 @@ import { DeleteProjectButton } from "@/components/admin/delete-project-button";
  * public site uses, so the admin reads as part of the same product.
  */
 export default async function AdminProjectsPage() {
-    const projects = await readProjects();
+    // The admin list must show what was just saved, so it skips the memo.
+    const projects = await readProjects({ fresh: true });
     const products = projects.filter((p) => p.kind === "product");
     const commercial = projects.filter((p) => p.kind === "commercial");
 

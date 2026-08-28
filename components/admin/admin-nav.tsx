@@ -27,24 +27,34 @@ interface NavGroup {
   items: NavItem[];
 }
 
+/*
+  Ordered by how often it is opened, not by how the data model is arranged:
+  leads and the funnel are the daily work, the register of companies to
+  approach is occasional. Proposals used to be a section of their own — the
+  price and the stage now live on the lead card, which is where the deal is.
+*/
 const GROUPS: NavGroup[] = [
-  { label: null, items: [{ href: "/admin", label: "Дашборд" }] },
+  { label: null, items: [{ href: "/admin", label: "Сегодня" }] },
   {
-    label: "CRM",
+    label: "Продажи",
     items: [
-      { href: "/admin/crm/pipeline", label: "Воронка" },
-      { href: "/admin/crm/prospects", label: "Prospects" },
       { href: "/admin/crm/leads", label: "Лиды" },
-      { href: "/admin/crm/clients", label: "Клиенты" },
+      { href: "/admin/crm/pipeline", label: "Воронка" },
       { href: "/admin/crm/tasks", label: "Задачи" },
       { href: "/admin/crm/meetings", label: "Встречи" },
-      { href: "/admin/crm/proposals", label: "КП", roles: ["ADMIN", "SALES"] },
-      { href: "/admin/crm/projects", label: "Проекты клиентов" },
+      { href: "/admin/crm/prospects", label: "Кому написать" },
+    ],
+  },
+  {
+    label: "Работа",
+    items: [
+      { href: "/admin/crm/clients", label: "Клиенты" },
+      { href: "/admin/crm/projects", label: "Проекты" },
     ],
   },
   {
     label: "Сайт",
-    items: [{ href: "/admin/content", label: "Проекты в портфолио" }],
+    items: [{ href: "/admin/content", label: "Портфолио" }],
   },
 ];
 

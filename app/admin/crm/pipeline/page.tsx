@@ -20,16 +20,16 @@ export default async function PipelinePage() {
   return (
     <div className="space-y-10">
       <PageHeader
-        label="CRM"
+        label="Продажи"
         title="Воронка"
-        hint="Перетащите карточку, чтобы сменить этап — изменение попадёт в историю лида."
+        hint="Перетащите карточку, чтобы сменить этап."
         action={<PrimaryAction href="/admin/crm/leads/new">Новый лид</PrimaryAction>}
       />
 
       {leads.length === 0 ? (
         <EmptyState
           title="В воронке пусто"
-          hint="Создайте лид или переведите компанию из реестра prospects."
+          hint="Создайте лид — или переведите компанию из списка «Кому написать»."
           action={<PrimaryAction href="/admin/crm/leads/new">Добавить лид</PrimaryAction>}
         />
       ) : (

@@ -1,43 +1,37 @@
-"use client";
-
-import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowDown, ArrowUp } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { Section, SectionHeading } from "@/components/layout/section";
-import { Reveal, EASE } from "@/components/animations/reveal";
-import { ProjectShowcase } from "@/components/projects/project-showcase";
-import { ProjectIndex } from "@/components/projects/project-index";
+import { Reveal } from "@/components/animations/reveal";
+import { ProjectCard } from "@/components/projects/project-card";
 import type { Locale, Project } from "@/types/project";
 
 /**
  * The centre of the site.
  *
- * The five strongest products are shown straight away; everything else — the
- * remaining SDS product and the team's Dotlabs-era work — unfolds in place
- * behind "show more". There is no separate projects route to navigate to.
+ * A plain two-column grid, every card the same shape: our own products first,
+ * then the team's Dotlabs-era work under its own heading. Nothing is hidden
+ * behind "show more" and nothing alternates sides — with seven projects the
+ * whole body of work fits on one screenful of scrolling, and which caption
+ * belongs to which picture is never a question.
  *
- * Data comes from the DB (via the server parent, see projects-section-data.tsx)
- * instead of the old hardcoded `data/projects.ts` import. `locale` is passed
- * down so ProjectShowcase / ProjectIndex can pick the right translation out
- * of each project's `i18n` field without their own useTranslations("Projects").
+ * The two groups stay visually and verbally separate: the Dotlabs work is the
+ * team's commercial experience, not SDS client work, and the caption above it
+ * says so.
+ *
+ * Data comes from the DB via the server parent; `locale` is passed down so
+ * each card can pick the right translation out of the project's `i18n` field.
  */
 export function ProjectsSection({
   locale,
-  featuredProjects,
-  productRest,
+  products,
   commercialProjects,
 }: {
   locale: Locale;
-  featuredProjects: Project[];
-  productRest: Project[];
+  products: Project[];
   commercialProjects: Project[];
 }) {
   const t = useTranslations("Work");
   const tCommercial = useTranslations("Commercial");
-  const reduced = useReducedMotion();
-  const [expanded, setExpanded] = useState(false);
 
   return (
     <Section id="projects">
@@ -48,9 +42,9 @@ export function ProjectsSection({
           description={t("subtitle")}
         />
 
-        <div className="mt-16 space-y-16 lg:mt-20 lg:space-y-24">
-          {featuredProjects.map((project, i) => (
-            <ProjectShowcase
+        <div className="mt-16 grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:mt-20 lg:gap-x-10 lg:gap-y-20">
+          {products.map((project, i) => (
+            <ProjectCard
               key={project.slug}
               project={project}
               locale={locale}
@@ -58,68 +52,39 @@ export function ProjectsSection({
               priority={i === 0}
             />
           ))}
-
-          <AnimatePresence initial={false}>
-            {expanded ? (
-              <motion.div
-                key="more"
-                initial={reduced ? { opacity: 0 } : { opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={reduced ? { opacity: 0 } : { opacity: 0, y: 8 }}
-                transition={{ duration: 0.6, ease: EASE }}
-                className="space-y-16 lg:space-y-24"
-              >
-                {productRest.map((project, i) => (
-                  <ProjectShowcase
-                    key={project.slug}
-                    project={project}
-                    locale={locale}
-                    index={featuredProjects.length + i}
-                  />
-                ))}
-
-                {/* Dotlabs-era work, kept visually and verbally separate. */}
-                <div className="border-t border-border-strong pt-12 lg:pt-16">
-                  <Reveal>
-                    <span className="label">{tCommercial("label")}</span>
-                    <h3 className="display-3 mt-4 max-w-2xl text-balance">
-                      {tCommercial("title")}
-                    </h3>
-                    <p className="mt-4 max-w-xl text-pretty text-[0.9375rem] leading-relaxed text-muted-foreground">
-                      {tCommercial("subtitle")}
-                    </p>
-                  </Reveal>
-
-                  <div className="mt-10">
-                    <ProjectIndex projects={commercialProjects} locale={locale} />
-                  </div>
-
-                  <Reveal>
-                    <p className="mt-8 max-w-xl text-sm leading-relaxed text-subtle-foreground">
-                      {tCommercial("disclaimer")}
-                    </p>
-                  </Reveal>
-                </div>
-              </motion.div>
-            ) : null}
-          </AnimatePresence>
         </div>
 
-        <div className="mt-16 border-t border-border pt-8 lg:mt-20">
-          <button
-            type="button"
-            onClick={() => setExpanded((value) => !value)}
-            aria-expanded={expanded}
-            className="group inline-flex items-center gap-2.5 text-[1.0625rem] font-medium transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4"
-          >
-            {expanded ? t("showLess") : t("showMore")}
-            {expanded ? (
-              <ArrowUp className="size-4 transition-transform duration-300 group-hover:-translate-y-1" />
-            ) : (
-              <ArrowDown className="size-4 transition-transform duration-300 group-hover:translate-y-1" />
-            )}
-          </button>
-        </div>
+        {commercialProjects.length > 0 ? (
+          <div className="mt-24 border-t border-border-strong pt-12 lg:mt-32 lg:pt-16">
+            <Reveal>
+              <span className="label">{tCommercial("label")}</span>
+              <h3 className="display-3 mt-4 max-w-2xl text-balance">
+                {tCommercial("title")}
+              </h3>
+              <p className="mt-4 max-w-xl text-pretty text-[0.9375rem] leading-relaxed text-muted-foreground">
+                {tCommercial("subtitle")}
+              </p>
+            </Reveal>
+
+            <div className="mt-12 grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:gap-x-10 lg:gap-y-20">
+              {commercialProjects.map((project, i) => (
+                <ProjectCard
+                  key={project.slug}
+                  project={project}
+                  locale={locale}
+                  index={i}
+                  variant="team"
+                />
+              ))}
+            </div>
+
+            <Reveal>
+              <p className="mt-12 max-w-xl text-sm leading-relaxed text-subtle-foreground">
+                {tCommercial("disclaimer")}
+              </p>
+            </Reveal>
+          </div>
+        ) : null}
       </Container>
     </Section>
   );

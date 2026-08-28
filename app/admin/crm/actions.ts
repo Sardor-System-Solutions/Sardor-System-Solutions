@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import {
   AuthzError,
   addLeadActivity,
@@ -41,14 +42,21 @@ import type {
   result object instead of throwing, so forms can show what went wrong.
 */
 
-export type ActionResult = { ok: true } | { ok: false; error: string };
+/** `id` is the created record's, when the action made one. */
+export type ActionResult =
+  | { ok: true; id?: string }
+  | { ok: false; error: string };
 
 async function run(work: () => Promise<unknown>): Promise<ActionResult> {
   try {
-    await work();
+    const created = await work();
     // The CRM is read on every screen; refresh the whole admin subtree.
     revalidatePath("/admin", "layout");
-    return { ok: true };
+    const id =
+      created && typeof created === "object" && "id" in created
+        ? String((created as { id: unknown }).id)
+        : undefined;
+    return { ok: true, id };
   } catch (error) {
     if (error instanceof AuthzError || error instanceof CrmStoreError) {
       return { ok: false, error: error.message };
@@ -71,7 +79,7 @@ const money = (form: FormData, amountKey: string, currencyKey: string) => {
   if (!raw) return undefined;
   const amount = Number(raw.replace(/[^\d.-]/g, ""));
   if (!Number.isFinite(amount) || amount <= 0) return undefined;
-  return { amount, currency: text(form, currencyKey) ?? "USD" };
+  return { amount, currency: text(form, currencyKey) ?? "UZS" };
 };
 
 /* -------------------------------- prospects ------------------------------- */
@@ -86,6 +94,7 @@ export async function addProspectAction(form: FormData): Promise<ActionResult> {
       contactName: text(form, "contactName"),
       website: text(form, "website"),
       instagram: text(form, "instagram"),
+      telegram: text(form, "telegram"),
       email: text(form, "email"),
       phone: text(form, "phone"),
       country: text(form, "country"),
@@ -119,7 +128,7 @@ export async function addLeadAction(form: FormData): Promise<ActionResult> {
   const firstName = text(form, "firstName");
   if (!firstName) return { ok: false, error: "Укажите имя." };
 
-  return run(() =>
+  const result = await run(() =>
     createLead({
       firstName,
       lastName: text(form, "lastName"),
@@ -142,6 +151,10 @@ export async function addLeadAction(form: FormData): Promise<ActionResult> {
       nextActionAt: text(form, "nextActionAt"),
     }),
   );
+
+  // Outside `run`, so the redirect isn't swallowed by its catch.
+  if (result.ok && result.id) redirect(`/admin/crm/leads/${result.id}`);
+  return result;
 }
 
 export async function updateLeadAction(
@@ -280,7 +293,7 @@ export async function addProposalAction(form: FormData): Promise<ActionResult> {
         .map((s) => s.trim())
         .filter(Boolean),
       amount,
-      currency: text(form, "currency") ?? "USD",
+      currency: text(form, "currency") ?? "UZS",
       timeline: text(form, "timeline"),
       description: text(form, "description"),
     }),
@@ -335,7 +348,7 @@ export async function addPaymentAction(
   return run(() =>
     addPayment(projectId, {
       amount,
-      currency: text(form, "currency") ?? "USD",
+      currency: text(form, "currency") ?? "UZS",
       paidAt: text(form, "paidAt") ?? new Date().toISOString().slice(0, 10),
       note: text(form, "note"),
     }),

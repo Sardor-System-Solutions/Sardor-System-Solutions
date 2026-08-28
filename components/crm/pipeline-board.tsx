@@ -2,7 +2,7 @@
 
 import { useOptimistic, useState, useTransition } from "react";
 import Link from "next/link";
-import { PIPELINE_STAGES, type Lead, type LeadStage } from "@/types/crm";
+import { PIPELINE_STAGES, pipelineColumn, type Lead, type LeadStage } from "@/types/crm";
 import { cn } from "@/lib/utils";
 import { STAGE_LABEL, formatDate, formatMoney } from "./ui";
 import { setLeadStageAction } from "@/app/admin/crm/actions";
@@ -60,14 +60,16 @@ export function PipelineBoard({
     >
       <div className="flex min-w-max gap-4">
         {PIPELINE_STAGES.map((stage) => {
-          const column = items.filter((lead) => lead.stage === stage);
+          const column = items.filter(
+            (lead) => pipelineColumn(lead.stage) === stage,
+          );
           const total = column.reduce(
             (sum, lead) =>
               sum + (lead.proposedPrice?.amount ?? lead.budget?.amount ?? 0),
             0,
           );
           const currency =
-            column[0]?.proposedPrice?.currency ?? column[0]?.budget?.currency ?? "USD";
+            column[0]?.proposedPrice?.currency ?? column[0]?.budget?.currency ?? "UZS";
 
           return (
             <section
